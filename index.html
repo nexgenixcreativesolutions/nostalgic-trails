@@ -3,237 +3,184 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Nostalgic Trails — Michael Denny</title>
+  <title>Nostalgic Trails — Photography</title>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Syncopate:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --cream: #f5f0e8;
-      --warm-white: #faf8f4;
-      --charcoal: #1a1714;
-      --deep-brown: #2c2118;
-      --copper: #b8834a;
-      --copper-light: #d4a366;
-      --copper-glow: rgba(184, 131, 74, 0.3);
-      --fog: rgba(245, 240, 232, 0.06);
-      --text-muted: #8a7e72;
-      --border: rgba(184, 131, 74, 0.2);
+      --white: #ffffff;
+      --off-white: #faf9f7;
+      --parchment: #f4f0ea;
+      --sage: #7a9e87;
+      --sage-dark: #5a7d67;
+      --sage-light: #a8c4b0;
+      --sage-wash: rgba(122,158,135,0.08);
+      --rose: #c4886e;
+      --rose-light: #d9a892;
+      --rose-wash: rgba(196,136,110,0.1);
+      --ink: #1e1e1e;
+      --text-mid: #6b6560;
+      --text-muted: #9e9791;
+      --border: rgba(122,158,135,0.2);
+      --border-rose: rgba(196,136,110,0.2);
+      --shadow: 0 4px 40px rgba(0,0,0,0.06);
     }
-
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     html { scroll-behavior: smooth; }
-
     body {
-      background: var(--charcoal);
-      color: var(--cream);
+      background: var(--white);
+      color: var(--ink);
       font-family: 'DM Sans', sans-serif;
       overflow-x: hidden;
       cursor: none;
     }
 
-    /* ── CUSTOM CURSOR ── */
+    /* CURSOR */
     .cursor {
-      position: fixed; width: 10px; height: 10px;
-      background: var(--copper); border-radius: 50%;
+      position: fixed; width: 9px; height: 9px;
+      background: var(--rose); border-radius: 50%;
       pointer-events: none; z-index: 9999;
-      transform: translate(-50%, -50%);
+      transform: translate(-50%,-50%);
       transition: transform 0.1s ease;
     }
     .cursor-ring {
-      position: fixed; width: 38px; height: 38px;
-      border: 1px solid var(--copper-light); border-radius: 50%;
+      position: fixed; width: 36px; height: 36px;
+      border: 1.5px solid var(--sage); border-radius: 50%;
       pointer-events: none; z-index: 9998;
-      transform: translate(-50%, -50%);
-      transition: all 0.18s ease;
-      opacity: 0.7;
+      transform: translate(-50%,-50%);
+      transition: all 0.18s ease; opacity: 0.6;
     }
-    body:hover .cursor { opacity: 1; }
 
-    /* ── NOISE OVERLAY ── */
+    /* TEXTURE */
     body::before {
-      content: '';
-      position: fixed; inset: 0; z-index: 1;
-      pointer-events: none;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-      opacity: 0.35;
+      content: ''; position: fixed; inset: 0; z-index: 1; pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+      opacity: 0.6;
     }
 
-    /* ── NAV ── */
+    /* NAV */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; justify-content: space-between; align-items: center;
       padding: 28px 60px;
-      background: linear-gradient(to bottom, rgba(26,23,20,0.9) 0%, transparent 100%);
-      backdrop-filter: blur(2px);
+      background: linear-gradient(to bottom, rgba(255,255,255,0.96) 0%, rgba(255,255,255,0) 100%);
+      backdrop-filter: blur(4px);
     }
-
     .nav-logo {
-      font-family: 'Syncopate', sans-serif;
-      font-size: 11px; letter-spacing: 0.35em; text-transform: uppercase;
-      color: var(--cream); text-decoration: none; line-height: 1.6;
+      font-family: 'Syncopate', sans-serif; font-size: 11px;
+      letter-spacing: 0.35em; text-transform: uppercase;
+      color: var(--ink); text-decoration: none; line-height: 1.6;
     }
-    .nav-logo span { display: block; color: var(--copper); font-size: 9px; letter-spacing: 0.5em; }
-
+    .nav-logo span { display: block; color: var(--sage); font-size: 8.5px; letter-spacing: 0.55em; margin-top: 2px; }
     .nav-links { display: flex; gap: 40px; list-style: none; }
     .nav-links a {
       font-family: 'DM Sans', sans-serif; font-size: 11px;
       letter-spacing: 0.2em; text-transform: uppercase;
-      color: var(--text-muted); text-decoration: none;
-      transition: color 0.3s;
+      color: var(--text-mid); text-decoration: none; transition: color 0.3s;
     }
-    .nav-links a:hover { color: var(--copper-light); }
-
+    .nav-links a:hover { color: var(--sage-dark); }
     .nav-cta {
       font-family: 'Syncopate', sans-serif; font-size: 9px;
       letter-spacing: 0.3em; text-transform: uppercase;
-      color: var(--charcoal); background: var(--copper);
-      border: none; padding: 12px 24px;
-      cursor: none; transition: background 0.3s;
-      text-decoration: none;
+      color: var(--white); background: var(--sage-dark);
+      border: none; padding: 12px 24px; cursor: none;
+      transition: background 0.3s; text-decoration: none;
     }
-    .nav-cta:hover { background: var(--copper-light); }
+    .nav-cta:hover { background: var(--sage); }
 
-    /* ── HERO ── */
+    /* HERO */
     #hero {
       position: relative; height: 100vh;
       display: flex; align-items: flex-end;
-      padding: 0 60px 80px;
-      overflow: hidden;
+      padding: 0 60px 80px; overflow: hidden;
+      background: var(--off-white);
     }
-
     .hero-bg {
       position: absolute; inset: 0; z-index: 0;
       background:
-        radial-gradient(ellipse at 70% 30%, rgba(184,131,74,0.15) 0%, transparent 60%),
-        radial-gradient(ellipse at 20% 80%, rgba(184,131,74,0.08) 0%, transparent 50%),
-        linear-gradient(135deg, #1a1714 0%, #2c2118 40%, #1a1714 100%);
+        radial-gradient(ellipse at 72% 25%, rgba(122,158,135,0.13) 0%, transparent 55%),
+        radial-gradient(ellipse at 15% 75%, rgba(196,136,110,0.09) 0%, transparent 50%),
+        linear-gradient(160deg, #faf9f7 0%, #f0ede8 50%, #faf9f7 100%);
     }
-
-    /* Decorative film-strip lines */
-    .hero-lines {
-      position: absolute; inset: 0; z-index: 1;
-      overflow: hidden;
-    }
+    .hero-lines { position: absolute; inset: 0; z-index: 1; overflow: hidden; }
     .hero-lines::before {
-      content: '';
-      position: absolute; top: 0; left: 55%; width: 1px; height: 100%;
-      background: linear-gradient(to bottom, transparent, var(--copper), transparent);
-      opacity: 0.3;
+      content: ''; position: absolute; top: 0; left: 54%; width: 1px; height: 100%;
+      background: linear-gradient(to bottom, transparent, rgba(122,158,135,0.4), transparent);
     }
     .hero-lines::after {
-      content: '';
-      position: absolute; top: 30%; left: 0; width: 100%; height: 1px;
-      background: linear-gradient(to right, transparent, var(--copper), transparent);
-      opacity: 0.2;
+      content: ''; position: absolute; top: 28%; left: 0; width: 100%; height: 1px;
+      background: linear-gradient(to right, transparent, rgba(196,136,110,0.25), transparent);
     }
-
-    /* Floating photo frames */
     .hero-frames {
-      position: absolute; top: 0; right: 0; bottom: 0;
-      width: 55%; z-index: 2;
-      display: grid; grid-template-columns: 1fr 1fr;
-      grid-template-rows: 1fr 1fr;
-      gap: 3px; padding: 120px 0 0 30px;
+      position: absolute; top: 0; right: 0; bottom: 0; width: 54%; z-index: 2;
+      display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr;
+      gap: 3px; padding: 110px 0 0 28px;
     }
-
     .frame {
-      position: relative; overflow: hidden;
-      background: var(--deep-brown);
-      animation: fadeSlideIn 1s ease forwards;
-      opacity: 0;
+      position: relative; overflow: hidden; background: var(--parchment);
+      animation: fadeSlideIn 1s ease forwards; opacity: 0;
     }
     .frame:nth-child(1) { animation-delay: 0.2s; grid-row: span 2; }
     .frame:nth-child(2) { animation-delay: 0.4s; }
     .frame:nth-child(3) { animation-delay: 0.6s; }
-
     .frame-inner {
       width: 100%; height: 100%;
-      background-size: cover; background-position: center;
       transition: transform 0.8s ease;
-      filter: sepia(20%) contrast(1.05);
+      filter: saturate(0.85) contrast(1.02);
     }
     .frame:hover .frame-inner { transform: scale(1.05); }
-
-    /* Photo placeholders with gradient */
-    .frame:nth-child(1) .frame-inner {
-      background: linear-gradient(135deg,
-        #3d2b1a 0%, #5c3d28 30%, #2e1f12 60%, #4a3020 100%),
-        repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,255,255,0.02) 10px, rgba(255,255,255,0.02) 11px);
-    }
-    .frame:nth-child(2) .frame-inner {
-      background: linear-gradient(225deg, #2c2118 0%, #4a3320 50%, #1f1810 100%);
-    }
-    .frame:nth-child(3) .frame-inner {
-      background: linear-gradient(45deg, #3b2917 0%, #5e4230 50%, #28190d 100%);
-    }
-
+    .frame:nth-child(1) .frame-inner { background: linear-gradient(145deg, #c5b8a8 0%, #e0d5c8 35%, #b0a394 65%, #d4c9bc 100%); }
+    .frame:nth-child(2) .frame-inner { background: linear-gradient(225deg, #c8bdb0 0%, #ddd4c8 50%, #b8aea2 100%); }
+    .frame:nth-child(3) .frame-inner { background: linear-gradient(45deg, #bdb0a3 0%, #d8cec4 50%, #aca095 100%); }
     .frame-label {
       position: absolute; bottom: 0; left: 0; right: 0;
       padding: 40px 20px 16px;
-      background: linear-gradient(to top, rgba(26,23,20,0.9), transparent);
+      background: linear-gradient(to top, rgba(255,255,255,0.88), transparent);
       font-family: 'DM Sans', sans-serif; font-size: 10px;
-      letter-spacing: 0.25em; text-transform: uppercase; color: var(--copper-light);
+      letter-spacing: 0.25em; text-transform: uppercase; color: var(--sage-dark);
     }
-
-    /* Decorative photo SVG content */
-    .frame-svg {
-      position: absolute; inset: 0; display: flex;
-      align-items: center; justify-content: center; opacity: 0.15;
-    }
+    .frame-svg { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; opacity: 0.12; }
 
     .hero-content { position: relative; z-index: 3; max-width: 560px; }
-
     .hero-eyebrow {
       font-family: 'DM Sans', sans-serif; font-size: 10px;
       letter-spacing: 0.4em; text-transform: uppercase;
-      color: var(--copper); margin-bottom: 24px;
+      color: var(--rose); margin-bottom: 24px;
       display: flex; align-items: center; gap: 16px;
       animation: fadeSlideUp 0.8s ease forwards; opacity: 0;
     }
-    .hero-eyebrow::before {
-      content: ''; width: 40px; height: 1px; background: var(--copper);
-    }
-
+    .hero-eyebrow::before { content: ''; width: 40px; height: 1px; background: var(--rose); }
     .hero-title {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(52px, 7vw, 96px);
-      font-weight: 300; line-height: 0.95;
-      color: var(--cream); margin-bottom: 32px;
+      font-size: clamp(52px,7vw,96px); font-weight: 300; line-height: 0.95;
+      color: var(--ink); margin-bottom: 32px;
       animation: fadeSlideUp 0.8s ease 0.15s forwards; opacity: 0;
     }
-    .hero-title em { font-style: italic; color: var(--copper-light); }
-
+    .hero-title em { font-style: italic; color: var(--sage-dark); }
     .hero-desc {
-      font-size: 14px; line-height: 1.8;
-      color: var(--text-muted); max-width: 360px; margin-bottom: 48px;
+      font-size: 14px; line-height: 1.8; color: var(--text-mid);
+      max-width: 360px; margin-bottom: 48px;
       animation: fadeSlideUp 0.8s ease 0.3s forwards; opacity: 0;
     }
-
     .hero-actions {
       display: flex; gap: 20px; align-items: center;
       animation: fadeSlideUp 0.8s ease 0.45s forwards; opacity: 0;
     }
-
     .btn-primary {
       font-family: 'Syncopate', sans-serif; font-size: 9px;
       letter-spacing: 0.3em; text-transform: uppercase;
-      color: var(--charcoal); background: var(--copper);
-      border: none; padding: 16px 36px;
-      cursor: none; transition: all 0.3s; text-decoration: none;
-      display: inline-block;
+      color: var(--white); background: var(--sage-dark);
+      border: none; padding: 16px 36px; cursor: none;
+      transition: all 0.3s; text-decoration: none; display: inline-block;
     }
-    .btn-primary:hover { background: var(--copper-light); transform: translateY(-2px); }
-
+    .btn-primary:hover { background: var(--sage); transform: translateY(-2px); }
     .btn-ghost {
       font-family: 'DM Sans', sans-serif; font-size: 11px;
       letter-spacing: 0.15em; text-transform: uppercase;
-      color: var(--cream); text-decoration: none;
-      display: flex; align-items: center; gap: 10px;
-      transition: gap 0.3s;
+      color: var(--ink); text-decoration: none;
+      display: flex; align-items: center; gap: 10px; transition: gap 0.3s;
     }
     .btn-ghost:hover { gap: 16px; }
-    .btn-ghost::after { content: '→'; color: var(--copper); }
-
+    .btn-ghost::after { content: '→'; color: var(--rose); }
     .hero-scroll {
       position: absolute; bottom: 80px; right: 60px; z-index: 3;
       writing-mode: vertical-rl; font-size: 9px; letter-spacing: 0.4em;
@@ -243,166 +190,102 @@
     }
     .hero-scroll::after {
       content: ''; width: 1px; height: 60px;
-      background: linear-gradient(to bottom, var(--copper), transparent);
+      background: linear-gradient(to bottom, var(--sage), transparent);
       animation: scrollLine 2s ease-in-out infinite;
     }
-    @keyframes scrollLine {
-      0%, 100% { opacity: 0.3; transform: scaleY(1); }
-      50% { opacity: 1; transform: scaleY(1.2); }
-    }
+    @keyframes scrollLine { 0%,100%{opacity:0.3;transform:scaleY(1)} 50%{opacity:1;transform:scaleY(1.2)} }
 
-    /* ── INTRO STRIP ── */
+    /* STRIP */
     .strip {
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      padding: 20px 0; overflow: hidden;
-      display: flex;
+      border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+      padding: 18px 0; overflow: hidden; display: flex; background: var(--white);
     }
     .strip-track {
       display: flex; gap: 60px; align-items: center;
-      animation: stripScroll 20s linear infinite;
-      white-space: nowrap;
+      animation: stripScroll 20s linear infinite; white-space: nowrap;
     }
     .strip-track span {
       font-family: 'Cormorant Garamond', serif; font-style: italic;
-      font-size: 14px; color: var(--text-muted); flex-shrink: 0;
+      font-size: 15px; color: var(--text-muted); flex-shrink: 0;
     }
-    .strip-track .dot {
-      width: 4px; height: 4px; border-radius: 50%;
-      background: var(--copper); flex-shrink: 0;
-    }
-    @keyframes stripScroll {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
-    }
+    .strip-track .dot { width: 4px; height: 4px; border-radius: 50%; background: var(--rose-light); flex-shrink: 0; }
+    @keyframes stripScroll { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
 
-    /* ── ABOUT ── */
-    #about {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 0; min-height: 80vh; position: relative; z-index: 2;
-    }
-
-    .about-visual {
-      position: relative; overflow: hidden;
-      background: var(--deep-brown);
-    }
+    /* ABOUT */
+    #about { display: grid; grid-template-columns: 1fr 1fr; min-height: 80vh; position: relative; z-index: 2; }
+    .about-visual { position: relative; overflow: hidden; background: var(--parchment); }
     .about-visual-inner {
       width: 100%; height: 100%;
-      background:
-        linear-gradient(160deg, #3d2b1a 0%, #5c3d28 35%, #1f1810 70%, #2c2118 100%);
+      background: linear-gradient(160deg, #e8e0d4 0%, #d6ccbe 35%, #eae4da 70%, #d8d0c4 100%);
       display: flex; align-items: center; justify-content: center;
     }
     .about-portrait {
-      width: 220px; height: 280px;
-      border: 1px solid var(--copper);
+      width: 220px; height: 280px; border: 1px solid var(--sage);
       position: relative; overflow: hidden;
     }
     .about-portrait-fill {
       width: 100%; height: 100%;
-      background: linear-gradient(180deg, #4a3020 0%, #2c1f0f 100%);
+      background: linear-gradient(180deg, #c8bfb4 0%, #b0a89e 100%);
       display: flex; align-items: center; justify-content: center;
     }
-    .about-portrait-fill svg { opacity: 0.25; }
+    .about-portrait-fill svg { opacity: 0.2; }
     .about-portrait::after {
-      content: 'MICHAEL DENNY';
+      content: 'NOSTALGIC TRAILS';
       position: absolute; bottom: 0; left: 0; right: 0;
       padding: 30px 16px 16px;
-      background: linear-gradient(to top, rgba(26,23,20,0.95), transparent);
-      font-family: 'Syncopate', sans-serif; font-size: 9px;
-      letter-spacing: 0.3em; text-align: center; color: var(--copper-light);
+      background: linear-gradient(to top, rgba(255,255,255,0.9), transparent);
+      font-family: 'Syncopate', sans-serif; font-size: 7px;
+      letter-spacing: 0.3em; text-align: center; color: var(--sage-dark);
     }
-
     .about-year {
-      position: absolute; top: 60px; left: 60px;
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 120px; font-weight: 300; line-height: 1;
-      color: rgba(184,131,74,0.08); pointer-events: none;
+      position: absolute; top: 60px; left: 50px;
+      font-family: 'Cormorant Garamond', serif; font-size: 120px;
+      font-weight: 300; line-height: 1;
+      color: rgba(122,158,135,0.12); pointer-events: none;
     }
-
     .about-content {
-      padding: 100px 80px;
-      display: flex; flex-direction: column; justify-content: center;
-      background: linear-gradient(135deg, #1e1b18 0%, var(--charcoal) 100%);
+      padding: 100px 80px; display: flex; flex-direction: column;
+      justify-content: center; background: var(--white);
     }
-
     .section-tag {
       font-family: 'DM Sans', sans-serif; font-size: 10px;
-      letter-spacing: 0.4em; text-transform: uppercase;
-      color: var(--copper); margin-bottom: 24px;
-      display: flex; align-items: center; gap: 16px;
+      letter-spacing: 0.4em; text-transform: uppercase; color: var(--rose);
+      margin-bottom: 24px; display: flex; align-items: center; gap: 16px;
     }
-    .section-tag::before { content: ''; width: 30px; height: 1px; background: var(--copper); }
-
+    .section-tag::before { content: ''; width: 30px; height: 1px; background: var(--rose); }
     .section-title {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(36px, 4vw, 60px); font-weight: 300; line-height: 1.1;
-      margin-bottom: 32px;
+      font-size: clamp(36px,4vw,60px); font-weight: 300; line-height: 1.1;
+      color: var(--ink); margin-bottom: 32px;
     }
-    .section-title em { font-style: italic; color: var(--copper-light); }
+    .section-title em { font-style: italic; color: var(--sage-dark); }
+    .about-body { font-size: 14px; line-height: 1.9; color: var(--text-mid); margin-bottom: 24px; max-width: 440px; }
+    .stats-row { display: flex; gap: 48px; margin-top: 16px; }
+    .stat-num { font-family: 'Cormorant Garamond', serif; font-size: 48px; font-weight: 300; color: var(--sage-dark); line-height: 1; }
+    .stat-label { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); margin-top: 4px; }
 
-    .about-body {
-      font-size: 14px; line-height: 1.9;
-      color: var(--text-muted); margin-bottom: 48px; max-width: 440px;
-    }
-
-    .stats-row { display: flex; gap: 48px; }
-    .stat-item { }
-    .stat-num {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 48px; font-weight: 300; color: var(--copper-light);
-      line-height: 1;
-    }
-    .stat-label {
-      font-size: 10px; letter-spacing: 0.2em;
-      text-transform: uppercase; color: var(--text-muted); margin-top: 4px;
-    }
-
-    /* ── WORKS / GALLERY ── */
-    #works { padding: 120px 60px; position: relative; z-index: 2; }
-
-    .section-header {
-      display: flex; justify-content: space-between; align-items: flex-end;
-      margin-bottom: 80px;
-    }
-    .section-header-left { }
+    /* WORKS */
+    #works { padding: 120px 60px; position: relative; z-index: 2; background: var(--off-white); }
+    .section-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 80px; }
     .view-all {
       font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
-      color: var(--copper); text-decoration: none;
-      border-bottom: 1px solid var(--copper); padding-bottom: 4px;
-      transition: color 0.3s;
+      color: var(--sage-dark); text-decoration: none;
+      border-bottom: 1px solid var(--sage-dark); padding-bottom: 4px; transition: color 0.3s;
     }
-    .view-all:hover { color: var(--copper-light); }
-
-    /* Filter tabs */
-    .filter-tabs {
-      display: flex; gap: 4px; margin-bottom: 60px;
-    }
+    .view-all:hover { color: var(--sage); border-color: var(--sage); }
+    .filter-tabs { display: flex; gap: 4px; margin-bottom: 60px; }
     .tab {
       font-family: 'DM Sans', sans-serif; font-size: 11px;
-      letter-spacing: 0.15em; text-transform: uppercase;
-      color: var(--text-muted);
-      background: transparent; border: 1px solid var(--border);
-      padding: 10px 24px; cursor: none;
-      transition: all 0.3s;
+      letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-mid);
+      background: transparent; border: 1px solid var(--border); padding: 10px 24px;
+      cursor: none; transition: all 0.3s;
     }
-    .tab.active, .tab:hover {
-      background: var(--copper); color: var(--charcoal);
-      border-color: var(--copper);
-    }
-
-    /* Masonry-ish gallery */
+    .tab.active, .tab:hover { background: var(--sage-dark); color: var(--white); border-color: var(--sage-dark); }
     .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(12, 1fr);
-      grid-template-rows: auto;
-      gap: 4px;
+      display: grid; grid-template-columns: repeat(12,1fr);
+      grid-template-rows: auto; gap: 4px;
     }
-
-    .gallery-item {
-      position: relative; overflow: hidden;
-      background: var(--deep-brown);
-      cursor: none;
-    }
+    .gallery-item { position: relative; overflow: hidden; background: var(--parchment); cursor: none; }
     .gallery-item:nth-child(1) { grid-column: span 5; grid-row: span 2; }
     .gallery-item:nth-child(2) { grid-column: span 4; }
     .gallery-item:nth-child(3) { grid-column: span 3; }
@@ -411,296 +294,110 @@
     .gallery-item:nth-child(6) { grid-column: span 4; grid-row: span 2; }
     .gallery-item:nth-child(7) { grid-column: span 4; }
     .gallery-item:nth-child(8) { grid-column: span 4; }
-
-    .gallery-item-inner {
-      width: 100%; height: 100%;
-      min-height: 280px;
-      transition: transform 0.7s ease;
-    }
+    .gallery-item-inner { width: 100%; height: 100%; min-height: 280px; transition: transform 0.7s ease; }
     .gallery-item:hover .gallery-item-inner { transform: scale(1.06); }
-
-    /* Gallery visual fills */
-    .g1 { background: linear-gradient(160deg, #5c3d28 0%, #3b2510 40%, #6b4a32 70%, #2c1e0f 100%); }
-    .g2 { background: linear-gradient(220deg, #4a3020 0%, #6b4830 50%, #2e200e 100%); }
-    .g3 { background: linear-gradient(45deg, #3d2b18 0%, #5a3d27 60%, #241a0c 100%); }
-    .g4 { background: linear-gradient(135deg, #2c2010 0%, #4f3520 50%, #1f1608 100%); }
-    .g5 { background: linear-gradient(315deg, #5e4030 0%, #3a2818 60%, #69483a 100%); }
-    .g6 { background: linear-gradient(180deg, #3b2812 0%, #5c3f28 40%, #281c0a 80%, #472f1c 100%); }
-    .g7 { background: linear-gradient(90deg, #4a3220 0%, #3b2914 50%, #5e4030 100%); }
-    .g8 { background: linear-gradient(260deg, #2c1e0c 0%, #4f3825 50%, #241a09 100%); }
-
-    /* Gallery overlay */
+    .g1 { background: linear-gradient(160deg,#c5b8a8 0%,#ddd4c8 35%,#b8b0a4 65%,#cec8bc 100%); }
+    .g2 { background: linear-gradient(220deg,#bfbab2 0%,#d8d2cc 50%,#aeaaa5 100%); }
+    .g3 { background: linear-gradient(45deg,#c0b8ae 0%,#d4cec8 60%,#b0aaa4 100%); }
+    .g4 { background: linear-gradient(135deg,#c8c0b8 0%,#ddd8d0 50%,#b8b2ac 100%); }
+    .g5 { background: linear-gradient(315deg,#d0c8c0 0%,#beb8b2 60%,#c8c4bc 100%); }
+    .g6 { background: linear-gradient(180deg,#c4bcb4 0%,#d8d0c8 40%,#b4aea8 80%,#cac4bc 100%); }
+    .g7 { background: linear-gradient(90deg,#bcb8b0 0%,#ccc8c0 50%,#b8b4ac 100%); }
+    .g8 { background: linear-gradient(260deg,#c0bbb5 0%,#d4d0cc 50%,#b2aead 100%); }
     .gallery-overlay {
       position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(26,23,20,0.95) 0%, transparent 50%);
+      background: linear-gradient(to top, rgba(255,255,255,0.95) 0%, transparent 50%);
       opacity: 0; transition: opacity 0.4s ease;
-      display: flex; flex-direction: column;
-      justify-content: flex-end; padding: 24px;
+      display: flex; flex-direction: column; justify-content: flex-end; padding: 24px;
     }
     .gallery-item:hover .gallery-overlay { opacity: 1; }
-    .gallery-overlay-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 20px; font-style: italic; font-weight: 300;
-      color: var(--cream); margin-bottom: 6px;
-    }
-    .gallery-overlay-tag {
-      font-size: 10px; letter-spacing: 0.25em;
-      text-transform: uppercase; color: var(--copper-light);
-    }
-
-    /* Gallery icons */
+    .gallery-overlay-title { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-style: italic; font-weight: 300; color: var(--ink); margin-bottom: 6px; }
+    .gallery-overlay-tag { font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--sage-dark); }
     .gallery-icon { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
-    .gallery-icon svg { opacity: 0.08; }
+    .gallery-icon svg { opacity: 0.1; }
 
-    /* ── SERVICES ── */
-    #services {
-      padding: 120px 60px;
-      background: linear-gradient(160deg, #1e1b18 0%, var(--charcoal) 100%);
-      position: relative; z-index: 2;
-    }
-
-    .services-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 1px; background: var(--border); margin-top: 80px;
-    }
-
-    .service-card {
-      background: var(--charcoal);
-      padding: 56px 48px;
-      transition: background 0.4s;
-      position: relative; overflow: hidden;
-    }
-    .service-card:hover { background: #201d1a; }
+    /* SERVICES */
+    #services { padding: 120px 60px; position: relative; z-index: 2; background: var(--white); }
+    .services-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--border); margin-top: 80px; }
+    .service-card { background: var(--white); padding: 56px 48px; transition: background 0.4s; position: relative; overflow: hidden; }
+    .service-card:hover { background: var(--off-white); }
     .service-card::after {
-      content: ''; position: absolute;
-      top: 0; left: 0; right: 0; height: 2px;
-      background: var(--copper); transform: scaleX(0);
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: var(--sage); transform: scaleX(0);
       transition: transform 0.4s ease; transform-origin: left;
     }
     .service-card:hover::after { transform: scaleX(1); }
-    .service-card.featured { background: #201d19; }
-    .service-card.featured::after { transform: scaleX(1); }
-
-    .service-num {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 72px; font-weight: 300;
-      color: rgba(184,131,74,0.1); line-height: 1;
-      margin-bottom: 24px;
-    }
+    .service-card.featured { background: #f7faf8; }
+    .service-card.featured::after { transform: scaleX(1); background: var(--rose); }
+    .service-num { font-family: 'Cormorant Garamond', serif; font-size: 72px; font-weight: 300; color: rgba(122,158,135,0.1); line-height: 1; margin-bottom: 24px; }
     .service-icon { margin-bottom: 24px; }
-    .service-icon svg { color: var(--copper); }
+    .service-icon svg { color: var(--sage-dark); }
+    .featured .service-icon svg { color: var(--rose); }
+    .service-name { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 300; color: var(--ink); margin-bottom: 16px; }
+    .service-name em { font-style: italic; color: var(--sage-dark); }
+    .featured .service-name em { color: var(--rose); }
+    .service-desc { font-size: 13px; line-height: 1.8; color: var(--text-mid); margin-bottom: 32px; }
+    .service-tag { display: inline-block; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--sage-dark); border: 1px solid var(--border); padding: 6px 16px; }
+    .featured .service-tag { background: var(--rose-wash); border-color: var(--border-rose); color: var(--rose); }
+    .featured-ribbon { position: absolute; top: 24px; right: 0; font-family: 'Syncopate', sans-serif; font-size: 7.5px; letter-spacing: 0.2em; background: var(--rose); color: var(--white); padding: 6px 20px; }
 
-    .service-name {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 28px; font-weight: 300;
-      margin-bottom: 16px;
-    }
-    .service-name em { font-style: italic; color: var(--copper-light); }
-
-    .service-desc {
-      font-size: 13px; line-height: 1.8;
-      color: var(--text-muted); margin-bottom: 32px;
-    }
-
-    .service-tag {
-      display: inline-block;
-      font-size: 10px; letter-spacing: 0.2em;
-      text-transform: uppercase; color: var(--copper);
-      border: 1px solid var(--border); padding: 6px 16px;
-    }
-    .featured .service-tag { background: var(--copper-glow); border-color: var(--copper); }
-
-    .featured-ribbon {
-      position: absolute; top: 24px; right: -12px;
-      font-family: 'Syncopate', sans-serif; font-size: 8px;
-      letter-spacing: 0.2em; background: var(--copper);
-      color: var(--charcoal); padding: 6px 20px;
-      transform: rotate(0deg);
-    }
-
-    /* ── PROCESS ── */
-    #process { padding: 120px 60px; position: relative; z-index: 2; }
-
-    .process-steps {
-      display: grid; grid-template-columns: repeat(4, 1fr);
-      gap: 1px; background: var(--border); margin-top: 80px;
-    }
-
-    .process-step {
-      background: var(--charcoal); padding: 48px 40px;
-      position: relative;
-    }
-    .step-num {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 80px; font-weight: 300;
-      color: rgba(184,131,74,0.07); line-height: 0.9;
-      margin-bottom: 32px;
-    }
-    .step-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 22px; font-weight: 400; margin-bottom: 16px;
-    }
-    .step-desc { font-size: 13px; line-height: 1.8; color: var(--text-muted); }
-
-    .process-arrow {
-      position: absolute; top: 50%; right: -12px; z-index: 1;
-      width: 24px; height: 24px; background: var(--copper);
-      display: flex; align-items: center; justify-content: center;
-      transform: translateY(-50%);
-      font-size: 12px; color: var(--charcoal);
-    }
+    /* PROCESS */
+    #process { padding: 120px 60px; position: relative; z-index: 2; background: var(--off-white); }
+    .process-steps { display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; background: var(--border); margin-top: 80px; }
+    .process-step { background: var(--off-white); padding: 48px 40px; position: relative; }
+    .step-num { font-family: 'Cormorant Garamond', serif; font-size: 80px; font-weight: 300; color: rgba(122,158,135,0.1); line-height: 0.9; margin-bottom: 32px; }
+    .step-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 400; color: var(--ink); margin-bottom: 16px; }
+    .step-desc { font-size: 13px; line-height: 1.8; color: var(--text-mid); }
+    .process-arrow { position: absolute; top: 50%; right: -12px; z-index: 1; width: 24px; height: 24px; background: var(--sage); display: flex; align-items: center; justify-content: center; transform: translateY(-50%); font-size: 12px; color: var(--white); }
     .process-step:last-child .process-arrow { display: none; }
 
-    /* ── TESTIMONIALS ── */
-    #testimonials { padding: 120px 60px; position: relative; z-index: 2;
-      background: linear-gradient(180deg, var(--charcoal) 0%, #1c1a17 100%);
-    }
-
-    .testimonials-grid {
-      display: grid; grid-template-columns: 1fr 1fr 1fr;
-      gap: 32px; margin-top: 80px;
-    }
-
-    .testimonial-card {
-      border: 1px solid var(--border); padding: 40px;
-      position: relative; transition: border-color 0.3s;
-    }
-    .testimonial-card:hover { border-color: var(--copper); }
-    .testimonial-card::before {
-      content: '"'; font-family: 'Cormorant Garamond', serif;
-      font-size: 100px; line-height: 0.8; color: rgba(184,131,74,0.15);
-      position: absolute; top: 20px; left: 32px;
-      pointer-events: none;
-    }
-
-    .testimonial-text {
-      font-family: 'Cormorant Garamond', serif; font-style: italic;
-      font-size: 18px; line-height: 1.7; color: var(--cream);
-      margin-bottom: 28px; margin-top: 24px;
-    }
-
+    /* TESTIMONIALS */
+    #testimonials { padding: 120px 60px; position: relative; z-index: 2; background: var(--white); }
+    .testimonials-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 32px; margin-top: 80px; }
+    .testimonial-card { border: 1px solid var(--border); padding: 40px; position: relative; transition: all 0.3s; background: var(--white); }
+    .testimonial-card:hover { border-color: var(--sage); box-shadow: var(--shadow); }
+    .testimonial-card::before { content: '"'; font-family: 'Cormorant Garamond', serif; font-size: 100px; line-height: 0.8; color: rgba(122,158,135,0.12); position: absolute; top: 20px; left: 32px; pointer-events: none; }
+    .testimonial-text { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 18px; line-height: 1.7; color: var(--ink); margin-bottom: 28px; margin-top: 24px; }
     .testimonial-author { display: flex; align-items: center; gap: 16px; }
-    .author-avatar {
-      width: 44px; height: 44px; border-radius: 50%;
-      background: linear-gradient(135deg, var(--copper), #5c3d28);
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'Cormorant Garamond', serif; font-size: 18px;
-      color: var(--cream); flex-shrink: 0;
-    }
-    .author-name {
-      font-size: 13px; font-weight: 500; color: var(--cream); margin-bottom: 4px;
-    }
-    .author-occasion {
-      font-size: 10px; letter-spacing: 0.2em;
-      text-transform: uppercase; color: var(--copper-light);
-    }
-    .stars { color: var(--copper); font-size: 12px; margin-bottom: 8px; letter-spacing: 2px; }
+    .author-avatar { width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg,var(--sage-light),var(--sage-dark)); display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif; font-size: 18px; color: var(--white); flex-shrink: 0; }
+    .author-name { font-size: 13px; font-weight: 500; color: var(--ink); margin-bottom: 4px; }
+    .author-occasion { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--rose); }
+    .stars { color: var(--rose-light); font-size: 12px; margin-bottom: 8px; letter-spacing: 2px; }
 
-    /* ── CONTACT / CTA ── */
+    /* CONTACT */
     #contact {
       padding: 160px 60px;
-      background:
-        radial-gradient(ellipse at 50% 0%, rgba(184,131,74,0.12) 0%, transparent 70%),
-        linear-gradient(180deg, #1c1a17 0%, var(--charcoal) 100%);
+      background: radial-gradient(ellipse at 50% 0%, rgba(122,158,135,0.1) 0%, transparent 65%), var(--off-white);
       text-align: center; position: relative; z-index: 2;
     }
-
-    .contact-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(48px, 7vw, 100px); font-weight: 300;
-      line-height: 1; margin-bottom: 32px;
-    }
-    .contact-title em { font-style: italic; color: var(--copper-light); }
-
-    .contact-subtitle {
-      font-size: 15px; line-height: 1.8; color: var(--text-muted);
-      max-width: 480px; margin: 0 auto 64px;
-    }
-
-    .contact-form {
-      max-width: 560px; margin: 0 auto; display: flex; flex-direction: column; gap: 16px;
-    }
-
+    .contact-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(48px,7vw,100px); font-weight: 300; line-height: 1; color: var(--ink); margin-bottom: 32px; }
+    .contact-title em { font-style: italic; color: var(--sage-dark); }
+    .contact-subtitle { font-size: 15px; line-height: 1.8; color: var(--text-mid); max-width: 480px; margin: 0 auto 64px; }
+    .contact-form { max-width: 560px; margin: 0 auto; display: flex; flex-direction: column; gap: 16px; }
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-
-    .form-input {
-      background: rgba(245,240,232,0.04); border: 1px solid var(--border);
-      color: var(--cream); padding: 16px 20px; font-size: 13px;
-      font-family: 'DM Sans', sans-serif; letter-spacing: 0.05em;
-      outline: none; transition: border-color 0.3s; width: 100%;
-    }
+    .form-input { background: var(--white); border: 1px solid #e0dbd4; color: var(--ink); padding: 16px 20px; font-size: 13px; font-family: 'DM Sans', sans-serif; letter-spacing: 0.05em; outline: none; transition: border-color 0.3s; width: 100%; }
     .form-input::placeholder { color: var(--text-muted); }
-    .form-input:focus { border-color: var(--copper); }
-
+    .form-input:focus { border-color: var(--sage); }
     textarea.form-input { resize: vertical; min-height: 120px; }
+    .form-select { background: var(--white); border: 1px solid #e0dbd4; color: var(--text-muted); padding: 16px 20px; font-size: 13px; font-family: 'DM Sans', sans-serif; letter-spacing: 0.05em; outline: none; transition: border-color 0.3s; width: 100%; appearance: none; }
+    .form-select:focus { border-color: var(--sage); }
+    .form-submit { font-family: 'Syncopate', sans-serif; font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--white); background: var(--sage-dark); border: none; padding: 20px 48px; cursor: none; transition: all 0.3s; align-self: center; margin-top: 8px; }
+    .form-submit:hover { background: var(--sage); transform: translateY(-2px); }
 
-    .form-select {
-      background: rgba(245,240,232,0.04); border: 1px solid var(--border);
-      color: var(--text-muted); padding: 16px 20px; font-size: 13px;
-      font-family: 'DM Sans', sans-serif; letter-spacing: 0.05em;
-      outline: none; transition: border-color 0.3s; width: 100%;
-      appearance: none; cursor: none;
-    }
-    .form-select:focus { border-color: var(--copper); }
-
-    .form-submit {
-      font-family: 'Syncopate', sans-serif; font-size: 10px;
-      letter-spacing: 0.3em; text-transform: uppercase;
-      color: var(--charcoal); background: var(--copper);
-      border: none; padding: 20px 48px;
-      cursor: none; transition: all 0.3s; align-self: center;
-      margin-top: 8px;
-    }
-    .form-submit:hover { background: var(--copper-light); transform: translateY(-2px); }
-
-    /* ── FOOTER ── */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 60px; display: flex;
-      justify-content: space-between; align-items: center;
-      position: relative; z-index: 2;
-    }
-
-    .footer-brand {
-      font-family: 'Syncopate', sans-serif; font-size: 10px;
-      letter-spacing: 0.35em; color: var(--cream);
-    }
+    /* FOOTER */
+    footer { border-top: 1px solid var(--border); padding: 60px; display: flex; justify-content: space-between; align-items: center; background: var(--white); position: relative; z-index: 2; }
+    .footer-brand { font-family: 'Syncopate', sans-serif; font-size: 10px; letter-spacing: 0.35em; color: var(--ink); }
     .footer-brand span { display: block; color: var(--text-muted); font-size: 8px; margin-top: 4px; }
-
     .footer-links { display: flex; gap: 32px; }
-    .footer-links a {
-      font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
-      color: var(--text-muted); text-decoration: none; transition: color 0.3s;
-    }
-    .footer-links a:hover { color: var(--copper-light); }
+    .footer-links a { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; transition: color 0.3s; }
+    .footer-links a:hover { color: var(--sage-dark); }
+    .footer-social { display: flex; gap: 16px; }
+    .social-link { width: 36px; height: 36px; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--text-muted); text-decoration: none; font-size: 13px; transition: all 0.3s; }
+    .social-link:hover { border-color: var(--sage); color: var(--sage-dark); }
 
-    .footer-social { display: flex; gap: 20px; }
-    .social-link {
-      width: 36px; height: 36px; border: 1px solid var(--border);
-      display: flex; align-items: center; justify-content: center;
-      color: var(--text-muted); text-decoration: none;
-      font-size: 13px; transition: all 0.3s;
-    }
-    .social-link:hover { border-color: var(--copper); color: var(--copper); }
-
-    .footer-copy {
-      position: absolute; bottom: 60px; left: 50%;
-      transform: translateX(-50%);
-      font-size: 10px; letter-spacing: 0.15em;
-      color: var(--text-muted); white-space: nowrap;
-    }
-
-    /* ── ANIMATIONS ── */
-    @keyframes fadeSlideUp {
-      from { opacity: 0; transform: translateY(24px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes fadeSlideIn {
-      from { opacity: 0; transform: translateX(20px); }
-      to { opacity: 1; transform: translateX(0); }
-    }
-
-    /* Scroll reveal */
+    /* ANIMATIONS */
+    @keyframes fadeSlideUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+    @keyframes fadeSlideIn { from{opacity:0;transform:translateX(20px)} to{opacity:1;transform:translateX(0)} }
     .reveal { opacity: 0; transform: translateY(32px); transition: all 0.8s ease; }
     .reveal.visible { opacity: 1; transform: translateY(0); }
     .reveal-delay-1 { transition-delay: 0.1s; }
@@ -708,13 +405,7 @@
     .reveal-delay-3 { transition-delay: 0.3s; }
     .reveal-delay-4 { transition-delay: 0.4s; }
 
-    /* ── FLOATING DECORATIVE SHAPES ── */
-    .deco-circle {
-      position: absolute; border-radius: 50%;
-      border: 1px solid rgba(184,131,74,0.15); pointer-events: none;
-    }
-
-    /* ── RESPONSIVE ── */
+    /* RESPONSIVE */
     @media (max-width: 1100px) {
       nav { padding: 24px 40px; }
       #hero { padding: 0 40px 60px; }
@@ -734,24 +425,15 @@
       .hero-title { font-size: 48px; }
       #works, #services, #process, #testimonials, #contact { padding: 80px 24px; }
       footer { padding: 40px 24px; flex-direction: column; gap: 24px; text-align: center; }
-      .footer-copy { position: static; transform: none; }
       .services-grid, .process-steps, .testimonials-grid { grid-template-columns: 1fr; }
       .gallery-item:nth-child(n) { grid-column: span 12 !important; grid-row: span 1 !important; }
       .form-row { grid-template-columns: 1fr; }
       .stats-row { gap: 28px; }
     }
-
-    /* Glow line effect */
-    .glow-line {
-      position: absolute; left: 60px; right: 60px; height: 1px;
-      background: linear-gradient(to right, transparent, var(--copper), transparent);
-      opacity: 0.3; pointer-events: none;
-    }
   </style>
 </head>
 <body>
 
-  <!-- Custom Cursor -->
   <div class="cursor" id="cursor"></div>
   <div class="cursor-ring" id="cursorRing"></div>
 
@@ -759,7 +441,7 @@
   <nav>
     <a href="#" class="nav-logo">
       Nostalgic Trails
-      <span>Michael Denny Photography</span>
+      <span>Photography Studio</span>
     </a>
     <ul class="nav-links">
       <li><a href="#works">Works</a></li>
@@ -774,78 +456,58 @@
   <section id="hero">
     <div class="hero-bg"></div>
     <div class="hero-lines"></div>
-
     <div class="hero-frames">
       <div class="frame">
         <div class="frame-inner g1"></div>
-        <div class="frame-svg">
-          <svg width="80" height="80" viewBox="0 0 80 80" fill="none"><circle cx="40" cy="32" r="16" stroke="#f5f0e8" stroke-width="1.5"/><path d="M20 65c0-11 9-20 20-20s20 9 20 20" stroke="#f5f0e8" stroke-width="1.5"/></svg>
-        </div>
+        <div class="frame-svg"><svg width="80" height="80" viewBox="0 0 80 80" fill="none"><circle cx="40" cy="32" r="16" stroke="#1e1e1e" stroke-width="1.5"/><path d="M20 65c0-11 9-20 20-20s20 9 20 20" stroke="#1e1e1e" stroke-width="1.5"/></svg></div>
         <div class="frame-label">Wedding Series</div>
       </div>
       <div class="frame">
         <div class="frame-inner g2"></div>
-        <div class="frame-svg">
-          <svg width="60" height="60" viewBox="0 0 60 60" fill="none"><rect x="8" y="14" width="44" height="32" rx="2" stroke="#f5f0e8" stroke-width="1.5"/><circle cx="30" cy="30" r="10" stroke="#f5f0e8" stroke-width="1.5"/></svg>
-        </div>
+        <div class="frame-svg"><svg width="60" height="60" viewBox="0 0 60 60" fill="none"><rect x="8" y="14" width="44" height="32" rx="2" stroke="#1e1e1e" stroke-width="1.5"/><circle cx="30" cy="30" r="10" stroke="#1e1e1e" stroke-width="1.5"/></svg></div>
         <div class="frame-label">Prenuptials</div>
       </div>
       <div class="frame">
         <div class="frame-inner g3"></div>
-        <div class="frame-svg">
-          <svg width="60" height="60" viewBox="0 0 60 60" fill="none"><path d="M12 20 L30 10 L48 20 L48 46 L12 46Z" stroke="#f5f0e8" stroke-width="1.5"/><path d="M22 46 L22 33 L38 33 L38 46" stroke="#f5f0e8" stroke-width="1.5"/></svg>
-        </div>
+        <div class="frame-svg"><svg width="60" height="60" viewBox="0 0 60 60" fill="none"><path d="M12 20 L30 10 L48 20 L48 46 L12 46Z" stroke="#1e1e1e" stroke-width="1.5"/></svg></div>
         <div class="frame-label">Portraits</div>
       </div>
     </div>
-
     <div class="hero-content">
-      <div class="hero-eyebrow">Photography & Visual Artistry</div>
-      <h1 class="hero-title">
-        Where Memory<br>Meets <em>Light</em>
-      </h1>
-      <p class="hero-desc">Michael Denny captures the moments you feel but cannot hold — turning fleeting emotion into timeless, cinematic imagery that lives forever.</p>
+      <div class="hero-eyebrow">Photography &amp; Visual Artistry</div>
+      <h1 class="hero-title">Where Memory<br>Meets <em>Light</em></h1>
+      <p class="hero-desc">We capture the moments you feel but cannot hold — turning fleeting emotion into timeless, cinematic imagery that lives forever.</p>
       <div class="hero-actions">
         <a href="#works" class="btn-primary">Explore Works</a>
         <a href="#services" class="btn-ghost">View Services</a>
       </div>
     </div>
-
     <div class="hero-scroll">Scroll</div>
   </section>
 
   <!-- STRIP -->
   <div class="strip">
-    <div class="strip-track" id="stripTrack">
-      <span>Weddings</span><div class="dot"></div>
-      <span>Prenuptials</span><div class="dot"></div>
-      <span>Portraits</span><div class="dot"></div>
-      <span>Events</span><div class="dot"></div>
-      <span>Maternity</span><div class="dot"></div>
-      <span>Graduations</span><div class="dot"></div>
-      <span>Family</span><div class="dot"></div>
-      <span>Corporate</span><div class="dot"></div>
-      <span>Weddings</span><div class="dot"></div>
-      <span>Prenuptials</span><div class="dot"></div>
-      <span>Portraits</span><div class="dot"></div>
-      <span>Events</span><div class="dot"></div>
-      <span>Maternity</span><div class="dot"></div>
-      <span>Graduations</span><div class="dot"></div>
-      <span>Family</span><div class="dot"></div>
-      <span>Corporate</span><div class="dot"></div>
+    <div class="strip-track">
+      <span>Weddings</span><div class="dot"></div><span>Prenuptials</span><div class="dot"></div>
+      <span>Portraits</span><div class="dot"></div><span>Events</span><div class="dot"></div>
+      <span>Maternity</span><div class="dot"></div><span>Graduations</span><div class="dot"></div>
+      <span>Family</span><div class="dot"></div><span>Corporate</span><div class="dot"></div>
+      <span>Weddings</span><div class="dot"></div><span>Prenuptials</span><div class="dot"></div>
+      <span>Portraits</span><div class="dot"></div><span>Events</span><div class="dot"></div>
+      <span>Maternity</span><div class="dot"></div><span>Graduations</span><div class="dot"></div>
+      <span>Family</span><div class="dot"></div><span>Corporate</span><div class="dot"></div>
     </div>
   </div>
 
   <!-- WORKS -->
   <section id="works">
     <div class="section-header reveal">
-      <div class="section-header-left">
+      <div>
         <div class="section-tag">Portfolio</div>
         <h2 class="section-title">Selected <em>Works</em></h2>
       </div>
       <a href="#contact" class="view-all">View Full Portfolio →</a>
     </div>
-
     <div class="filter-tabs reveal">
       <button class="tab active">All</button>
       <button class="tab">Weddings</button>
@@ -853,73 +515,15 @@
       <button class="tab">Portraits</button>
       <button class="tab">Events</button>
     </div>
-
     <div class="gallery-grid">
-      <div class="gallery-item reveal reveal-delay-1">
-        <div class="gallery-item-inner g1"></div>
-        <div class="gallery-icon">
-          <svg width="100" height="100" viewBox="0 0 100 100" fill="none"><circle cx="50" cy="42" r="22" stroke="#f5f0e8" stroke-width="1"/><path d="M26 85c0-13 11-24 24-24s24 11 24 24" stroke="#f5f0e8" stroke-width="1"/></svg>
-        </div>
-        <div class="gallery-overlay">
-          <div class="gallery-overlay-title">The Golden Hour</div>
-          <div class="gallery-overlay-tag">Wedding · 2024</div>
-        </div>
-      </div>
-      <div class="gallery-item reveal reveal-delay-2">
-        <div class="gallery-item-inner g2"></div>
-        <div class="gallery-icon">
-          <svg width="80" height="80" viewBox="0 0 80 80" fill="none"><path d="M20 40 Q40 20 60 40 Q40 60 20 40Z" stroke="#f5f0e8" stroke-width="1"/></svg>
-        </div>
-        <div class="gallery-overlay">
-          <div class="gallery-overlay-title">Coastal Whispers</div>
-          <div class="gallery-overlay-tag">Prenuptial · 2024</div>
-        </div>
-      </div>
-      <div class="gallery-item reveal reveal-delay-3">
-        <div class="gallery-item-inner g3"></div>
-        <div class="gallery-icon">
-          <svg width="70" height="70" viewBox="0 0 70 70" fill="none"><rect x="10" y="10" width="50" height="50" rx="2" stroke="#f5f0e8" stroke-width="1"/><circle cx="35" cy="35" r="14" stroke="#f5f0e8" stroke-width="1"/></svg>
-        </div>
-        <div class="gallery-overlay">
-          <div class="gallery-overlay-title">Forest Reverie</div>
-          <div class="gallery-overlay-tag">Portrait · 2024</div>
-        </div>
-      </div>
-      <div class="gallery-item reveal reveal-delay-1">
-        <div class="gallery-item-inner g4"></div>
-        <div class="gallery-overlay">
-          <div class="gallery-overlay-title">Garden Ceremony</div>
-          <div class="gallery-overlay-tag">Wedding · 2023</div>
-        </div>
-      </div>
-      <div class="gallery-item reveal reveal-delay-2">
-        <div class="gallery-item-inner g5"></div>
-        <div class="gallery-overlay">
-          <div class="gallery-overlay-title">Urban Romance</div>
-          <div class="gallery-overlay-tag">Prenuptial · 2023</div>
-        </div>
-      </div>
-      <div class="gallery-item reveal reveal-delay-3">
-        <div class="gallery-item-inner g6"></div>
-        <div class="gallery-overlay">
-          <div class="gallery-overlay-title">Summer Gala</div>
-          <div class="gallery-overlay-tag">Event · 2023</div>
-        </div>
-      </div>
-      <div class="gallery-item reveal reveal-delay-1">
-        <div class="gallery-item-inner g7"></div>
-        <div class="gallery-overlay">
-          <div class="gallery-overlay-title">Family Ties</div>
-          <div class="gallery-overlay-tag">Family · 2023</div>
-        </div>
-      </div>
-      <div class="gallery-item reveal reveal-delay-2">
-        <div class="gallery-item-inner g8"></div>
-        <div class="gallery-overlay">
-          <div class="gallery-overlay-title">Morning Vows</div>
-          <div class="gallery-overlay-tag">Wedding · 2023</div>
-        </div>
-      </div>
+      <div class="gallery-item reveal reveal-delay-1"><div class="gallery-item-inner g1"></div><div class="gallery-icon"><svg width="100" height="100" viewBox="0 0 100 100" fill="none"><circle cx="50" cy="42" r="22" stroke="#1e1e1e" stroke-width="1"/><path d="M26 85c0-13 11-24 24-24s24 11 24 24" stroke="#1e1e1e" stroke-width="1"/></svg></div><div class="gallery-overlay"><div class="gallery-overlay-title">The Golden Hour</div><div class="gallery-overlay-tag">Wedding · 2024</div></div></div>
+      <div class="gallery-item reveal reveal-delay-2"><div class="gallery-item-inner g2"></div><div class="gallery-overlay"><div class="gallery-overlay-title">Coastal Whispers</div><div class="gallery-overlay-tag">Prenuptial · 2024</div></div></div>
+      <div class="gallery-item reveal reveal-delay-3"><div class="gallery-item-inner g3"></div><div class="gallery-overlay"><div class="gallery-overlay-title">Forest Reverie</div><div class="gallery-overlay-tag">Portrait · 2024</div></div></div>
+      <div class="gallery-item reveal reveal-delay-1"><div class="gallery-item-inner g4"></div><div class="gallery-overlay"><div class="gallery-overlay-title">Garden Ceremony</div><div class="gallery-overlay-tag">Wedding · 2023</div></div></div>
+      <div class="gallery-item reveal reveal-delay-2"><div class="gallery-item-inner g5"></div><div class="gallery-overlay"><div class="gallery-overlay-title">Urban Romance</div><div class="gallery-overlay-tag">Prenuptial · 2023</div></div></div>
+      <div class="gallery-item reveal reveal-delay-3"><div class="gallery-item-inner g6"></div><div class="gallery-overlay"><div class="gallery-overlay-title">Summer Gala</div><div class="gallery-overlay-tag">Event · 2023</div></div></div>
+      <div class="gallery-item reveal reveal-delay-1"><div class="gallery-item-inner g7"></div><div class="gallery-overlay"><div class="gallery-overlay-title">Family Ties</div><div class="gallery-overlay-tag">Family · 2023</div></div></div>
+      <div class="gallery-item reveal reveal-delay-2"><div class="gallery-item-inner g8"></div><div class="gallery-overlay"><div class="gallery-overlay-title">Morning Vows</div><div class="gallery-overlay-tag">Wedding · 2023</div></div></div>
     </div>
   </section>
 
@@ -929,34 +533,21 @@
       <div class="about-visual-inner">
         <div class="about-portrait">
           <div class="about-portrait-fill">
-            <svg width="80" height="100" viewBox="0 0 80 100" fill="none">
-              <circle cx="40" cy="30" r="20" stroke="#f5f0e8" stroke-width="1.5"/>
-              <path d="M10 95c0-17 13-30 30-30s30 13 30 30" stroke="#f5f0e8" stroke-width="1.5"/>
-            </svg>
+            <svg width="80" height="100" viewBox="0 0 80 100" fill="none"><circle cx="40" cy="30" r="20" stroke="#1e1e1e" stroke-width="1.5"/><path d="M10 95c0-17 13-30 30-30s30 13 30 30" stroke="#1e1e1e" stroke-width="1.5"/></svg>
           </div>
         </div>
       </div>
       <div class="about-year">2014</div>
     </div>
-
     <div class="about-content">
-      <div class="section-tag reveal">About the Artist</div>
+      <div class="section-tag reveal">About the Studio</div>
       <h2 class="section-title reveal">Crafting <em>Timeless</em><br>Memories</h2>
-      <p class="about-body reveal">Michael Denny is a storytelling photographer based in the Philippines, with over a decade of experience weaving emotional narratives through the lens. His distinctive approach blends cinematic light, intimate composition, and quiet patience — waiting for the moment that needs no words.</p>
-      <p class="about-body reveal" style="margin-top:-16px">Best known for his hauntingly beautiful wedding and prenuptial work, Michael's images feel like a memory you never want to lose — tender, honest, and impossibly beautiful.</p>
+      <p class="about-body reveal">Nostalgic Trails is a storytelling photography studio rooted in the Philippines, with over a decade of experience weaving emotional narratives through the lens. Our distinctive approach blends cinematic light, intimate composition, and quiet patience — waiting for the moment that needs no words.</p>
+      <p class="about-body reveal">Best known for hauntingly beautiful wedding and prenuptial work, our images feel like a memory you never want to lose — tender, honest, and impossibly beautiful.</p>
       <div class="stats-row reveal">
-        <div class="stat-item">
-          <div class="stat-num">500+</div>
-          <div class="stat-label">Couples Served</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-num">11</div>
-          <div class="stat-label">Years Experience</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-num">38</div>
-          <div class="stat-label">Awards Won</div>
-        </div>
+        <div class="stat-item"><div class="stat-num">500+</div><div class="stat-label">Couples Served</div></div>
+        <div class="stat-item"><div class="stat-num">11</div><div class="stat-label">Years Experience</div></div>
+        <div class="stat-item"><div class="stat-num">38</div><div class="stat-label">Awards Won</div></div>
       </div>
     </div>
   </section>
@@ -965,63 +556,50 @@
   <section id="services">
     <div class="section-header reveal">
       <div>
-        <div class="section-tag">What I Offer</div>
+        <div class="section-tag">What We Offer</div>
         <h2 class="section-title">Every Occasion, <em>Immortalized</em></h2>
       </div>
     </div>
-
     <div class="services-grid">
       <div class="service-card featured reveal reveal-delay-1">
         <div class="featured-ribbon">Most Booked</div>
         <div class="service-num">01</div>
-        <div class="service-icon">
-          <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M14 3L3 10v15h8v-6h6v6h8V10L14 3z" stroke="#b8834a" stroke-width="1.5" stroke-linejoin="round"/></svg>
-        </div>
+        <div class="service-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M14 3L3 10v15h8v-6h6v6h8V10L14 3z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
         <div class="service-name">Weddings &amp; <em>Prenuptials</em></div>
         <p class="service-desc">Full-day wedding coverage with cinematic precision. From bridal prep to the last dance — every vow, every tear, every laugh, preserved forever. Prenuptial sessions in bespoke locations that tell your unique love story.</p>
         <div class="service-tag">Signature Series</div>
       </div>
       <div class="service-card reveal reveal-delay-2">
         <div class="service-num">02</div>
-        <div class="service-icon">
-          <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="11" r="5" stroke="#b8834a" stroke-width="1.5"/><path d="M6 24c0-4.4 3.6-8 8-8s8 3.6 8 8" stroke="#b8834a" stroke-width="1.5"/></svg>
-        </div>
+        <div class="service-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="11" r="5" stroke="currentColor" stroke-width="1.5"/><path d="M6 24c0-4.4 3.6-8 8-8s8 3.6 8 8" stroke="currentColor" stroke-width="1.5"/></svg></div>
         <div class="service-name">Portraits &amp; <em>Headshots</em></div>
         <p class="service-desc">Studio and outdoor portrait sessions for individuals, couples, and families. Corporate headshots to personal editorial portraits — crafted with intentional lighting and composition.</p>
         <div class="service-tag">Available Year-Round</div>
       </div>
       <div class="service-card reveal reveal-delay-3">
         <div class="service-num">03</div>
-        <div class="service-icon">
-          <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="3" y="7" width="22" height="16" rx="2" stroke="#b8834a" stroke-width="1.5"/><circle cx="14" cy="15" r="4" stroke="#b8834a" stroke-width="1.5"/><path d="M10 7V5M18 7V5" stroke="#b8834a" stroke-width="1.5" stroke-linecap="round"/></svg>
-        </div>
+        <div class="service-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="3" y="7" width="22" height="16" rx="2" stroke="currentColor" stroke-width="1.5"/><circle cx="14" cy="15" r="4" stroke="currentColor" stroke-width="1.5"/><path d="M10 7V5M18 7V5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
         <div class="service-name">Events &amp; <em>Celebrations</em></div>
         <p class="service-desc">Birthdays, debut balls, anniversaries, graduations, corporate events. Candid documentary-style photography that captures the energy and emotion of your special gathering.</p>
         <div class="service-tag">All Occasions</div>
       </div>
       <div class="service-card reveal reveal-delay-1">
         <div class="service-num">04</div>
-        <div class="service-icon">
-          <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M14 3c3 0 6 2 7 5l3 1-2 3 1 3-3-1c-1 3-4 5-7 5s-6-2-7-5l-3 1 1-3-2-3 3-1c1-3 4-5 6-5z" stroke="#b8834a" stroke-width="1.5"/></svg>
-        </div>
+        <div class="service-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M14 3c3 0 6 2 7 5l3 1-2 3 1 3-3-1c-1 3-4 5-7 5s-6-2-7-5l-3 1 1-3-2-3 3-1c1-3 4-5 6-5z" stroke="currentColor" stroke-width="1.5"/></svg></div>
         <div class="service-name">Maternity &amp; <em>Newborn</em></div>
         <p class="service-desc">Gentle, intimate sessions capturing the magic of new life. Maternity glow, family bonds, and the quiet wonder of a newborn — timeless imagery for life's most tender chapter.</p>
         <div class="service-tag">Tender Moments</div>
       </div>
       <div class="service-card reveal reveal-delay-2">
         <div class="service-num">05</div>
-        <div class="service-icon">
-          <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="4" y="4" width="20" height="16" rx="1.5" stroke="#b8834a" stroke-width="1.5"/><path d="M4 12h20M12 20v4M16 20v4M9 24h10" stroke="#b8834a" stroke-width="1.5" stroke-linecap="round"/></svg>
-        </div>
+        <div class="service-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="4" y="4" width="20" height="16" rx="1.5" stroke="currentColor" stroke-width="1.5"/><path d="M4 12h20M12 20v4M16 20v4M9 24h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
         <div class="service-name">Family &amp; <em>Lifestyle</em></div>
         <p class="service-desc">Authentic family sessions that feel relaxed and real. In-home lifestyle sessions, outdoor adventures, or curated studio sets — connections captured as they naturally are.</p>
         <div class="service-tag">Lifestyle Sessions</div>
       </div>
       <div class="service-card reveal reveal-delay-3">
         <div class="service-num">06</div>
-        <div class="service-icon">
-          <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M4 20L10 8l6 8 4-5 4 9" stroke="#b8834a" stroke-width="1.5" stroke-linejoin="round"/><rect x="3" y="4" width="22" height="20" rx="2" stroke="#b8834a" stroke-width="1.5"/></svg>
-        </div>
+        <div class="service-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M4 20L10 8l6 8 4-5 4 9" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><rect x="3" y="4" width="22" height="20" rx="2" stroke="currentColor" stroke-width="1.5"/></svg></div>
         <div class="service-name">Commercial &amp; <em>Editorial</em></div>
         <p class="service-desc">Brand photography, product campaigns, editorial spreads. Visual content crafted to elevate your brand identity with the same artistry applied to personal work.</p>
         <div class="service-tag">Brand Identity</div>
@@ -1037,26 +615,22 @@
     </div>
     <div class="process-steps">
       <div class="process-step reveal reveal-delay-1">
-        <div class="step-num">01</div>
-        <h3 class="step-title">Discovery Call</h3>
+        <div class="step-num">01</div><h3 class="step-title">Discovery Call</h3>
         <p class="step-desc">We start with a conversation — about your vision, your story, your desires. No cookie-cutter packages; every session is shaped around you.</p>
         <div class="process-arrow">→</div>
       </div>
       <div class="process-step reveal reveal-delay-2">
-        <div class="step-num">02</div>
-        <h3 class="step-title">Creative Planning</h3>
+        <div class="step-num">02</div><h3 class="step-title">Creative Planning</h3>
         <p class="step-desc">Locations, mood boards, timing, wardrobe — we plan every detail together to ensure the images feel authentically yours.</p>
         <div class="process-arrow">→</div>
       </div>
       <div class="process-step reveal reveal-delay-3">
-        <div class="step-num">03</div>
-        <h3 class="step-title">The Session</h3>
-        <p class="step-desc">On the day, Michael guides you gently — creating a relaxed atmosphere where genuine emotion flows and real moments unfold naturally.</p>
+        <div class="step-num">03</div><h3 class="step-title">The Session</h3>
+        <p class="step-desc">On the day, we guide you gently — creating a relaxed atmosphere where genuine emotion flows and real moments unfold naturally.</p>
         <div class="process-arrow">→</div>
       </div>
       <div class="process-step reveal reveal-delay-4">
-        <div class="step-num">04</div>
-        <h3 class="step-title">Delivery</h3>
+        <div class="step-num">04</div><h3 class="step-title">Delivery</h3>
         <p class="step-desc">Meticulously edited images delivered via a private gallery within 4–6 weeks. Print collections, albums, and wall art available on request.</p>
       </div>
     </div>
@@ -1073,49 +647,27 @@
     <div class="testimonials-grid">
       <div class="testimonial-card reveal reveal-delay-1">
         <div class="stars">★★★★★</div>
-        <p class="testimonial-text">Michael didn't just photograph our wedding — he captured its soul. Every photo feels like a painting. We cry every time we look at the album.</p>
-        <div class="testimonial-author">
-          <div class="author-avatar">A</div>
-          <div>
-            <div class="author-name">Andrea & Luis Santos</div>
-            <div class="author-occasion">Wedding · Tagaytay 2024</div>
-          </div>
-        </div>
+        <p class="testimonial-text">Nostalgic Trails didn't just photograph our wedding — they captured its soul. Every photo feels like a painting. We cry every time we look at the album.</p>
+        <div class="testimonial-author"><div class="author-avatar">A</div><div><div class="author-name">Andrea &amp; Luis Santos</div><div class="author-occasion">Wedding · Tagaytay 2024</div></div></div>
       </div>
       <div class="testimonial-card reveal reveal-delay-2">
         <div class="stars">★★★★★</div>
-        <p class="testimonial-text">Our prenup shots are absolutely breathtaking. He has this incredible ability to find the light and make everything look cinematic. Worth every centavo.</p>
-        <div class="testimonial-author">
-          <div class="author-avatar">M</div>
-          <div>
-            <div class="author-name">Marco & Bea Reyes</div>
-            <div class="author-occasion">Prenuptial · Batangas 2024</div>
-          </div>
-        </div>
+        <p class="testimonial-text">Our prenup shots are absolutely breathtaking. They have this incredible ability to find the light and make everything look cinematic. Worth every centavo.</p>
+        <div class="testimonial-author"><div class="author-avatar">M</div><div><div class="author-name">Marco &amp; Bea Reyes</div><div class="author-occasion">Prenuptial · Batangas 2024</div></div></div>
       </div>
       <div class="testimonial-card reveal reveal-delay-3">
         <div class="stars">★★★★★</div>
-        <p class="testimonial-text">We've hired Michael three times now — for our engagement, wedding, and our daughter's first birthday. He always exceeds expectations. A true artist.</p>
-        <div class="testimonial-author">
-          <div class="author-avatar">C</div>
-          <div>
-            <div class="author-name">Carla & James Lim</div>
-            <div class="author-occasion">Multiple Sessions · 2022–2024</div>
-          </div>
-        </div>
+        <p class="testimonial-text">We've booked Nostalgic Trails three times — for our engagement, wedding, and our daughter's first birthday. They always exceed expectations. True artists.</p>
+        <div class="testimonial-author"><div class="author-avatar">C</div><div><div class="author-name">Carla &amp; James Lim</div><div class="author-occasion">Multiple Sessions · 2022–2024</div></div></div>
       </div>
     </div>
   </section>
 
   <!-- CONTACT -->
   <section id="contact">
-    <div class="deco-circle" style="width:300px;height:300px;top:-150px;left:50%;transform:translateX(-50%);opacity:0.4;"></div>
     <div class="section-tag reveal" style="justify-content:center">Get In Touch</div>
-    <h2 class="contact-title reveal">
-      Let's Create<br><em>Something</em><br>Beautiful
-    </h2>
-    <p class="contact-subtitle reveal">Whether you're planning a wedding, a prenup, or any occasion worth remembering — Michael would love to hear your story.</p>
-
+    <h2 class="contact-title reveal">Let's Create<br><em>Something</em><br>Beautiful</h2>
+    <p class="contact-subtitle reveal">Whether you're planning a wedding, a prenup, or any occasion worth remembering — we'd love to hear your story.</p>
     <form class="contact-form reveal" onsubmit="return false;">
       <div class="form-row">
         <input class="form-input" type="text" placeholder="Your Name" />
@@ -1135,7 +687,7 @@
         <option>Family Session</option>
         <option>Commercial / Editorial</option>
       </select>
-      <textarea class="form-input" placeholder="Tell me about your vision..."></textarea>
+      <textarea class="form-input" placeholder="Tell us about your vision..."></textarea>
       <button type="submit" class="form-submit">Send Inquiry</button>
     </form>
   </section>
@@ -1144,7 +696,7 @@
   <footer>
     <div class="footer-brand">
       Nostalgic Trails
-      <span>© 2025 Michael Denny Photography. All rights reserved.</span>
+      <span>© 2025 Nostalgic Trails Photography. All rights reserved.</span>
     </div>
     <nav class="footer-links">
       <a href="#works">Portfolio</a>
@@ -1153,95 +705,64 @@
       <a href="#contact">Contact</a>
     </nav>
     <div class="footer-social">
-      <a href="#" class="social-link">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-      </a>
-      <a href="#" class="social-link">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-      </a>
-      <a href="#" class="social-link">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34v-7a8.16 8.16 0 004.77 1.52v-3.4a4.85 4.85 0 01-1-.73z"/></svg>
-      </a>
+      <a href="#" class="social-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
+      <a href="#" class="social-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+      <a href="#" class="social-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34v-7a8.16 8.16 0 004.77 1.52v-3.4a4.85 4.85 0 01-1-.73z"/></svg></a>
     </div>
   </footer>
 
   <script>
-    // Custom cursor
     const cursor = document.getElementById('cursor');
     const cursorRing = document.getElementById('cursorRing');
     let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
-
-    document.addEventListener('mousemove', (e) => {
+    document.addEventListener('mousemove', e => {
       mouseX = e.clientX; mouseY = e.clientY;
-      cursor.style.left = mouseX + 'px';
-      cursor.style.top = mouseY + 'px';
+      cursor.style.left = mouseX + 'px'; cursor.style.top = mouseY + 'px';
     });
-
     function animateRing() {
-      ringX += (mouseX - ringX) * 0.12;
-      ringY += (mouseY - ringY) * 0.12;
-      cursorRing.style.left = ringX + 'px';
-      cursorRing.style.top = ringY + 'px';
+      ringX += (mouseX - ringX) * 0.12; ringY += (mouseY - ringY) * 0.12;
+      cursorRing.style.left = ringX + 'px'; cursorRing.style.top = ringY + 'px';
       requestAnimationFrame(animateRing);
     }
     animateRing();
-
-    // Scale cursor on hover
     document.querySelectorAll('a, button, .gallery-item, .service-card').forEach(el => {
       el.addEventListener('mouseenter', () => {
-        cursor.style.transform = 'translate(-50%, -50%) scale(2.5)';
-        cursorRing.style.transform = 'translate(-50%, -50%) scale(1.5)';
-        cursorRing.style.opacity = '0.4';
+        cursor.style.transform = 'translate(-50%,-50%) scale(2.5)';
+        cursorRing.style.transform = 'translate(-50%,-50%) scale(1.5)';
+        cursorRing.style.opacity = '0.35';
       });
       el.addEventListener('mouseleave', () => {
-        cursor.style.transform = 'translate(-50%, -50%) scale(1)';
-        cursorRing.style.transform = 'translate(-50%, -50%) scale(1)';
-        cursorRing.style.opacity = '0.7';
+        cursor.style.transform = 'translate(-50%,-50%) scale(1)';
+        cursorRing.style.transform = 'translate(-50%,-50%) scale(1)';
+        cursorRing.style.opacity = '0.6';
       });
     });
-
-    // Scroll reveal
-    const reveals = document.querySelectorAll('.reveal');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
     }, { threshold: 0.1 });
-    reveals.forEach(el => observer.observe(el));
-
-    // Filter tabs
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     document.querySelectorAll('.tab').forEach(tab => {
       tab.addEventListener('click', function() {
         document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
         this.classList.add('active');
       });
     });
-
-    // Nav background on scroll
     const nav = document.querySelector('nav');
     window.addEventListener('scroll', () => {
       if (window.scrollY > 80) {
-        nav.style.background = 'rgba(26,23,20,0.97)';
-        nav.style.backdropFilter = 'blur(12px)';
+        nav.style.background = 'rgba(255,255,255,0.97)';
+        nav.style.backdropFilter = 'blur(16px)';
+        nav.style.boxShadow = '0 1px 24px rgba(0,0,0,0.06)';
       } else {
-        nav.style.background = 'linear-gradient(to bottom, rgba(26,23,20,0.9) 0%, transparent 100%)';
-        nav.style.backdropFilter = 'blur(2px)';
+        nav.style.background = 'linear-gradient(to bottom, rgba(255,255,255,0.96) 0%, rgba(255,255,255,0) 100%)';
+        nav.style.backdropFilter = 'blur(4px)';
+        nav.style.boxShadow = 'none';
       }
     });
-
-    // Form submit feedback
-    const formSubmit = document.querySelector('.form-submit');
-    formSubmit.addEventListener('click', () => {
-      formSubmit.textContent = 'Message Sent ✓';
-      formSubmit.style.background = '#5a7a4a';
-      formSubmit.style.color = '#fff';
-      setTimeout(() => {
-        formSubmit.textContent = 'Send Inquiry';
-        formSubmit.style.background = '';
-        formSubmit.style.color = '';
-      }, 3000);
+    document.querySelector('.form-submit').addEventListener('click', function() {
+      this.textContent = 'Message Sent ✓';
+      this.style.background = '#7a9e87';
+      setTimeout(() => { this.textContent = 'Send Inquiry'; this.style.background = ''; }, 3000);
     });
   </script>
 </body>
