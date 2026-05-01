@@ -57,6 +57,7 @@
       display: flex; justify-content: space-between; align-items: center;
       padding: 28px 60px;
       transition: all 0.4s ease;
+      gap: 40px; /* ensures logo never crashes into links */
     }
     nav.scrolled {
       background: rgba(13,11,9,0.92);
@@ -66,22 +67,26 @@
     }
     .nav-logo {
       font-family: 'Syncopate', sans-serif; font-size: 11px;
-      letter-spacing: 0.35em; text-transform: uppercase;
+      letter-spacing: 0.25em; text-transform: uppercase;
       color: var(--white); text-decoration: none; line-height: 1.6;
+      flex-shrink: 0; /* never compress the logo */
+      white-space: nowrap;
     }
-    .nav-logo span { display: block; color: var(--sage); font-size: 8.5px; letter-spacing: 0.55em; margin-top: 2px; }
-    .nav-links { display: flex; gap: 40px; list-style: none; }
+    .nav-logo span { display: block; color: var(--sage); font-size: 8px; letter-spacing: 0.35em; margin-top: 2px; }
+    .nav-links { display: flex; gap: 32px; list-style: none; flex-shrink: 0; }
     .nav-links a {
-      font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+      font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase;
       color: rgba(255,255,255,0.65); text-decoration: none; transition: color 0.3s;
+      white-space: nowrap;
     }
     .nav-links a:hover { color: var(--sage-light); }
     .nav-cta {
       font-family: 'Syncopate', sans-serif; font-size: 9px;
-      letter-spacing: 0.3em; text-transform: uppercase;
+      letter-spacing: 0.25em; text-transform: uppercase;
       color: var(--white); background: var(--sage-dark);
       border: none; padding: 12px 24px; cursor: none;
       transition: background 0.3s; text-decoration: none;
+      flex-shrink: 0; white-space: nowrap;
     }
     .nav-cta:hover { background: var(--sage); }
 
@@ -165,7 +170,7 @@
 
     .section-title-big {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(48px, 7vw, 104px);
+      font-size: clamp(48px, 5.5vw, 110px);
       font-weight: 300; line-height: 0.93;
       color: var(--white);
       opacity: 0; transform: translateY(14px);
@@ -438,6 +443,76 @@
       position: fixed; inset: 0; z-index: 2; pointer-events: none;
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
       opacity: 0.5;
+    }
+
+    /* ─── LARGE SCREENS & TV ────────────────────────────────────── */
+
+    /* ── Wide desktop 1440–1920px ── */
+    @media (min-width: 1440px) {
+      nav { padding: 32px 80px; }
+      nav.scrolled { padding: 20px 80px; }
+
+      .section-content { padding: 80px 80px; }
+      .section-content.bottom-left,
+      .section-content.bottom-right { padding: 0 80px 100px; }
+
+      .section-body { font-size: 15px; max-width: 560px; }
+
+      .services-inner { max-width: 1100px; }
+      .testimonials-inner { max-width: 1100px; gap: 32px; }
+      .svc-card { padding: 48px 36px; }
+      .t-card { padding: 44px 36px; }
+
+      .marquee-photo { width: 380px; height: 260px; }
+      .marquee-header { padding: 0 80px 72px; }
+
+      .site-footer { padding: 70px 80px; }
+    }
+
+    /* ── TV / ultra-wide 1920px+ ── */
+    @media (min-width: 1920px) {
+      nav { padding: 36px 120px; gap: 60px; }
+      nav.scrolled { padding: 24px 120px; }
+      .nav-logo { font-size: 12px; }
+      .nav-links { gap: 48px; }
+      .nav-links a { font-size: 12px; }
+      .nav-cta { font-size: 10px; padding: 14px 30px; }
+
+      .section-content { padding: 100px 120px; }
+      .section-content.bottom-left,
+      .section-content.bottom-right { padding: 0 120px 130px; }
+
+      .section-title-big { font-size: clamp(80px, 4.5vw, 130px) !important; }
+      .section-body { font-size: 17px; max-width: 620px; line-height: 1.9; }
+      .section-eyebrow { font-size: 11px; }
+
+      .services-inner { max-width: 1400px; }
+      .svc-card { padding: 56px 44px; }
+      .svc-num { font-size: 64px; }
+      .svc-name { font-size: 26px; }
+      .svc-desc { font-size: 14px; }
+
+      .testimonials-inner { max-width: 1400px; gap: 40px; }
+      .t-text { font-size: 19px; }
+      .t-card { padding: 52px 44px; }
+
+      .contact-inner { max-width: 700px; }
+      .form-input { font-size: 15px; padding: 18px 22px; }
+      .form-select { font-size: 15px; padding: 18px 22px; }
+      textarea.form-input { min-height: 140px; }
+
+      .marquee-photo { width: 460px; height: 310px; }
+      .marquee-section { padding: 130px 0; }
+      .marquee-title { font-size: clamp(48px, 3.5vw, 80px); }
+
+      .section-counter { font-size: 11px; left: 50px; bottom: 50px; }
+      .section-progress { right: 44px; }
+      .progress-dot { width: 8px; height: 8px; }
+
+      .site-footer { padding: 80px 120px; }
+      .footer-brand { font-size: 12px; }
+      .footer-links a { font-size: 12px; }
+      .social-link { width: 44px; height: 44px; }
     }
 
     /* ─── RESPONSIVE ────────────────────────────────────────────────────────── */
@@ -837,7 +912,6 @@
       <span>© 2025 Nostalgic Trails Photography. All rights reserved.</span>
     </div>
     <nav class="footer-links">
-      <a href="#sec-weddings">Portfolio</a>
       <a href="#sec-services">Services</a>
       <a href="#sec-about">About</a>
       <a href="#sec-contact">Contact</a>
