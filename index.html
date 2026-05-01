@@ -29,56 +29,7 @@
     }
 
     body {
-      background-color: #c8703a;
-      background-image:
-        /* Film strip bands — diagonal at ~-15deg */
-        repeating-linear-gradient(
-          -15deg,
-          rgba(10,5,0,0.92)   0px,
-          rgba(10,5,0,0.92)   38px,
-          rgba(180,85,20,0.85) 38px,
-          rgba(180,85,20,0.85) 155px,
-          rgba(10,5,0,0.92)   155px,
-          rgba(10,5,0,0.92)   175px,
-          rgba(200,100,30,0.8) 175px,
-          rgba(200,100,30,0.8) 295px,
-          rgba(10,5,0,0.92)   295px,
-          rgba(10,5,0,0.92)   315px,
-          rgba(170,75,15,0.85) 315px,
-          rgba(170,75,15,0.85) 435px,
-          rgba(10,5,0,0.92)   435px,
-          rgba(10,5,0,0.92)   455px
-        ),
-        /* Sprocket holes — left edge of each band */
-        repeating-linear-gradient(
-          -15deg,
-          transparent         0px,
-          transparent         44px,
-          rgba(255,255,255,0.18) 44px,
-          rgba(255,255,255,0.18) 52px,
-          transparent         52px,
-          transparent         66px,
-          rgba(255,255,255,0.18) 66px,
-          rgba(255,255,255,0.18) 74px,
-          transparent         74px,
-          transparent         158px,
-          rgba(255,255,255,0.18) 158px,
-          rgba(255,255,255,0.18) 166px,
-          transparent         166px,
-          transparent         180px,
-          rgba(255,255,255,0.18) 180px,
-          rgba(255,255,255,0.18) 188px,
-          transparent         188px,
-          transparent         298px,
-          rgba(255,255,255,0.18) 298px,
-          rgba(255,255,255,0.18) 306px,
-          transparent         306px,
-          transparent         320px,
-          rgba(255,255,255,0.18) 320px,
-          rgba(255,255,255,0.18) 328px,
-          transparent         328px,
-          transparent         455px
-        );
+      background-color: #1a0d05;
       color: var(--ink);
       font-family: 'DM Sans', sans-serif;
       cursor: none;
@@ -329,7 +280,8 @@
 
     .scroll-section {
       position: relative;
-      height: 180vh; /* tighter scroll lane — text reveals sooner */
+      height: 180vh;
+      z-index: 1;
     }
 
     .scroll-sticky {
@@ -689,6 +641,7 @@
       padding: 40px 60px;
       display: flex; justify-content: space-between; align-items: center;
       flex-wrap: wrap; gap: 20px;
+      position: relative; z-index: 1;
     }
     .footer-brand {
       font-family: 'Syncopate', sans-serif; font-size: 10px;
@@ -1007,9 +960,247 @@
       .section-title-big { font-size: clamp(28px, 9vw, 46px) !important; }
       .marquee-photo { width: 170px; height: 130px; }
     }
+    /* ─── NEGATIVE FILM BACKGROUND ─────────────────────────────── */
+    .film-bg {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+      background: #1a0d05;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      gap: 0;
+      pointer-events: none;
+    }
+
+    .film-strip {
+      position: relative;
+      width: 100%;
+      height: 130px;
+      background: #c96a1e;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+    }
+
+    /* Top & bottom sprocket edge */
+    .film-strip::before,
+    .film-strip::after {
+      content: '';
+      position: absolute;
+      left: 0; right: 0;
+      height: 22px;
+      background:
+        repeating-linear-gradient(
+          90deg,
+          #b85a10 0px, #b85a10 6px,
+          #c96a1e 6px, #c96a1e 10px,
+          #fff    10px, #fff    22px,
+          #c96a1e 22px, #c96a1e 30px,
+          #b85a10 30px, #b85a10 36px,
+          #c96a1e 36px, #c96a1e 44px
+        );
+      z-index: 2;
+    }
+    .film-strip::before { top: 0; }
+    .film-strip::after  { bottom: 0; }
+
+    /* Sprocket hole punches */
+    .film-strip-holes {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      z-index: 3;
+      pointer-events: none;
+      background:
+        repeating-linear-gradient(
+          90deg,
+          transparent 0px, transparent 14px,
+          rgba(0,0,0,0.55) 14px, rgba(0,0,0,0.55) 36px,
+          transparent 36px, transparent 44px
+        );
+      -webkit-mask:
+        repeating-linear-gradient(90deg,
+          transparent 0px, transparent 14px,
+          black 14px, black 36px,
+          transparent 36px, transparent 44px
+        )
+        top 2px left 0 / 44px 18px repeat-x,
+        repeating-linear-gradient(90deg,
+          transparent 0px, transparent 14px,
+          black 14px, black 36px,
+          transparent 36px, transparent 44px
+        )
+        bottom 2px left 0 / 44px 18px repeat-x;
+      mask:
+        repeating-linear-gradient(90deg,
+          transparent 0px, transparent 14px,
+          black 14px, black 36px,
+          transparent 36px, transparent 44px
+        )
+        top 2px left 0 / 44px 18px repeat-x,
+        repeating-linear-gradient(90deg,
+          transparent 0px, transparent 14px,
+          black 14px, black 36px,
+          transparent 36px, transparent 44px
+        )
+        bottom 2px left 0 / 44px 18px repeat-x;
+    }
+
+    /* Frames row inside strip */
+    .film-frames {
+      position: absolute;
+      top: 22px; bottom: 22px; left: 0;
+      display: flex;
+      gap: 3px;
+      padding: 0 3px;
+      z-index: 1;
+      overflow: hidden;
+      width: 100%;
+    }
+
+    .film-frame {
+      flex-shrink: 0;
+      height: 100%;
+      width: 120px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .film-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: sepia(1) hue-rotate(-10deg) saturate(1.6) brightness(0.75) contrast(1.1);
+      mix-blend-mode: multiply;
+    }
+
+    /* Orange tint overlay on each frame */
+    .film-frame::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(201, 106, 30, 0.55);
+      mix-blend-mode: multiply;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    /* KODAK label strip */
+    .film-label {
+      position: absolute;
+      bottom: 22px;
+      left: 0; right: 0;
+      height: 12px;
+      background: #a0480a;
+      z-index: 4;
+      display: flex;
+      align-items: center;
+      padding: 0 8px;
+      gap: 28px;
+      overflow: hidden;
+    }
+    .film-label span {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 6px;
+      letter-spacing: 0.15em;
+      color: rgba(255,220,160,0.7);
+      text-transform: uppercase;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    /* Second strip — reversed/flipped for variety */
+    .film-strip.reverse .film-frames { flex-direction: row-reverse; }
+    .film-strip.reverse { background: #b85510; }
+    .film-strip.reverse .film-label { background: #8a3c08; }
+
   </style>
 </head>
 <body>
+
+  <!-- ░░ NEGATIVE FILM BACKGROUND ░░ -->
+  <div class="film-bg" aria-hidden="true">
+
+    <!-- Strip 1 -->
+    <div class="film-strip">
+      <div class="film-strip-holes"></div>
+      <div class="film-frames">
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=240&q=60&fit=crop" alt=""></div>
+      </div>
+      <div class="film-label">
+        <span>KODAK GC 400-8</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>KODAK GC 400-8</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span>
+      </div>
+    </div>
+
+    <!-- Strip 2 (reverse) -->
+    <div class="film-strip reverse">
+      <div class="film-strip-holes"></div>
+      <div class="film-frames">
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1591604021695-0c69b7c05981?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1525267219888-bb077b8792cc?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1524824267900-2b39b93f98f4?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1532712938310-34cb3982ef74?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=240&q=60&fit=crop" alt=""></div>
+      </div>
+      <div class="film-label">
+        <span>KODAK GC 400-8</span><span>13</span><span>14</span><span>15</span><span>15A</span><span>16</span><span>17</span><span>18</span><span>KODAK GC 400-8</span><span>19</span><span>20</span>
+      </div>
+    </div>
+
+    <!-- Strip 3 -->
+    <div class="film-strip">
+      <div class="film-strip-holes"></div>
+      <div class="film-frames">
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1524824267900-2b39b93f98f4?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=240&q=60&fit=crop" alt=""></div>
+      </div>
+      <div class="film-label">
+        <span>KODAK GC 400-8</span><span>21</span><span>22</span><span>23</span><span>24</span><span>25</span><span>26</span><span>KODAK GC 400-8</span><span>27</span><span>28</span>
+      </div>
+    </div>
+
+    <!-- Strip 4 (reverse) -->
+    <div class="film-strip reverse">
+      <div class="film-strip-holes"></div>
+      <div class="film-frames">
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1532712938310-34cb3982ef74?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1591604021695-0c69b7c05981?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1525267219888-bb077b8792cc?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1532712938310-34cb3982ef74?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1591604021695-0c69b7c05981?w=240&q=60&fit=crop" alt=""></div>
+      </div>
+      <div class="film-label">
+        <span>KODAK GC 400-8</span><span>29</span><span>30</span><span>31</span><span>32</span><span>33</span><span>34</span><span>KODAK GC 400-8</span><span>35</span><span>36</span>
+      </div>
+    </div>
+
+  </div>
+  <!-- ░░ END FILM BACKGROUND ░░ -->
 
   <div class="cursor" id="cursor"></div>
   <div class="cursor-ring" id="cursorRing"></div>
