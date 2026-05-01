@@ -29,7 +29,56 @@
     }
 
     body {
-      background: #0d0b09;
+      background-color: #c8703a;
+      background-image:
+        /* Film strip bands — diagonal at ~-15deg */
+        repeating-linear-gradient(
+          -15deg,
+          rgba(10,5,0,0.92)   0px,
+          rgba(10,5,0,0.92)   38px,
+          rgba(180,85,20,0.85) 38px,
+          rgba(180,85,20,0.85) 155px,
+          rgba(10,5,0,0.92)   155px,
+          rgba(10,5,0,0.92)   175px,
+          rgba(200,100,30,0.8) 175px,
+          rgba(200,100,30,0.8) 295px,
+          rgba(10,5,0,0.92)   295px,
+          rgba(10,5,0,0.92)   315px,
+          rgba(170,75,15,0.85) 315px,
+          rgba(170,75,15,0.85) 435px,
+          rgba(10,5,0,0.92)   435px,
+          rgba(10,5,0,0.92)   455px
+        ),
+        /* Sprocket holes — left edge of each band */
+        repeating-linear-gradient(
+          -15deg,
+          transparent         0px,
+          transparent         44px,
+          rgba(255,255,255,0.18) 44px,
+          rgba(255,255,255,0.18) 52px,
+          transparent         52px,
+          transparent         66px,
+          rgba(255,255,255,0.18) 66px,
+          rgba(255,255,255,0.18) 74px,
+          transparent         74px,
+          transparent         158px,
+          rgba(255,255,255,0.18) 158px,
+          rgba(255,255,255,0.18) 166px,
+          transparent         166px,
+          transparent         180px,
+          rgba(255,255,255,0.18) 180px,
+          rgba(255,255,255,0.18) 188px,
+          transparent         188px,
+          transparent         298px,
+          rgba(255,255,255,0.18) 298px,
+          rgba(255,255,255,0.18) 306px,
+          transparent         306px,
+          transparent         320px,
+          rgba(255,255,255,0.18) 320px,
+          rgba(255,255,255,0.18) 328px,
+          transparent         328px,
+          transparent         455px
+        );
       color: var(--ink);
       font-family: 'DM Sans', sans-serif;
       cursor: none;
@@ -575,43 +624,43 @@
 
     /* ─── CONTACT FORM ──────────────────────────────────────────── */
     .contact-inner {
-      width: 100%; max-width: min(560px, 42vw);
+      width: 100%; max-width: min(560px, 90vw);
       margin: 0 auto;
     }
-    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 8px; }
     .form-input {
       background: rgba(255,255,255,0.07);
       border: 1px solid rgba(255,255,255,0.12);
-      color: var(--white); padding: 14px 18px;
-      font-size: 13px; font-family: 'DM Sans', sans-serif;
+      color: var(--white); padding: 10px 14px;
+      font-size: 12px; font-family: 'DM Sans', sans-serif;
       letter-spacing: 0.04em; outline: none;
       transition: border-color 0.3s; width: 100%;
     }
     .form-input::placeholder { color: rgba(255,255,255,0.3); }
     .form-input:focus { border-color: var(--sage); }
-    textarea.form-input { resize: vertical; min-height: 110px; margin-bottom: 12px; }
+    textarea.form-input { resize: vertical; min-height: 70px; margin-bottom: 8px; }
     .form-select {
       background: rgba(255,255,255,0.07);
       border: 1px solid rgba(255,255,255,0.12);
-      color: rgba(255,255,255,0.55); padding: 14px 18px;
-      font-size: 13px; font-family: 'DM Sans', sans-serif;
+      color: rgba(255,255,255,0.55); padding: 10px 14px;
+      font-size: 12px; font-family: 'DM Sans', sans-serif;
       outline: none; transition: border-color 0.3s; width: 100%;
-      appearance: none; margin-bottom: 12px;
+      appearance: none; margin-bottom: 8px;
     }
     .form-select:focus { border-color: var(--sage); }
     .form-submit {
-      font-family: 'Syncopate', sans-serif; font-size: 10px;
+      font-family: 'Syncopate', sans-serif; font-size: 9px;
       letter-spacing: 0.3em; text-transform: uppercase;
       color: var(--white); background: var(--sage-dark);
-      border: none; padding: 18px 48px; cursor: none;
+      border: none; padding: 12px 36px; cursor: none;
       transition: all 0.3s; display: block; margin: 0 auto;
     }
     .form-submit:hover { background: var(--sage); }
 
     /* ─── CONTACT INFO ICONS ────────────────────────────────────── */
     .contact-info-row {
-      display: flex; flex-wrap: wrap; gap: 10px 20px;
-      margin-bottom: 28px; justify-content: center;
+      display: flex; flex-wrap: wrap; gap: 8px 16px;
+      margin-bottom: 0; margin-top: 20px; justify-content: center;
     }
     .contact-info-item {
       display: flex; align-items: center; gap: 8px;
@@ -637,28 +686,25 @@
     .site-footer {
       background: #080605;
       border-top: 1px solid rgba(122,158,135,0.12);
-      padding: 60px;
+      padding: 40px 60px;
       display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 20px;
     }
     .footer-brand {
       font-family: 'Syncopate', sans-serif; font-size: 10px;
       letter-spacing: 0.35em; color: var(--white);
     }
     .footer-brand span { display: block; color: var(--text-muted); font-size: 8px; margin-top: 4px; }
-    .footer-links { display: flex; gap: 32px; }
-    .footer-links a {
-      font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
-      color: var(--text-muted); text-decoration: none; transition: color 0.3s;
-    }
-    .footer-links a:hover { color: var(--sage-light); }
-    .footer-social { display: flex; gap: 14px; }
+    .footer-social { display: flex; gap: 10px; }
     .social-link {
-      width: 36px; height: 36px;
-      border: 1px solid rgba(122,158,135,0.2);
+      width: 40px; height: 40px;
+      border: 1px solid rgba(122,158,135,0.25);
+      border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
-      color: var(--text-muted); text-decoration: none; transition: all 0.3s;
+      color: var(--text-muted); text-decoration: none;
+      transition: all 0.3s; flex-shrink: 0;
     }
-    .social-link:hover { border-color: var(--sage); color: var(--sage-light); }
+    .social-link:hover { border-color: var(--sage); color: var(--sage-light); background: rgba(122,158,135,0.08); }
 
     /* ─── CONTACT SECTION MOBILE SCROLL FIX ────────────────────── */
     /* On mobile, the contact form is taller than 100vh — allow scroll inside sticky */
@@ -1202,33 +1248,6 @@
             <textarea class="form-input" placeholder="Tell us about your vision..."></textarea>
             <button type="button" class="form-submit" id="formSubmit">Send Inquiry</button>
 
-            <!-- Contact Info Icons -->
-            <div class="contact-info-row" style="margin-top:32px; margin-bottom:0;">
-              <a href="tel:+639287030126" class="contact-info-item">
-                <span class="contact-info-icon">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
-                </span>
-                <span class="contact-info-text">+63 928 703 0126</span>
-              </a>
-              <a href="mailto:nostalgictrails@gmail.com" class="contact-info-item">
-                <span class="contact-info-icon">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-                </span>
-                <span class="contact-info-text">nostalgictrails@gmail.com</span>
-              </a>
-              <a href="https://www.facebook.com/profile.php?id=100063809053493" target="_blank" rel="noopener" class="contact-info-item">
-                <span class="contact-info-icon">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-                </span>
-                <span class="contact-info-text">Nostalgic Trails</span>
-              </a>
-              <a href="https://www.instagram.com/nostalgictrails" target="_blank" rel="noopener" class="contact-info-item">
-                <span class="contact-info-icon">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-                </span>
-                <span class="contact-info-text">@nostalgictrails</span>
-              </a>
-            </div>
           </div>
         </div>
       </div>
@@ -1293,14 +1312,23 @@
       Nostalgic Trails
       <span>© 2025 Nostalgic Trails Photography. All rights reserved.</span>
     </div>
-    <nav class="footer-links">
-      <a href="#sec-services">Services</a>
-      <a href="#sec-about">About</a>
-      <a href="#sec-contact">Contact</a>
-    </nav>
     <div class="footer-social">
-      <a href="https://www.instagram.com/nostalgictrails" target="_blank" rel="noopener" class="social-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
-      <a href="https://www.facebook.com/profile.php?id=100063809053493" target="_blank" rel="noopener" class="social-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+      <!-- Instagram -->
+      <a href="https://www.instagram.com/nostalgictrails" target="_blank" rel="noopener" class="social-link" title="Instagram">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+      </a>
+      <!-- Facebook -->
+      <a href="https://www.facebook.com/profile.php?id=100063809053493" target="_blank" rel="noopener" class="social-link" title="Facebook">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+      </a>
+      <!-- Email -->
+      <a href="mailto:nostalgictrails@gmail.com" class="social-link" title="Email us">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+      </a>
+      <!-- Phone -->
+      <a href="tel:+639287030126" class="social-link" title="Call us">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+      </a>
     </div>
   </footer>
 
