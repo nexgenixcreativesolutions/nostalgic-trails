@@ -74,7 +74,7 @@
       z-index: 1100;
     }
     .nav-logo span { display: block; color: var(--sage); font-size: 7.5px; letter-spacing: 0.3em; margin-top: 3px; }
-    .nav-links { display: flex; gap: 36px; list-style: none; align-items: center; }
+    .nav-links { display: none; gap: 36px; list-style: none; align-items: center; }
     .nav-links a {
       font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
       color: rgba(255,255,255,0.65); text-decoration: none; transition: color 0.3s;
@@ -87,13 +87,14 @@
       color: var(--white); background: var(--sage-dark);
       border: none; padding: 11px 22px; cursor: none;
       transition: background 0.3s; text-decoration: none;
+      display: none;
       flex-shrink: 0; white-space: nowrap;
     }
     .nav-cta:hover { background: var(--sage); }
 
     /* ─── HAMBURGER ─────────────────────────────────────────────── */
     .nav-hamburger {
-      display: none;
+      display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
@@ -134,18 +135,17 @@
 
     /* ─── MOBILE MENU OVERLAY ───────────────────────────────────── */
     .nav-mobile-menu {
-      display: none; /* shown only on mobile via media query */
       position: fixed;
       inset: 0;
       z-index: 1050;
       background: rgba(8,6,4,0.97);
       backdrop-filter: blur(24px);
       -webkit-backdrop-filter: blur(24px);
+      display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: flex-start;
       padding: 100px 48px 60px;
-      /* hidden by default */
       opacity: 0;
       pointer-events: none;
       transition: opacity 0.45s cubic-bezier(0.23,1,0.32,1);
@@ -598,6 +598,30 @@
     }
     .social-link:hover { border-color: var(--sage); color: var(--sage-light); }
 
+    /* ─── CONTACT SECTION MOBILE SCROLL FIX ────────────────────── */
+    /* On mobile, the contact form is taller than 100vh — allow scroll inside sticky */
+    @media (max-width: 1024px) {
+      #sec-contact .scroll-sticky {
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+      .section-content--contact {
+        position: relative;
+        min-height: 100%;
+        padding-top: 80px !important;
+        padding-bottom: 60px !important;
+        justify-content: flex-start !important;
+        overflow: visible;
+      }
+      .section-content--contact .section-title-big {
+        font-size: clamp(28px, 7vw, 52px) !important;
+        margin-bottom: 24px !important;
+      }
+      .section-content--contact .section-eyebrow {
+        justify-content: center !important;
+      }
+    }
+
     /* ─── NOISE TEXTURE ─────────────────────────────────────────── */
     .noise {
       position: fixed; inset: 0; z-index: 2; pointer-events: none;
@@ -607,8 +631,20 @@
 
     /* ─── LARGE SCREENS & TV ────────────────────────────────────── */
 
+    /* ── Desktop 1025px+ — full nav, no hamburger ── */
+    @media (min-width: 1025px) {
+      .nav-hamburger { display: none !important; }
+      .nav-mobile-menu { display: none !important; opacity: 0 !important; pointer-events: none !important; }
+      .nav-links { display: flex !important; }
+      .nav-cta { display: inline-block !important; }
+    }
+
     /* ── Wide desktop 1440–1920px ── */
     @media (min-width: 1440px) {
+      .nav-hamburger { display: none !important; }
+      .nav-mobile-menu { display: none !important; }
+      .nav-links { display: flex !important; }
+      .nav-cta { display: inline-block !important; }
       nav { padding: 32px 80px; }
       nav.scrolled { padding: 20px 80px; }
 
@@ -679,10 +715,8 @@
 
     /* ── Tablet 768–1024px ── */
     @media (max-width: 1024px) {
-      nav { padding: 22px 40px; }
+      nav { padding: 22px 40px; gap: 0; }
       nav.scrolled { padding: 14px 40px; }
-      .nav-hamburger { display: none; }
-      .nav-mobile-menu { display: none !important; }
       .section-content { padding: 60px 40px; }
       .section-content.bottom-left,
       .section-content.bottom-right { padding: 0 40px 60px; }
@@ -694,32 +728,21 @@
     @media (max-width: 768px) {
       body { cursor: auto; }
       .cursor, .cursor-ring { display: none; }
-
-      nav { padding: 20px 24px; gap: 0; }
-      nav.scrolled { padding: 14px 24px; }
-
-      /* Hide desktop nav items */
-      .nav-links { display: none !important; }
-      .nav-cta { display: none !important; }
-
-      /* Show hamburger */
-      .nav-hamburger { display: flex; }
-
-      /* Show mobile menu container */
-      .nav-mobile-menu { display: flex; }
+      nav { padding: 18px 20px; gap: 0; }
+      nav.scrolled { padding: 12px 20px; }
 
       /* Tighten section height even further on mobile */
       .scroll-section { height: 160vh; }
 
       .section-content {
-        padding: 80px 20px 40px;
+        padding: 80px 20px 36px;
         justify-content: flex-end !important;
         align-items: flex-start !important;
         text-align: left !important;
       }
       .section-content.bottom-left,
       .section-content.bottom-right {
-        padding: 0 20px 48px;
+        padding: 0 20px 44px;
         align-items: flex-start !important;
         text-align: left !important;
       }
@@ -727,9 +750,12 @@
       /* Keep eyebrow left-aligned on mobile */
       .section-eyebrow { justify-content: flex-start !important; }
 
-      .section-title-big { font-size: clamp(36px, 10vw, 64px) !important; }
-      .section-body { font-size: 13px; max-width: 100% !important; margin-top: 16px; }
-      .section-actions { flex-wrap: wrap; gap: 14px; margin-top: 24px; }
+      .section-title-big { font-size: clamp(34px, 9.5vw, 58px) !important; }
+      .section-body { font-size: 13px; max-width: 85% !important; margin-top: 14px; }
+      .section-actions { flex-wrap: wrap; gap: 12px; margin-top: 20px; }
+
+      /* Hide the absolute client tag so it never overlaps the CTA button */
+      .client-tag { display: none !important; }
 
       /* Services — single column */
       .services-inner {
@@ -756,9 +782,9 @@
       /* Contact form */
       .form-row { grid-template-columns: 1fr; }
       .contact-inner { max-width: 100%; }
-      textarea.form-input { min-height: 90px; }
+      textarea.form-input { min-height: 80px; }
 
-      /* Progress dots — hide on very small screens */
+      /* Progress dots */
       .section-progress { right: 14px; }
 
       /* Counter */
@@ -778,21 +804,14 @@
       }
       .footer-links { flex-wrap: wrap; justify-content: center; gap: 16px; }
 
-      /* Section-specific layout adjustments */
-      /* Portraits vertical label — hide on mobile */
+      /* Portraits vertical label — hide */
       [style*="writing-mode:vertical"] { display: none; }
-      /* Client tag bottom-right — move it */
-      [style*="bottom:80px;right:60px"] {
-        bottom: 48px !important;
-        right: 20px !important;
-      }
     }
 
     /* ── Very small phones < 400px ── */
     @media (max-width: 400px) {
       .scroll-section { height: 150vh; }
-      .section-title-big { font-size: clamp(30px, 9vw, 52px) !important; }
-      .nav-cta { display: none; }
+      .section-title-big { font-size: clamp(28px, 9vw, 46px) !important; }
       .marquee-photo { width: 170px; height: 130px; }
     }
   </style>
@@ -894,7 +913,7 @@
           </div>
         </div>
         <!-- Client tag -->
-        <div style="position:absolute;bottom:80px;right:60px;z-index:3;text-align:right;">
+        <div class="client-tag" style="position:absolute;bottom:80px;right:60px;z-index:3;text-align:right;">
           <div style="font-family:'Syncopate',sans-serif;font-size:8px;letter-spacing:0.4em;color:rgba(255,255,255,0.45);text-transform:uppercase;">Andrea &amp; Luis Santos</div>
           <div style="font-size:10px;letter-spacing:0.15em;color:var(--rose-light);margin-top:4px;">Wedding · Tagaytay 2024</div>
         </div>
@@ -1012,7 +1031,7 @@
       <div class="scroll-zoom" id="zoom-6">
         <div class="section-bg" style="background-image:url('https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=1600&q=80&fit=crop');filter:brightness(0.35) saturate(0.65)"></div>
         <div class="section-overlay" style="background:rgba(8,6,4,0.65)"></div>
-        <div class="section-content" style="padding-top:90px;">
+        <div class="section-content section-content--contact" style="padding-top:90px;">
           <div class="section-eyebrow" style="justify-content:center;">Get In Touch</div>
           <h2 class="section-title-big" style="font-size:clamp(36px,4vw,72px);margin-bottom:40px;">Let's Create<br><em>Something</em> Beautiful</h2>
           <div class="contact-inner">
