@@ -90,7 +90,7 @@
 
     .scroll-section {
       position: relative;
-      height: 300vh; /* scroll distance = 3× viewport height */
+      height: 180vh; /* tighter scroll lane — text reveals sooner */
     }
 
     .scroll-sticky {
@@ -158,8 +158,8 @@
       color: var(--rose-light);
       margin-bottom: 20px;
       display: flex; align-items: center; gap: 14px;
-      opacity: 0; transform: translateY(16px);
-      transition: opacity 0.7s ease 0.1s, transform 0.7s ease 0.1s;
+      opacity: 0; transform: translateY(12px);
+      transition: opacity 0.5s ease 0s, transform 0.5s ease 0s;
     }
     .section-eyebrow::before { content: ''; width: 32px; height: 1px; background: var(--rose); }
 
@@ -168,8 +168,8 @@
       font-size: clamp(48px, 7vw, 104px);
       font-weight: 300; line-height: 0.93;
       color: var(--white);
-      opacity: 0; transform: translateY(20px);
-      transition: opacity 0.8s ease 0.2s, transform 0.8s ease 0.2s;
+      opacity: 0; transform: translateY(14px);
+      transition: opacity 0.55s ease 0.08s, transform 0.55s ease 0.08s;
     }
     .section-title-big em { font-style: italic; color: var(--sage-light); }
 
@@ -177,14 +177,14 @@
       font-size: 14px; line-height: 1.8;
       color: rgba(255,255,255,0.72);
       max-width: 480px; margin-top: 28px;
-      opacity: 0; transform: translateY(16px);
-      transition: opacity 0.7s ease 0.35s, transform 0.7s ease 0.35s;
+      opacity: 0; transform: translateY(10px);
+      transition: opacity 0.5s ease 0.16s, transform 0.5s ease 0.16s;
     }
 
     .section-actions {
       display: flex; gap: 20px; align-items: center; margin-top: 40px;
-      opacity: 0; transform: translateY(12px);
-      transition: opacity 0.6s ease 0.5s, transform 0.6s ease 0.5s;
+      opacity: 0; transform: translateY(8px);
+      transition: opacity 0.5s ease 0.24s, transform 0.5s ease 0.24s;
     }
 
     /* Animate in when section is "active" (fully zoomed) */
@@ -315,6 +315,7 @@
       display: grid; grid-template-columns: repeat(3,1fr);
       gap: 1px; background: rgba(255,255,255,0.08);
       max-width: 960px; margin: 0 auto;
+      width: 100%;
     }
     .svc-card {
       background: rgba(255,255,255,0.04);
@@ -338,7 +339,7 @@
     /* ─── TESTIMONIAL CARDS (inside section) ────────────────────── */
     .testimonials-inner {
       display: grid; grid-template-columns: repeat(3,1fr);
-      gap: 24px; max-width: 1000px; margin: 0 auto;
+      gap: 24px; max-width: 1000px; margin: 0 auto; width: 100%;
     }
     .t-card {
       background: rgba(255,255,255,0.06);
@@ -439,18 +440,115 @@
       opacity: 0.5;
     }
 
-    /* ─── RESPONSIVE ────────────────────────────────────────────── */
-    @media (max-width: 900px) {
-      nav { padding: 20px 24px; }
-      nav.scrolled { padding: 14px 24px; }
-      .nav-links { display: none; }
+    /* ─── RESPONSIVE ────────────────────────────────────────────────────────── */
+
+    /* ── Tablet 768–1024px ── */
+    @media (max-width: 1024px) {
+      nav { padding: 22px 40px; }
+      nav.scrolled { padding: 14px 40px; }
+      .section-content { padding: 60px 40px; }
       .section-content.bottom-left,
-      .section-content.bottom-right { padding: 0 28px 70px; }
-      .services-inner { grid-template-columns: 1fr; max-width: 400px; }
-      .testimonials-inner { grid-template-columns: 1fr; max-width: 400px; }
+      .section-content.bottom-right { padding: 0 40px 60px; }
+      .services-inner { grid-template-columns: repeat(2, 1fr); max-width: 700px; }
+      .testimonials-inner { grid-template-columns: repeat(2, 1fr); max-width: 700px; }
+    }
+
+    /* ── Mobile < 768px ── */
+    @media (max-width: 768px) {
+      body { cursor: auto; } /* restore default cursor on touch */
+      .cursor, .cursor-ring { display: none; }
+
+      nav { padding: 18px 20px; }
+      nav.scrolled { padding: 12px 20px; }
+      .nav-links { display: none; }
+      .nav-cta { padding: 10px 18px; font-size: 8px; }
+
+      /* Tighten section height even further on mobile */
+      .scroll-section { height: 160vh; }
+
+      .section-content {
+        padding: 80px 20px 40px;
+        justify-content: flex-end !important;
+        align-items: flex-start !important;
+        text-align: left !important;
+      }
+      .section-content.bottom-left,
+      .section-content.bottom-right {
+        padding: 0 20px 48px;
+        align-items: flex-start !important;
+        text-align: left !important;
+      }
+
+      /* Keep eyebrow left-aligned on mobile */
+      .section-eyebrow { justify-content: flex-start !important; }
+
+      .section-title-big { font-size: clamp(36px, 10vw, 64px) !important; }
+      .section-body { font-size: 13px; max-width: 100% !important; margin-top: 16px; }
+      .section-actions { flex-wrap: wrap; gap: 14px; margin-top: 24px; }
+
+      /* Services — single column */
+      .services-inner {
+        grid-template-columns: 1fr;
+        max-width: 100%;
+        gap: 1px;
+      }
+      .svc-card { padding: 28px 20px; }
+      .svc-num { font-size: 38px; }
+      .svc-name { font-size: 18px; }
+
+      /* Testimonials — single column, scrollable */
+      .testimonials-inner {
+        grid-template-columns: 1fr;
+        max-width: 100%;
+        gap: 16px;
+        max-height: 60vh;
+        overflow-y: auto;
+        padding-right: 4px;
+      }
+      .t-card { padding: 24px 20px; }
+      .t-text { font-size: 14px; }
+
+      /* Contact form */
       .form-row { grid-template-columns: 1fr; }
-      .site-footer { flex-direction: column; gap: 28px; text-align: center; padding: 40px 24px; }
-      .marquee-photo { width: 240px; height: 170px; }
+      .contact-inner { max-width: 100%; }
+      textarea.form-input { min-height: 90px; }
+
+      /* Progress dots — hide on very small screens */
+      .section-progress { right: 14px; }
+
+      /* Counter */
+      .section-counter { left: 20px; bottom: 20px; }
+
+      /* Marquee */
+      .marquee-section { padding: 60px 0; }
+      .marquee-header { padding: 0 20px 40px; }
+      .marquee-photo { width: 200px; height: 150px; }
+
+      /* Footer */
+      .site-footer {
+        flex-direction: column;
+        gap: 24px;
+        text-align: center;
+        padding: 40px 20px;
+      }
+      .footer-links { flex-wrap: wrap; justify-content: center; gap: 16px; }
+
+      /* Section-specific layout adjustments */
+      /* Portraits vertical label — hide on mobile */
+      [style*="writing-mode:vertical"] { display: none; }
+      /* Client tag bottom-right — move it */
+      [style*="bottom:80px;right:60px"] {
+        bottom: 48px !important;
+        right: 20px !important;
+      }
+    }
+
+    /* ── Very small phones < 400px ── */
+    @media (max-width: 400px) {
+      .scroll-section { height: 150vh; }
+      .section-title-big { font-size: clamp(30px, 9vw, 52px) !important; }
+      .nav-cta { display: none; }
+      .marquee-photo { width: 170px; height: 130px; }
     }
   </style>
 </head>
@@ -793,13 +891,13 @@
 
     // ─── CAMERA ZOOM ENGINE ───────────────────────────────────────────────────
     //
-    // Each .scroll-section has height = 300vh.
+    // Each .scroll-section has height = 180vh.
     // progress 0→1 maps the sticky scroll range.
     //
     // Zoom curve:
-    //   0.00 → 0.20  : zoom IN  — scale 1.8 → 1.0, blur clears  (entering)
-    //   0.20 → 0.78  : HOLD     — scale stays at 1.0, text animates in
-    //   0.78 → 1.00  : zoom OUT — scale 1.0 → 1.5, blur returns (exiting)
+    //   0.00 → 0.12  : zoom IN  — scale 1.8 → 1.0, blur clears  (entering)
+    //   0.12 → 0.85  : HOLD     — scale stays at 1.0, text animates in
+    //   0.85 → 1.00  : zoom OUT — scale 1.0 → 1.5, blur returns (exiting)
     //
     const SECTIONS      = document.querySelectorAll('.scroll-section');
     const N             = SECTIONS.length;
@@ -844,20 +942,20 @@
 
         let scale, blur;
 
-        if (p <= 0.20) {
+        if (p <= 0.12) {
           // ZOOM IN — camera pushes toward subject
-          const t  = p / 0.20;
+          const t  = p / 0.12;
           const et = easeOut3(t);
           scale = ZOOM_START - (ZOOM_START - 1.0) * et;
           blur  = BLUR_IN * (1 - et);
-        } else if (p <= 0.78) {
+        } else if (p <= 0.85) {
           // HOLD — sharp, fully revealed
           scale = 1.0;
           blur  = 0;
           nowActive = i;
         } else {
           // ZOOM OUT — camera pulls back
-          const t  = (p - 0.78) / 0.22;
+          const t  = (p - 0.85) / 0.15;
           const et = easeIn3(t);
           scale = 1.0 + (ZOOM_EXIT - 1.0) * et;
           blur  = BLUR_EXIT * et;
@@ -867,10 +965,10 @@
         zoomEl.style.filter    = blur > 0.08 ? `blur(${blur.toFixed(2)}px)` : '';
 
         // Text animate in/out
-        section.classList.toggle('active', p > 0.22 && p < 0.76);
+        section.classList.toggle('active', p > 0.13 && p < 0.84);
 
         // Dot state
-        if (dots[i]) dots[i].classList.toggle('active', p > 0.1 && p < 0.9);
+        if (dots[i]) dots[i].classList.toggle('active', p > 0.05 && p < 0.95);
       });
 
       // HUD visible during zoom-in phase of any section
@@ -878,7 +976,7 @@
         const r  = s.getBoundingClientRect();
         const lt = scrollY + r.top;
         const p  = Math.max(0, Math.min(1, (scrollY - lt) / (s.offsetHeight - window.innerHeight)));
-        return p > 0.01 && p < 0.22;
+        return p > 0.01 && p < 0.13;
       });
       HUD.classList.toggle('visible', zooming);
 
