@@ -52,13 +52,13 @@
     }
 
     /* ─── NAV ───────────────────────────────────────────────────── */
-    nav {
+    #mainNav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
       display: flex; align-items: center;
       padding: 24px 48px;
       transition: background 0.4s ease, padding 0.4s ease, border-color 0.4s ease;
     }
-    nav.scrolled {
+    #mainNav.scrolled {
       background: rgba(13,11,9,0.95);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
@@ -73,38 +73,18 @@
     }
     .nav-logo span { display: block; color: var(--sage); font-size: 7.5px; letter-spacing: 0.3em; margin-top: 3px; }
 
-    /* ── DESKTOP NAV — visible only on 1025px+ ── */
+    /* ── DESKTOP NAV — hidden at all screen sizes ── */
     .nav-desktop {
-      display: flex; /* always flex, controlled by visibility */
-      visibility: hidden;
-      overflow: hidden;
-      width: 0;
-      flex: 1; justify-content: center;
-      gap: 32px; list-style: none; align-items: center;
-      padding: 0; margin: 0;
-      pointer-events: none;
+      display: none;
     }
-    .nav-desktop a {
-      font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
-      color: rgba(255,255,255,0.65); text-decoration: none; transition: color 0.3s;
-      white-space: nowrap;
-    }
-    .nav-desktop a:hover { color: var(--sage-light); }
 
     .nav-desktop-cta {
       display: none;
-      font-family: 'Syncopate', sans-serif; font-size: 8.5px;
-      letter-spacing: 0.22em; text-transform: uppercase;
-      color: var(--white); background: var(--sage-dark);
-      border: none; padding: 11px 20px;
-      transition: background 0.3s; text-decoration: none;
-      flex-shrink: 0; white-space: nowrap;
     }
-    .nav-desktop-cta:hover { background: var(--sage); }
 
-    /* ── MOBILE TOGGLE (hamburger) — visible only below 1025px ── */
+    /* ── MOBILE TOGGLE (hamburger) — always visible ── */
     .nav-mobile-toggle {
-      display: flex; /* visible on mobile by default */
+      display: flex;
       flex-direction: column; justify-content: center; align-items: center;
       width: 44px; height: 44px;
       cursor: pointer !important;
@@ -197,6 +177,42 @@
       border-right: 1px solid rgba(196,136,110,0.4);
       pointer-events: none;
     }
+
+    /* ── MENU CLOSE BUTTON ── */
+    .menu-close-btn {
+      position: absolute;
+      top: 28px; right: 28px;
+      width: 48px; height: 48px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(196,136,110,0.35);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 0;
+      cursor: pointer !important;
+      z-index: 1200;
+      transition: background 0.3s, border-color 0.3s, transform 0.3s;
+      padding: 0;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease 0.1s, background 0.3s, border-color 0.3s, transform 0.3s;
+    }
+    .nav-mobile-menu.open .menu-close-btn {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .menu-close-btn:hover {
+      background: rgba(196,136,110,0.15);
+      border-color: var(--rose-light);
+      transform: rotate(90deg);
+    }
+    .menu-close-line {
+      display: block;
+      width: 18px; height: 1.5px;
+      background: var(--rose-light);
+      position: absolute;
+    }
+    .menu-close-line:nth-child(1) { transform: rotate(45deg); }
+    .menu-close-line:nth-child(2) { transform: rotate(-45deg); }
 
     .nav-mobile-menu ul {
       list-style: none;
@@ -677,17 +693,10 @@
 
     /* ─── LARGE SCREENS & TV ────────────────────────────────────── */
 
-    /* ── Desktop 1025px+ — show desktop nav, hide hamburger ── */
+    /* ── Desktop 1025px+ — nav links remain hidden, hamburger stays visible ── */
     @media (min-width: 1025px) {
-      .nav-desktop {
-        visibility: visible;
-        overflow: visible;
-        width: auto;
-        padding: 0 24px;
-        pointer-events: all;
-      }
-      .nav-desktop-cta { display: inline-block; }
-      .nav-mobile-toggle { display: none !important; }
+      /* .nav-desktop stays display:none — no desktop links shown */
+      /* .nav-mobile-toggle stays visible at all sizes */
     }
 
     /* ── Wide desktop 1440px+ ── */
@@ -696,10 +705,6 @@
       nav.scrolled { padding: 18px 5vw; }
       .nav-logo { font-size: 12px; letter-spacing: 0.28em; }
       .nav-logo span { font-size: 8.5px; letter-spacing: 0.38em; }
-      .nav-desktop { gap: 40px; }
-      .nav-desktop a { font-size: 11px; letter-spacing: 0.2em; }
-      .nav-desktop-cta { font-size: 9.5px; padding: 13px 24px; }
-
       .section-content { padding: 80px 6vw; }
       .section-content.bottom-left { padding: 0 6vw 6vw; }
       .section-content.bottom-right { padding: 0 6vw 6vw; }
@@ -742,10 +747,6 @@
       nav.scrolled { padding: 20px 6vw; }
       .nav-logo { font-size: 13px; letter-spacing: 0.3em; }
       .nav-logo span { font-size: 9.5px; letter-spacing: 0.42em; }
-      .nav-desktop { gap: 52px; }
-      .nav-desktop a { font-size: 12px; letter-spacing: 0.22em; }
-      .nav-desktop-cta { font-size: 10px; padding: 15px 28px; letter-spacing: 0.28em; }
-
       .section-content { padding: 100px 7vw; }
       .section-content.bottom-left { padding: 0 7vw 5vw; }
       .section-content.bottom-right { padding: 0 7vw 5vw; }
@@ -806,10 +807,6 @@
       nav.scrolled { padding: 24px 7vw; }
       .nav-logo { font-size: 15px; letter-spacing: 0.32em; }
       .nav-logo span { font-size: 11px; letter-spacing: 0.45em; }
-      .nav-desktop { gap: 64px; }
-      .nav-desktop a { font-size: 13px; }
-      .nav-desktop-cta { font-size: 11px; padding: 18px 36px; }
-
       .section-content { padding: 120px 8vw; }
       .section-content.bottom-left { padding: 0 8vw 4.5vw; }
       .section-content.bottom-right { padding: 0 8vw 4.5vw; }
@@ -990,18 +987,9 @@
 
   <!-- NAV -->
   <nav id="mainNav">
-    <a href="#" class="nav-logo">Nostalgic Trails<span>Raw unfiltered emotions</span></a>
+    <a href="#sec-hero" class="nav-logo">Nostalgic Trails<span>Raw unfiltered emotions</span></a>
 
-    <!-- DESKTOP NAV LINKS — hidden on mobile/tablet via .nav-desktop -->
-    <ul class="nav-desktop">
-      <li><a href="#sec-weddings"></a></li>
-      <li><a href="#sec-services"></a></li>
-      <li><a href="#sec-about"></a></li>
-      <li><a href="#sec-contact"></a></li>
-    </ul>
-    <a href="#sec-contact" class="nav-desktop-cta">Book a Session</a>
-
-    <!-- HAMBURGER — mobile/tablet only, hidden on desktop via .nav-mobile-toggle -->
+    <!-- HAMBURGER — opens full-screen mobile menu -->
     <button class="nav-mobile-toggle" id="navHamburger" aria-label="Open menu">
       <span class="ham-line"></span>
       <span class="ham-line"></span>
@@ -1012,6 +1000,11 @@
   <!-- MOBILE FULL-SCREEN MENU — completely separate from desktop links -->
   <div class="nav-mobile-menu" id="navMobileMenu">
     <div class="menu-corner-br"></div>
+    <!-- CLOSE BUTTON -->
+    <button class="menu-close-btn" id="menuCloseBtn" aria-label="Close menu">
+      <span class="menu-close-line"></span>
+      <span class="menu-close-line"></span>
+    </button>
     <ul>
       <li><a href="#sec-weddings" class="menu-link">Works</a></li>
       <li><a href="#sec-services" class="menu-link">Services</a></li>
@@ -1041,8 +1034,8 @@
           <h1 class="section-title-big">Where Memory<br>Meets <em>Light</em></h1>
           <p class="section-body">We capture the moments you feel but cannot hold — turning fleeting emotion into timeless, cinematic imagery that lives forever.</p>
           <div class="section-actions">
-            <a href="#works" class="btn-primary">Explore Works</a>
-            <a href="#services" class="btn-ghost">View Services</a>
+            <a href="#sec-weddings" class="btn-primary">Explore Works</a>
+            <a href="#sec-services" class="btn-ghost">View Services</a>
           </div>
         </div>
       </div>
@@ -1062,7 +1055,7 @@
           <h2 class="section-title-big">Weddings &amp;<br><em>Prenuptials</em></h2>
           <p class="section-body">Full-day wedding coverage with cinematic precision. Every vow, every tear, every laugh — preserved forever in images that feel like paintings.</p>
           <div class="section-actions">
-            <a href="#contact" class="btn-primary">Book Now</a>
+            <a href="#sec-contact" class="btn-primary">Book Now</a>
           </div>
         </div>
         <!-- Client tag -->
@@ -1188,8 +1181,29 @@
           <div class="section-eyebrow" style="justify-content:center;">Get In Touch</div>
           <h2 class="section-title-big" style="font-size:clamp(36px,4vw,72px);margin-bottom:40px;">Let's Create<br><em>Something</em> Beautiful</h2>
           <div class="contact-inner">
+            <div class="form-row">
+              <input class="form-input" type="text" placeholder="Your Name" />
+              <input class="form-input" type="email" placeholder="Email Address" />
+            </div>
+            <div class="form-row">
+              <input class="form-input" type="tel" placeholder="Phone Number" />
+              <input class="form-input" type="text" placeholder="Event Date" />
+            </div>
+            <select class="form-select">
+              <option value="" disabled selected>Type of Session</option>
+              <option>Wedding Photography</option>
+              <option>Prenuptial Session</option>
+              <option>Portrait Session</option>
+              <option>Event Coverage</option>
+              <option>Maternity / Newborn</option>
+              <option>Family Session</option>
+              <option>Commercial / Editorial</option>
+            </select>
+            <textarea class="form-input" placeholder="Tell us about your vision..."></textarea>
+            <button type="button" class="form-submit" id="formSubmit">Send Inquiry</button>
+
             <!-- Contact Info Icons -->
-            <div class="contact-info-row">
+            <div class="contact-info-row" style="margin-top:32px; margin-bottom:0;">
               <a href="tel:+639287030126" class="contact-info-item">
                 <span class="contact-info-icon">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
@@ -1215,26 +1229,6 @@
                 <span class="contact-info-text">@nostalgictrails</span>
               </a>
             </div>
-            <div class="form-row">
-              <input class="form-input" type="text" placeholder="Your Name" />
-              <input class="form-input" type="email" placeholder="Email Address" />
-            </div>
-            <div class="form-row">
-              <input class="form-input" type="tel" placeholder="Phone Number" />
-              <input class="form-input" type="text" placeholder="Event Date" />
-            </div>
-            <select class="form-select">
-              <option value="" disabled selected>Type of Session</option>
-              <option>Wedding Photography</option>
-              <option>Prenuptial Session</option>
-              <option>Portrait Session</option>
-              <option>Event Coverage</option>
-              <option>Maternity / Newborn</option>
-              <option>Family Session</option>
-              <option>Commercial / Editorial</option>
-            </select>
-            <textarea class="form-input" placeholder="Tell us about your vision..."></textarea>
-            <button type="button" class="form-submit" id="formSubmit">Send Inquiry</button>
           </div>
         </div>
       </div>
@@ -1315,6 +1309,7 @@
     const hamburger   = document.getElementById('navHamburger');
     const mobileMenu  = document.getElementById('navMobileMenu');
     const menuLinks   = document.querySelectorAll('.menu-link');
+    const closeBtn    = document.getElementById('menuCloseBtn');
 
     function openMenu() {
       hamburger.classList.add('open');
@@ -1329,6 +1324,7 @@
     hamburger.addEventListener('click', () => {
       hamburger.classList.contains('open') ? closeMenu() : openMenu();
     });
+    closeBtn.addEventListener('click', closeMenu);
     // Close on any menu link tap
     menuLinks.forEach(link => link.addEventListener('click', closeMenu));
     // Close on ESC
@@ -1371,6 +1367,14 @@
       this.textContent = 'Message Sent ✓';
       this.style.background = '#7a9e87';
       setTimeout(() => { this.textContent = 'Send Inquiry'; this.style.background = ''; }, 3000);
+    });
+
+    // Prevent tel:/mailto: links from triggering "not found" in preview environments
+    document.querySelectorAll('a[href^="tel:"], a[href^="mailto:"]').forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        window.location.href = this.href;
+      });
     });
 
     // ─── CAMERA ZOOM ENGINE ───────────────────────────────────────────────────
