@@ -8,17 +8,21 @@
   <style>
     :root {
       --white: #ffffff;
-      --off-white: #faf9f7;
-      --parchment: #f4f0ea;
-      --sage: #7a9e87;
-      --sage-dark: #5a7d67;
-      --sage-light: #a8c4b0;
+      --off-white: #f5f0e8;
+      --parchment: #ede5d8;
+      --sage: #8aaa8e;
+      --sage-dark: #5c7d62;
+      --sage-light: #b0c9b4;
       --rose: #c4886e;
       --rose-light: #d9a892;
-      --ink: #1e1e1e;
-      --text-mid: #6b6560;
-      --text-muted: #9e9791;
-      --border: rgba(122,158,135,0.2);
+      --amber: #c8884a;
+      --amber-dark: #a06030;
+      --ink: #e8e0d4;
+      --text-mid: #a09888;
+      --text-muted: #786e64;
+      --border: rgba(138,170,142,0.18);
+      --film-orange: #c86e28;
+      --film-dark: #1a0c04;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -29,7 +33,7 @@
     }
 
     body {
-      background-color: #1a0d05;
+      background-color: #0d0b09;
       color: var(--ink);
       font-family: 'DM Sans', sans-serif;
       cursor: none;
@@ -237,7 +241,7 @@
     }
     .nav-mobile-menu ul li a em {
       font-style: italic;
-      color: var(--sage-light);
+      color: var(--off-white);
     }
     .nav-mobile-menu ul li a:hover { color: var(--rose-light); transform: translateX(8px) !important; }
 
@@ -255,7 +259,7 @@
     .menu-book-btn {
       font-family: 'Syncopate', sans-serif;
       font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase;
-      color: var(--white); background: var(--sage-dark);
+      color: var(--white); background: var(--amber-dark);
       padding: 16px 36px; text-decoration: none;
       display: inline-block;
       margin-top: 40px;
@@ -263,7 +267,7 @@
       transition: opacity 0.45s ease 0.28s, background 0.3s;
     }
     .nav-mobile-menu.open .menu-book-btn { opacity: 1; }
-    .menu-book-btn:hover { background: var(--sage); }
+    .menu-book-btn:hover { background: var(--amber); }
 
     .menu-tagline {
       font-family: 'DM Sans', sans-serif;
@@ -362,7 +366,7 @@
       opacity: 0; transform: translateY(14px);
       transition: opacity 0.55s ease 0.08s, transform 0.55s ease 0.08s;
     }
-    .section-title-big em { font-style: italic; color: var(--sage-light); }
+    .section-title-big em { font-style: italic; color: var(--off-white); }
 
     .section-body {
       font-size: clamp(14px, 1.1vw, 18px); line-height: 1.8;
@@ -387,19 +391,19 @@
     .btn-primary {
       font-family: 'Syncopate', sans-serif; font-size: 9px;
       letter-spacing: 0.3em; text-transform: uppercase;
-      color: var(--white); background: var(--sage-dark);
+      color: var(--off-white); background: var(--amber-dark);
       border: none; padding: 16px 36px; cursor: none;
       transition: all 0.3s; text-decoration: none; display: inline-block;
     }
-    .btn-primary:hover { background: var(--sage); transform: translateY(-2px); }
+    .btn-primary:hover { background: var(--amber); transform: translateY(-2px); }
     .btn-ghost {
       font-family: 'DM Sans', sans-serif; font-size: 11px;
       letter-spacing: 0.15em; text-transform: uppercase;
-      color: rgba(255,255,255,0.8); text-decoration: none;
+      color: rgba(232,224,212,0.75); text-decoration: none;
       display: flex; align-items: center; gap: 10px; transition: gap 0.3s;
     }
-    .btn-ghost:hover { gap: 16px; }
-    .btn-ghost::after { content: '→'; color: var(--rose); }
+    .btn-ghost:hover { gap: 16px; color: var(--off-white); }
+    .btn-ghost::after { content: '→'; color: var(--amber); }
 
     /* Progress dots */
     .section-progress {
@@ -413,8 +417,8 @@
       transition: all 0.4s ease; cursor: pointer;
     }
     .progress-dot.active {
-      background: var(--rose);
-      border-color: var(--rose);
+      background: var(--amber);
+      border-color: var(--amber);
       transform: scale(1.4);
     }
 
@@ -453,7 +457,7 @@
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(ellipse 60% 50% at 20% 40%, rgba(122,158,135,0.07) 0%, transparent 70%),
+        radial-gradient(ellipse 60% 50% at 20% 40%, rgba(200,136,74,0.07) 0%, transparent 70%),
         radial-gradient(ellipse 50% 60% at 80% 60%, rgba(196,136,110,0.05) 0%, transparent 70%);
       pointer-events: none;
     }
@@ -473,7 +477,7 @@
       font-family: 'Cormorant Garamond', serif;
       font-size: clamp(36px,4vw,60px); font-weight: 300; color: rgba(255,255,255,0.88);
     }
-    .marquee-title em { font-style: italic; color: var(--sage-light); }
+    .marquee-title em { font-style: italic; color: var(--off-white); }
 
     .marquee-track-wrap {
       overflow: hidden;
@@ -536,7 +540,7 @@
       font-family: 'Cormorant Garamond', serif; font-size: clamp(18px, 1.5vw, 28px);
       font-weight: 300; color: var(--white); margin-bottom: 12px;
     }
-    .svc-name em { font-style: italic; color: var(--sage-light); }
+    .svc-name em { font-style: italic; color: var(--off-white); }
     .svc-desc { font-size: clamp(11px, 0.85vw, 15px); line-height: 1.75; color: rgba(255,255,255,0.55); }
 
     /* ─── TESTIMONIAL CARDS (inside section) ────────────────────── */
@@ -589,7 +593,7 @@
       transition: border-color 0.3s; width: 100%;
     }
     .form-input::placeholder { color: rgba(255,255,255,0.3); }
-    .form-input:focus { border-color: var(--sage); }
+    .form-input:focus { border-color: var(--amber); }
     textarea.form-input { resize: vertical; min-height: 70px; margin-bottom: 8px; }
     .form-select {
       background: rgba(255,255,255,0.07);
@@ -599,15 +603,15 @@
       outline: none; transition: border-color 0.3s; width: 100%;
       appearance: none; margin-bottom: 8px;
     }
-    .form-select:focus { border-color: var(--sage); }
+    .form-select:focus { border-color: var(--amber); }
     .form-submit {
       font-family: 'Syncopate', sans-serif; font-size: 9px;
       letter-spacing: 0.3em; text-transform: uppercase;
-      color: var(--white); background: var(--sage-dark);
+      color: var(--white); background: var(--amber-dark);
       border: none; padding: 12px 36px; cursor: none;
       transition: all 0.3s; display: block; margin: 0 auto;
     }
-    .form-submit:hover { background: var(--sage); }
+    .form-submit:hover { background: var(--amber); }
 
     /* ─── CONTACT INFO ICONS ────────────────────────────────────── */
     .contact-info-row {
@@ -622,7 +626,7 @@
       transition: color 0.3s;
       white-space: nowrap;
     }
-    .contact-info-item:hover { color: var(--sage-light); }
+    .contact-info-item:hover { color: var(--off-white); }
     .contact-info-icon {
       width: 28px; height: 28px; border-radius: 50%;
       border: 1px solid rgba(122,158,135,0.3);
@@ -630,8 +634,8 @@
       flex-shrink: 0; transition: border-color 0.3s, background 0.3s;
     }
     .contact-info-item:hover .contact-info-icon {
-      border-color: var(--sage);
-      background: rgba(122,158,135,0.1);
+      border-color: var(--amber);
+      background: rgba(200,136,74,0.1);
     }
 
     /* ─── FOOTER ────────────────────────────────────────────────── */
@@ -657,7 +661,7 @@
       color: var(--text-muted); text-decoration: none;
       transition: all 0.3s; flex-shrink: 0;
     }
-    .social-link:hover { border-color: var(--sage); color: var(--sage-light); background: rgba(122,158,135,0.08); }
+    .social-link:hover { border-color: var(--amber); color: var(--off-white); background: rgba(200,136,74,0.1); }
 
     /* ─── CONTACT SECTION MOBILE SCROLL FIX ────────────────────── */
     /* On mobile, the contact form is taller than 100vh — allow scroll inside sticky */
@@ -960,109 +964,70 @@
       .section-title-big { font-size: clamp(28px, 9vw, 46px) !important; }
       .marquee-photo { width: 170px; height: 130px; }
     }
-    /* ─── NEGATIVE FILM BACKGROUND ─────────────────────────────── */
-    .film-bg {
-      position: fixed;
-      inset: 0;
-      z-index: 0;
+    /* ─── NEGATIVE FILM STRIP DIVIDERS ─────────────────────────── */
+    .film-divider {
+      position: relative;
+      width: 100%;
+      background: var(--film-dark);
       overflow: hidden;
-      background: #1a0d05;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-around;
-      gap: 0;
-      pointer-events: none;
+      padding: 18px 0;
+      z-index: 1;
     }
 
     .film-strip {
       position: relative;
       width: 100%;
-      height: 130px;
-      background: #c96a1e;
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
+      height: 110px;
+      background: var(--film-orange);
+      opacity: 0.42;
+      overflow: hidden;
     }
 
-    /* Top & bottom sprocket edge */
+    .film-strip + .film-strip {
+      margin-top: 6px;
+    }
+
+    /* sprocket edges top & bottom */
     .film-strip::before,
     .film-strip::after {
       content: '';
       position: absolute;
       left: 0; right: 0;
-      height: 22px;
+      height: 20px;
+      z-index: 3;
       background:
         repeating-linear-gradient(
           90deg,
-          #b85a10 0px, #b85a10 6px,
-          #c96a1e 6px, #c96a1e 10px,
-          #fff    10px, #fff    22px,
-          #c96a1e 22px, #c96a1e 30px,
-          #b85a10 30px, #b85a10 36px,
-          #c96a1e 36px, #c96a1e 44px
+          var(--film-dark) 0px,   var(--film-dark) 8px,
+          var(--film-orange) 8px, var(--film-orange) 14px,
+          #fff  14px,             #fff  26px,
+          var(--film-orange) 26px,var(--film-orange) 32px,
+          var(--film-dark) 32px,  var(--film-dark) 44px
         );
-      z-index: 2;
     }
     .film-strip::before { top: 0; }
     .film-strip::after  { bottom: 0; }
 
-    /* Sprocket hole punches */
-    .film-strip-holes {
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      z-index: 3;
-      pointer-events: none;
-      background:
-        repeating-linear-gradient(
-          90deg,
-          transparent 0px, transparent 14px,
-          rgba(0,0,0,0.55) 14px, rgba(0,0,0,0.55) 36px,
-          transparent 36px, transparent 44px
-        );
-      -webkit-mask:
-        repeating-linear-gradient(90deg,
-          transparent 0px, transparent 14px,
-          black 14px, black 36px,
-          transparent 36px, transparent 44px
-        )
-        top 2px left 0 / 44px 18px repeat-x,
-        repeating-linear-gradient(90deg,
-          transparent 0px, transparent 14px,
-          black 14px, black 36px,
-          transparent 36px, transparent 44px
-        )
-        bottom 2px left 0 / 44px 18px repeat-x;
-      mask:
-        repeating-linear-gradient(90deg,
-          transparent 0px, transparent 14px,
-          black 14px, black 36px,
-          transparent 36px, transparent 44px
-        )
-        top 2px left 0 / 44px 18px repeat-x,
-        repeating-linear-gradient(90deg,
-          transparent 0px, transparent 14px,
-          black 14px, black 36px,
-          transparent 36px, transparent 44px
-        )
-        bottom 2px left 0 / 44px 18px repeat-x;
-    }
-
-    /* Frames row inside strip */
+    /* frames area */
     .film-frames {
       position: absolute;
-      top: 22px; bottom: 22px; left: 0;
+      top: 20px; bottom: 20px; left: 0;
       display: flex;
-      gap: 3px;
-      padding: 0 3px;
+      gap: 2px;
+      padding: 0 2px;
       z-index: 1;
-      overflow: hidden;
-      width: 100%;
+      width: max-content;
+    }
+
+    .film-strip.reverse .film-frames {
+      right: 0; left: auto;
+      flex-direction: row-reverse;
     }
 
     .film-frame {
       flex-shrink: 0;
       height: 100%;
-      width: 120px;
+      width: 105px;
       overflow: hidden;
       position: relative;
     }
@@ -1072,135 +1037,36 @@
       height: 100%;
       object-fit: cover;
       display: block;
-      filter: sepia(1) hue-rotate(-10deg) saturate(1.6) brightness(0.75) contrast(1.1);
-      mix-blend-mode: multiply;
+      filter: sepia(1) hue-rotate(-15deg) saturate(1.8) brightness(0.65) contrast(1.15);
     }
 
-    /* Orange tint overlay on each frame */
-    .film-frame::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: rgba(201, 106, 30, 0.55);
-      mix-blend-mode: multiply;
-      pointer-events: none;
-      z-index: 2;
-    }
-
-    /* KODAK label strip */
+    /* frame number label strip */
     .film-label {
       position: absolute;
-      bottom: 22px;
+      bottom: 20px;
       left: 0; right: 0;
-      height: 12px;
-      background: #a0480a;
+      height: 10px;
+      background: rgba(160,60,8,0.7);
       z-index: 4;
       display: flex;
       align-items: center;
-      padding: 0 8px;
-      gap: 28px;
+      padding: 0 6px;
+      gap: 24px;
       overflow: hidden;
     }
     .film-label span {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 6px;
-      letter-spacing: 0.15em;
-      color: rgba(255,220,160,0.7);
+      font-size: 5.5px;
+      letter-spacing: 0.12em;
+      color: rgba(255,210,140,0.65);
       text-transform: uppercase;
       white-space: nowrap;
       flex-shrink: 0;
+      font-family: monospace;
     }
-
-    /* Second strip — reversed/flipped for variety */
-    .film-strip.reverse .film-frames { flex-direction: row-reverse; }
-    .film-strip.reverse { background: #b85510; }
-    .film-strip.reverse .film-label { background: #8a3c08; }
 
   </style>
 </head>
 <body>
-
-  <!-- ░░ NEGATIVE FILM BACKGROUND ░░ -->
-  <div class="film-bg" aria-hidden="true">
-
-    <!-- Strip 1 -->
-    <div class="film-strip">
-      <div class="film-strip-holes"></div>
-      <div class="film-frames">
-        <div class="film-frame"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=240&q=60&fit=crop" alt=""></div>
-        <div class="film-frame"><img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=240&q=60&fit=crop" alt=""></div>
-        <div class="film-frame"><img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=240&q=60&fit=crop" alt=""></div>
-        <div class="film-frame"><img src="https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=240&q=60&fit=crop" alt=""></div>
-        <div class="film-frame"><img src="https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=240&q=60&fit=crop" alt=""></div>
-        <div class="film-frame"><img src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?w=240&q=60&fit=crop" alt=""></div>
-        <div class="film-frame"><img src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=240&q=60&fit=crop" alt=""></div>
-        <div class="film-frame"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=240&q=60&fit=crop" alt=""></div>
-        <div class="film-frame"><img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=240&q=60&fit=crop" alt=""></div>
-      </div>
-      <div class="film-label">
-        <span>KODAK GC 400-8</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>KODAK GC 400-8</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span>
-      </div>
-    </div>
-
-    <!-- Strip 2 (reverse) -->
-    <div class="film-strip reverse">
-      <div class="film-strip-holes"></div>
-      <div class="film-frames">
-        <div class="film-frame"><img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=240&q=60&fit=crop" alt=""></div>
-        <div class="film-frame"><img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=240&q=60&fit=crop" alt=""></div>
-        <div class="film-frame"><img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=240&q=60&fit=crop" alt=""></div>
-        <div class="film-frame"><img src="https://images.unsplash.com/photo-1591604021695-0c69b7c05981?w=240&q=60&fit=crop" alt=""></div>
-        <div class="film-frame"><img src="https://images.unsplash.com/photo-1525267219888-bb077b8792cc?w=240&q=60&fit=crop" alt=""></div>
-        <div class="film-frame"><img src="https://images.unsplash.com/photo-1524824267900-2b39b93f98f4?w=240&q=60&fit=crop" alt=""></div>
-        <div class="film-frame"><img src="https://images.unsplash.com/photo-1532712938310-34cb3982ef74?w=240&q=60&fit=crop" alt=""></div>
-        <div class="film-frame"><img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=240&q=60&fit=crop" alt=""></div>
-        <div class="film-frame"><img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=240&q=60&fit=crop" alt=""></div>
-      </div>
-      <div class="film-label">
-        <span>KODAK GC 400-8</span><span>13</span><span>14</span><span>15</span><span>15A</span><span>16</span><span>17</span><span>18</span><span>KODAK GC 400-8</span><span>19</span><span>20</span>
-      </div>
-    </div>
-
-    <!-- Strip 3 -->
-    <div class="film-strip">
-      <div class="film-strip-holes"></div>
-      <div class="film-frames">
-        <div class="film-frame"><img src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=240&q=60&fit=crop" alt=""></div>
-        <div class="film-frame"><img src="https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=240&q=60&fit=crop" alt=""></div>
-        <div class="film-frame"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=240&q=60&fit=crop" alt=""></div>
-        <div class="film-frame"><img src="https://images.unsplash.com/photo-1524824267900-2b39b93f98f4?w=240&q=60&fit=crop" alt=""></div>
-        <div class="film-frame"><img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=240&q=60&fit=crop" alt=""></div>
-        <div class="film-frame"><img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=240&q=60&fit=crop" alt=""></div>
-        <div class="film-frame"><img src="https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=240&q=60&fit=crop" alt=""></div>
-        <div class="film-frame"><img src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?w=240&q=60&fit=crop" alt=""></div>
-        <div class="film-frame"><img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=240&q=60&fit=crop" alt=""></div>
-      </div>
-      <div class="film-label">
-        <span>KODAK GC 400-8</span><span>21</span><span>22</span><span>23</span><span>24</span><span>25</span><span>26</span><span>KODAK GC 400-8</span><span>27</span><span>28</span>
-      </div>
-    </div>
-
-    <!-- Strip 4 (reverse) -->
-    <div class="film-strip reverse">
-      <div class="film-strip-holes"></div>
-      <div class="film-frames">
-        <div class="film-frame"><img src="https://images.unsplash.com/photo-1532712938310-34cb3982ef74?w=240&q=60&fit=crop" alt=""></div>
-        <div class="film-frame"><img src="https://images.unsplash.com/photo-1591604021695-0c69b7c05981?w=240&q=60&fit=crop" alt=""></div>
-        <div class="film-frame"><img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=240&q=60&fit=crop" alt=""></div>
-        <div class="film-frame"><img src="https://images.unsplash.com/photo-1525267219888-bb077b8792cc?w=240&q=60&fit=crop" alt=""></div>
-        <div class="film-frame"><img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=240&q=60&fit=crop" alt=""></div>
-        <div class="film-frame"><img src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=240&q=60&fit=crop" alt=""></div>
-        <div class="film-frame"><img src="https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=240&q=60&fit=crop" alt=""></div>
-        <div class="film-frame"><img src="https://images.unsplash.com/photo-1532712938310-34cb3982ef74?w=240&q=60&fit=crop" alt=""></div>
-        <div class="film-frame"><img src="https://images.unsplash.com/photo-1591604021695-0c69b7c05981?w=240&q=60&fit=crop" alt=""></div>
-      </div>
-      <div class="film-label">
-        <span>KODAK GC 400-8</span><span>29</span><span>30</span><span>31</span><span>32</span><span>33</span><span>34</span><span>KODAK GC 400-8</span><span>35</span><span>36</span>
-      </div>
-    </div>
-
-  </div>
-  <!-- ░░ END FILM BACKGROUND ░░ -->
 
   <div class="cursor" id="cursor"></div>
   <div class="cursor-ring" id="cursorRing"></div>
@@ -1279,6 +1145,41 @@
     </div>
   </div>
 
+  
+  <!-- ░ FILM DIVIDER ░ -->
+  <div class="film-divider" aria-hidden="true">
+    <div class="film-strip">
+      <div class="film-frames">
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1524824267900-2b39b93f98f4?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1532712938310-34cb3982ef74?w=240&q=60&fit=crop" alt=""></div>
+      </div>
+      <div class="film-label"><span>KODAK GC 400-8</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>KODAK GC 400-8</span><span>11</span><span>12</span></div>
+    </div>
+    <div class="film-strip reverse">
+      <div class="film-frames">
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1591604021695-0c69b7c05981?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1525267219888-bb077b8792cc?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?w=240&q=60&fit=crop" alt=""></div>
+      </div>
+      <div class="film-label"><span>KODAK GC 400-8</span><span>13</span><span>14</span><span>15</span><span>15A</span><span>16</span><span>17</span><span>18</span><span>19</span><span>20</span><span>KODAK GC 400-8</span><span>21</span><span>22</span></div>
+    </div>
+  </div>
+
   <!-- ════════════════════════════════════════════════════
        SECTION 2 — WEDDINGS
   ════════════════════════════════════════════════════ -->
@@ -1304,6 +1205,41 @@
     </div>
   </div>
 
+  
+  <!-- ░ FILM DIVIDER ░ -->
+  <div class="film-divider" aria-hidden="true">
+    <div class="film-strip">
+      <div class="film-frames">
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1524824267900-2b39b93f98f4?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1532712938310-34cb3982ef74?w=240&q=60&fit=crop" alt=""></div>
+      </div>
+      <div class="film-label"><span>KODAK GC 400-8</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>KODAK GC 400-8</span><span>11</span><span>12</span></div>
+    </div>
+    <div class="film-strip reverse">
+      <div class="film-frames">
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1591604021695-0c69b7c05981?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1525267219888-bb077b8792cc?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?w=240&q=60&fit=crop" alt=""></div>
+      </div>
+      <div class="film-label"><span>KODAK GC 400-8</span><span>13</span><span>14</span><span>15</span><span>15A</span><span>16</span><span>17</span><span>18</span><span>19</span><span>20</span><span>KODAK GC 400-8</span><span>21</span><span>22</span></div>
+    </div>
+  </div>
+
   <!-- ════════════════════════════════════════════════════
        SECTION 3 — PORTRAITS
   ════════════════════════════════════════════════════ -->
@@ -1319,6 +1255,41 @@
         </div>
         <div style="position:absolute;top:50%;left:60px;transform:translateY(-50%);z-index:3;writing-mode:vertical-rl;font-size:9px;letter-spacing:0.45em;color:rgba(255,255,255,0.35);text-transform:uppercase;">Marco &amp; Bea Reyes · Prenuptial · Batangas 2024</div>
       </div>
+    </div>
+  </div>
+
+  
+  <!-- ░ FILM DIVIDER ░ -->
+  <div class="film-divider" aria-hidden="true">
+    <div class="film-strip">
+      <div class="film-frames">
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1524824267900-2b39b93f98f4?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1532712938310-34cb3982ef74?w=240&q=60&fit=crop" alt=""></div>
+      </div>
+      <div class="film-label"><span>KODAK GC 400-8</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>KODAK GC 400-8</span><span>11</span><span>12</span></div>
+    </div>
+    <div class="film-strip reverse">
+      <div class="film-frames">
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1591604021695-0c69b7c05981?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1525267219888-bb077b8792cc?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?w=240&q=60&fit=crop" alt=""></div>
+      </div>
+      <div class="film-label"><span>KODAK GC 400-8</span><span>13</span><span>14</span><span>15</span><span>15A</span><span>16</span><span>17</span><span>18</span><span>19</span><span>20</span><span>KODAK GC 400-8</span><span>21</span><span>22</span></div>
     </div>
   </div>
 
@@ -1349,6 +1320,41 @@
     </div>
   </div>
 
+  
+  <!-- ░ FILM DIVIDER ░ -->
+  <div class="film-divider" aria-hidden="true">
+    <div class="film-strip">
+      <div class="film-frames">
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1524824267900-2b39b93f98f4?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1532712938310-34cb3982ef74?w=240&q=60&fit=crop" alt=""></div>
+      </div>
+      <div class="film-label"><span>KODAK GC 400-8</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>KODAK GC 400-8</span><span>11</span><span>12</span></div>
+    </div>
+    <div class="film-strip reverse">
+      <div class="film-frames">
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1591604021695-0c69b7c05981?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1525267219888-bb077b8792cc?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?w=240&q=60&fit=crop" alt=""></div>
+      </div>
+      <div class="film-label"><span>KODAK GC 400-8</span><span>13</span><span>14</span><span>15</span><span>15A</span><span>16</span><span>17</span><span>18</span><span>19</span><span>20</span><span>KODAK GC 400-8</span><span>21</span><span>22</span></div>
+    </div>
+  </div>
+
   <!-- ════════════════════════════════════════════════════
        SECTION 5 — SERVICES
   ════════════════════════════════════════════════════ -->
@@ -1370,6 +1376,41 @@
           </div>
         </div>
       </div>
+    </div>
+  </div>
+
+  
+  <!-- ░ FILM DIVIDER ░ -->
+  <div class="film-divider" aria-hidden="true">
+    <div class="film-strip">
+      <div class="film-frames">
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1524824267900-2b39b93f98f4?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1532712938310-34cb3982ef74?w=240&q=60&fit=crop" alt=""></div>
+      </div>
+      <div class="film-label"><span>KODAK GC 400-8</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>KODAK GC 400-8</span><span>11</span><span>12</span></div>
+    </div>
+    <div class="film-strip reverse">
+      <div class="film-frames">
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1591604021695-0c69b7c05981?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1525267219888-bb077b8792cc?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?w=240&q=60&fit=crop" alt=""></div>
+      </div>
+      <div class="film-label"><span>KODAK GC 400-8</span><span>13</span><span>14</span><span>15</span><span>15A</span><span>16</span><span>17</span><span>18</span><span>19</span><span>20</span><span>KODAK GC 400-8</span><span>21</span><span>22</span></div>
     </div>
   </div>
 
@@ -1403,6 +1444,41 @@
           </div>
         </div>
       </div>
+    </div>
+  </div>
+
+  
+  <!-- ░ FILM DIVIDER ░ -->
+  <div class="film-divider" aria-hidden="true">
+    <div class="film-strip">
+      <div class="film-frames">
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1524824267900-2b39b93f98f4?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1532712938310-34cb3982ef74?w=240&q=60&fit=crop" alt=""></div>
+      </div>
+      <div class="film-label"><span>KODAK GC 400-8</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>KODAK GC 400-8</span><span>11</span><span>12</span></div>
+    </div>
+    <div class="film-strip reverse">
+      <div class="film-frames">
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1591604021695-0c69b7c05981?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1525267219888-bb077b8792cc?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=240&q=60&fit=crop" alt=""></div>
+        <div class="film-frame"><img src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?w=240&q=60&fit=crop" alt=""></div>
+      </div>
+      <div class="film-label"><span>KODAK GC 400-8</span><span>13</span><span>14</span><span>15</span><span>15A</span><span>16</span><span>17</span><span>18</span><span>19</span><span>20</span><span>KODAK GC 400-8</span><span>21</span><span>22</span></div>
     </div>
   </div>
 
