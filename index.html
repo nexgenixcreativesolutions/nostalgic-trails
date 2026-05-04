@@ -325,9 +325,6 @@
     .section-content {
       position: absolute;
       inset: 0;
-      /* Horizontal inset matches film strip width so text never overlaps */
-      left: 28px;
-      right: 28px;
       z-index: 2;
       display: flex;
       flex-direction: column;
@@ -341,14 +338,12 @@
       align-items: flex-start;
       justify-content: flex-end;
       text-align: left;
-      left: 28px; right: 28px;
       padding: 0 60px 80px;
     }
     .section-content.bottom-right {
       align-items: flex-end;
       justify-content: flex-end;
       text-align: right;
-      left: 28px; right: 28px;
       padding: 0 60px 80px;
     }
 
@@ -890,12 +885,9 @@
       /* Tighten section height even further on mobile */
       .scroll-section { height: 160vh; }
 
-      /* Hide vertical film strips on small screens */
-      .scroll-section::before,
-      .scroll-section::after { display: none; }
+
 
       .section-content {
-        left: 0; right: 0;
         padding: 80px 20px 36px;
         justify-content: flex-end !important;
         align-items: flex-start !important;
@@ -976,69 +968,33 @@
       .marquee-photo { width: 170px; height: 130px; }
     }
     /* ─── VERTICAL FILM STRIPS ──────────────────────────────────── */
-    /*
-     * Each .scroll-section gets a continuous film strip
-     * running vertically on both its left and right edges.
-     * Sprocket holes are drawn with repeating CSS gradients,
-     * making sections look like frames on a real film reel.
-     */
-
-    .scroll-section::before,
-    .scroll-section::after {
-      content: '';
-      position: absolute;
+    .film-strip-left,
+    .film-strip-right {
+      position: fixed;
       top: 0;
       bottom: 0;
-      width: 28px;
-      z-index: 10;
+      width: 20px;
+      z-index: 50;
       pointer-events: none;
-
-      /* Film base — dark orange-brown celluloid colour */
-      background-color: #1a0c04;
-
-      /* Sprocket holes: repeated white rounded squares */
+      background-color: #1c0e05;
       background-image: repeating-linear-gradient(
         to bottom,
-        transparent 0px,
-        transparent 10px,
-        rgba(255,255,255,0.88) 10px,
-        rgba(255,255,255,0.88) 22px,
-        transparent 22px,
-        transparent 36px
+        transparent       0px,
+        transparent       8px,
+        rgba(255,255,255,0.72) 8px,
+        rgba(255,255,255,0.72) 18px,
+        transparent      18px,
+        transparent      28px
       );
-      background-size: 100% 36px;
-      background-position: center top;
+      background-size: 100% 28px;
+      background-repeat: repeat-y;
+      opacity: 0;
+      transition: opacity 0.4s ease;
     }
+    .film-strip-left  { left: 0;  border-right: 1.5px solid rgba(200,110,40,0.55); }
+    .film-strip-right { right: 0; border-left:  1.5px solid rgba(200,110,40,0.55); }
 
-    /* Left strip */
-    .scroll-section::before {
-      left: 0;
-      border-right: 1px solid rgba(200,110,40,0.45);
-      box-shadow: inset -4px 0 12px rgba(0,0,0,0.6), 2px 0 8px rgba(0,0,0,0.4);
-    }
-
-    /* Right strip */
-    .scroll-section::after {
-      right: 0;
-      border-left: 1px solid rgba(200,110,40,0.45);
-      box-shadow: inset 4px 0 12px rgba(0,0,0,0.6), -2px 0 8px rgba(0,0,0,0.4);
-    }
-
-    /* Thin amber accent line along the inner edge of each strip */
-    .scroll-section::before {
-      box-shadow:
-        inset -1px 0 0 rgba(200,136,74,0.35),
-        inset -4px 0 14px rgba(0,0,0,0.7),
-        2px 0 6px rgba(0,0,0,0.35);
-    }
-    .scroll-section::after {
-      box-shadow:
-        inset 1px 0 0 rgba(200,136,74,0.35),
-        inset 4px 0 14px rgba(0,0,0,0.7),
-        -2px 0 6px rgba(0,0,0,0.35);
-    }
-
-    /* Hide the old horizontal image dividers — no longer used */
+    /* Hide the old horizontal image dividers */
     .film-divider { display: none; }
 
   </style>
@@ -1048,6 +1004,8 @@
   <div class="cursor" id="cursor"></div>
   <div class="cursor-ring" id="cursorRing"></div>
   <div class="noise"></div>
+  <div class="film-strip-left"  id="filmStripL"></div>
+  <div class="film-strip-right" id="filmStripR"></div>
 
   <!-- Camera HUD -->
   <div class="cam-hud" id="camHud">
@@ -1559,6 +1517,19 @@
         return p > 0.01 && p < 0.13;
       });
       HUD.classList.toggle('visible', zooming);
+
+      // Film strips — show when services/testimonials/contact are on screen
+      const STRIP_IDS = ['sec-services','sec-testimonials','sec-contact'];
+      const stripL = document.getElementById('filmStripL');
+      const stripR = document.getElementById('filmStripR');
+      const showStrips = STRIP_IDS.some(id => {
+        const el = document.getElementById(id);
+        if (!el) return false;
+        const r = el.getBoundingClientRect();
+        return r.top < window.innerHeight && r.bottom > 0;
+      });
+      stripL.style.opacity = showStrips ? '1' : '0';
+      stripR.style.opacity = showStrips ? '1' : '0';
 
       // Counter
       if (nowActive >= 0 && nowActive !== activeIdx) {
