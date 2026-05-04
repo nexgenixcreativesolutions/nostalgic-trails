@@ -665,26 +665,44 @@
     .social-link:hover { border-color: var(--amber); color: var(--off-white); background: rgba(200,136,74,0.1); }
 
     /* ─── CONTACT SECTION MOBILE SCROLL FIX ────────────────────── */
-    /* On mobile, the contact form is taller than 100vh — allow scroll inside sticky */
-    @media (max-width: 1024px) {
-      #sec-contact .scroll-sticky {
-        overflow-y: auto;
-        -webkit-overflow-scrolling: touch;
-      }
-      .section-content--contact {
-        position: relative;
-        min-height: 100%;
-        padding-top: 80px !important;
-        padding-bottom: 60px !important;
-        justify-content: flex-start !important;
-        overflow: visible;
-      }
-      .section-content--contact .section-title-big {
-        font-size: clamp(28px, 7vw, 52px) !important;
-        margin-bottom: 24px !important;
-      }
-      .section-content--contact .section-eyebrow {
-        justify-content: center !important;
+    /* Testimonials and contact expand to fit all content — no clipping */
+    #sec-testimonials,
+    #sec-contact {
+      height: auto !important;
+    }
+    #sec-testimonials .scroll-sticky,
+    #sec-contact .scroll-sticky {
+      position: relative !important;
+      height: auto !important;
+      min-height: 100vh;
+      overflow: visible !important;
+    }
+    #sec-testimonials .scroll-zoom,
+    #sec-contact .scroll-zoom {
+      position: relative !important;
+      min-height: 100vh;
+    }
+    #sec-testimonials .section-bg,
+    #sec-contact .section-bg {
+      position: fixed !important;
+      inset: 0 !important;
+      z-index: -1;
+    }
+    #sec-testimonials .section-content,
+    #sec-contact .section-content {
+      position: relative !important;
+      min-height: 100vh;
+      padding-top: 100px !important;
+      padding-bottom: 80px !important;
+      justify-content: flex-start !important;
+      height: auto !important;
+    }
+    /* Stack testimonials vertically on mobile */
+    @media (max-width: 768px) {
+      .testimonials-inner {
+        grid-template-columns: 1fr !important;
+        max-height: none !important;
+        overflow-y: visible !important;
       }
     }
 
@@ -967,35 +985,44 @@
       .section-title-big { font-size: clamp(28px, 9vw, 46px) !important; }
       .marquee-photo { width: 170px; height: 130px; }
     }
-    /* ─── VERTICAL FILM STRIPS ──────────────────────────────────── */
-    .film-strip-left,
-    .film-strip-right {
-      position: fixed;
-      top: 0;
-      bottom: 0;
-      width: 20px;
-      z-index: 50;
+    /* ─── FILM STRIP GAPS ───────────────────────────────────────── */
+    /* The blank space is the 80vh buffer INSIDE each .scroll-section
+       below the 100vh sticky frame. We render strips there directly. */
+    .scroll-section:not(#sec-testimonials):not(#sec-contact)::before,
+    .scroll-section:not(#sec-testimonials):not(#sec-contact)::after {
+      content: '';
+      position: absolute;
+      top: 100vh;        /* start right below the sticky frame */
+      bottom: 0;         /* run to the bottom of the section lane */
+      width: 22px;
+      z-index: 2;
       pointer-events: none;
       background-color: #1c0e05;
       background-image: repeating-linear-gradient(
         to bottom,
-        transparent       0px,
-        transparent       8px,
-        rgba(255,255,255,0.72) 8px,
-        rgba(255,255,255,0.72) 18px,
-        transparent      18px,
-        transparent      28px
+        transparent            0px,
+        transparent            6px,
+        rgba(255,255,255,0.75) 6px,
+        rgba(255,255,255,0.75) 14px,
+        transparent            14px,
+        transparent            22px
       );
-      background-size: 100% 28px;
+      background-size: 100% 22px;
       background-repeat: repeat-y;
-      opacity: 0;
-      transition: opacity 0.4s ease;
     }
-    .film-strip-left  { left: 0;  border-right: 1.5px solid rgba(200,110,40,0.55); }
-    .film-strip-right { right: 0; border-left:  1.5px solid rgba(200,110,40,0.55); }
+    .scroll-section:not(#sec-testimonials):not(#sec-contact)::before {
+      left: 0;
+      border-right: 1.5px solid rgba(200,110,40,0.6);
+    }
+    .scroll-section:not(#sec-testimonials):not(#sec-contact)::after {
+      right: 0;
+      border-left: 1.5px solid rgba(200,110,40,0.6);
+    }
 
-    /* Hide the old horizontal image dividers */
-    .film-divider { display: none; }
+    /* Remove film-gap divs — no longer needed */
+    .film-gap { display: none; }
+
+
 
   </style>
 </head>
@@ -1004,8 +1031,6 @@
   <div class="cursor" id="cursor"></div>
   <div class="cursor-ring" id="cursorRing"></div>
   <div class="noise"></div>
-  <div class="film-strip-left"  id="filmStripL"></div>
-  <div class="film-strip-right" id="filmStripR"></div>
 
   <!-- Camera HUD -->
   <div class="cam-hud" id="camHud">
@@ -1080,8 +1105,8 @@
     </div>
   </div>
   <!-- ░ FILM DIVIDER ░ -->
-  <div class="film-divider" aria-hidden="true">
-    <img src="NTD.png" alt="" class="film-divider-img">
+  <div class="film-gap" aria-hidden="true">
+
   </div>
 
 
@@ -1110,8 +1135,8 @@
     </div>
   </div>
   <!-- ░ FILM DIVIDER ░ -->
-  <div class="film-divider" aria-hidden="true">
-    <img src="NTD.png" alt="" class="film-divider-img">
+  <div class="film-gap" aria-hidden="true">
+
   </div>
 
 
@@ -1133,8 +1158,8 @@
     </div>
   </div>
   <!-- ░ FILM DIVIDER ░ -->
-  <div class="film-divider" aria-hidden="true">
-    <img src="NTD.png" alt="" class="film-divider-img">
+  <div class="film-gap" aria-hidden="true">
+
   </div>
 
 
@@ -1165,8 +1190,8 @@
     </div>
   </div>
   <!-- ░ FILM DIVIDER ░ -->
-  <div class="film-divider" aria-hidden="true">
-    <img src="NTD.png" alt="" class="film-divider-img">
+  <div class="film-gap" aria-hidden="true">
+
   </div>
 
 
@@ -1194,8 +1219,8 @@
     </div>
   </div>
   <!-- ░ FILM DIVIDER ░ -->
-  <div class="film-divider" aria-hidden="true">
-    <img src="NTD.png" alt="" class="film-divider-img">
+  <div class="film-gap" aria-hidden="true">
+
   </div>
 
 
@@ -1232,8 +1257,8 @@
     </div>
   </div>
   <!-- ░ FILM DIVIDER ░ -->
-  <div class="film-divider" aria-hidden="true">
-    <img src="NTD.png" alt="" class="film-divider-img">
+  <div class="film-gap" aria-hidden="true">
+
   </div>
 
 
@@ -1517,19 +1542,6 @@
         return p > 0.01 && p < 0.13;
       });
       HUD.classList.toggle('visible', zooming);
-
-      // Film strips — show when services/testimonials/contact are on screen
-      const STRIP_IDS = ['sec-services','sec-testimonials','sec-contact'];
-      const stripL = document.getElementById('filmStripL');
-      const stripR = document.getElementById('filmStripR');
-      const showStrips = STRIP_IDS.some(id => {
-        const el = document.getElementById(id);
-        if (!el) return false;
-        const r = el.getBoundingClientRect();
-        return r.top < window.innerHeight && r.bottom > 0;
-      });
-      stripL.style.opacity = showStrips ? '1' : '0';
-      stripR.style.opacity = showStrips ? '1' : '0';
 
       // Counter
       if (nowActive >= 0 && nowActive !== activeIdx) {
