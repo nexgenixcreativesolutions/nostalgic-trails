@@ -664,46 +664,54 @@
     }
     .social-link:hover { border-color: var(--amber); color: var(--off-white); background: rgba(200,136,74,0.1); }
 
-    /* ─── CONTACT SECTION MOBILE SCROLL FIX ────────────────────── */
-    /* Testimonials and contact expand to fit all content — no clipping */
-    #sec-testimonials,
-    #sec-contact {
-      height: auto !important;
+    /* ─── STATIC SECTIONS (services, testimonials, contact) ─────── */
+    /* Fully outside the scroll-zoom engine — renders as normal flow */
+    .static-section {
+      position: relative;
+      width: 100%;
+      padding: 100px 40px 80px;
+      overflow: visible;
+      z-index: 2;
     }
-    #sec-testimonials .scroll-sticky,
-    #sec-contact .scroll-sticky {
-      position: relative !important;
-      height: auto !important;
-      min-height: 100vh;
-      overflow: visible !important;
+    .static-section .section-bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      z-index: 0;
     }
-    #sec-testimonials .scroll-zoom,
-    #sec-contact .scroll-zoom {
-      position: relative !important;
-      min-height: 100vh;
+    .static-section .section-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
     }
-    #sec-testimonials .section-bg,
-    #sec-contact .section-bg {
-      position: fixed !important;
-      inset: 0 !important;
-      z-index: -1;
+    .static-content {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      width: 100%;
     }
-    #sec-testimonials .section-content,
-    #sec-contact .section-content {
-      position: relative !important;
-      min-height: 100vh;
-      padding-top: 100px !important;
-      padding-bottom: 80px !important;
-      justify-content: flex-start !important;
-      height: auto !important;
-    }
-    /* Stack testimonials vertically on mobile */
     @media (max-width: 768px) {
+      .static-section { padding: 80px 20px 60px; }
+      .services-inner {
+        grid-template-columns: 1fr !important;
+        max-width: 100% !important;
+      }
       .testimonials-inner {
         grid-template-columns: 1fr !important;
+        max-width: 100% !important;
         max-height: none !important;
         overflow-y: visible !important;
       }
+      .form-row { grid-template-columns: 1fr !important; }
+    }
+    @media (min-width: 769px) and (max-width: 1024px) {
+      .services-inner { grid-template-columns: repeat(2, 1fr) !important; }
+      .testimonials-inner { grid-template-columns: 1fr !important; }
     }
 
     /* ─── NOISE TEXTURE ─────────────────────────────────────────── */
@@ -1198,26 +1206,22 @@
   <!-- ════════════════════════════════════════════════════
        SECTION 5 — SERVICES
   ════════════════════════════════════════════════════ -->
-  <div class="scroll-section" data-index="4" id="sec-services">
-    <div class="scroll-sticky">
-      <div class="scroll-zoom" id="zoom-4">
-        <div class="section-bg" style="background-image:url('https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=1600&q=80&fit=crop');filter:brightness(0.35) saturate(0.7)"></div>
-        <div class="section-overlay" style="background:rgba(8,6,4,0.55)"></div>
-        <div class="section-content" style="padding-top:100px;">
-          <div class="section-eyebrow" style="justify-content:center;">What We Offer</div>
-          <h2 class="section-title-big" style="font-size:clamp(36px,4vw,64px);margin-bottom:48px;">Every Occasion,<br><em>Immortalized</em></h2>
-          <div class="services-inner">
-            <div class="svc-card"><div class="svc-num">01</div><div class="svc-name">Weddings &amp; <em>Prenuptials</em></div><p class="svc-desc">Full-day coverage, cinematic precision. Bespoke prenup locations.</p></div>
-            <div class="svc-card"><div class="svc-num">02</div><div class="svc-name">Portraits &amp; <em>Headshots</em></div><p class="svc-desc">Studio and outdoor — individuals, couples, families, and corporate.</p></div>
-            <div class="svc-card"><div class="svc-num">03</div><div class="svc-name">Events &amp; <em>Celebrations</em></div><p class="svc-desc">Birthdays, debut balls, anniversaries, corporate gatherings.</p></div>
-            <div class="svc-card"><div class="svc-num">04</div><div class="svc-name">Maternity &amp; <em>Newborn</em></div><p class="svc-desc">Gentle sessions capturing the magic of new life.</p></div>
-            <div class="svc-card"><div class="svc-num">05</div><div class="svc-name">Family &amp; <em>Lifestyle</em></div><p class="svc-desc">Relaxed, authentic sessions — in-home or outdoors.</p></div>
-            <div class="svc-card"><div class="svc-num">06</div><div class="svc-name">Commercial &amp; <em>Editorial</em></div><p class="svc-desc">Brand photography, product campaigns, editorial spreads.</p></div>
-          </div>
-        </div>
+  <section class="static-section" id="sec-services">
+    <div class="section-bg" style="background-image:url('https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=1600&q=80&fit=crop');filter:brightness(0.35) saturate(0.7)"></div>
+    <div class="section-overlay" style="background:rgba(8,6,4,0.55)"></div>
+    <div class="static-content">
+      <div class="section-eyebrow" style="justify-content:center;opacity:1;transform:none;">What We Offer</div>
+      <h2 class="section-title-big" style="font-size:clamp(36px,4vw,64px);margin-bottom:48px;opacity:1;transform:none;">Every Occasion,<br><em>Immortalized</em></h2>
+      <div class="services-inner">
+        <div class="svc-card"><div class="svc-num">01</div><div class="svc-name">Weddings &amp; <em>Prenuptials</em></div><p class="svc-desc">Full-day coverage, cinematic precision. Bespoke prenup locations.</p></div>
+        <div class="svc-card"><div class="svc-num">02</div><div class="svc-name">Portraits &amp; <em>Headshots</em></div><p class="svc-desc">Studio and outdoor — individuals, couples, families, and corporate.</p></div>
+        <div class="svc-card"><div class="svc-num">03</div><div class="svc-name">Events &amp; <em>Celebrations</em></div><p class="svc-desc">Birthdays, debut balls, anniversaries, corporate gatherings.</p></div>
+        <div class="svc-card"><div class="svc-num">04</div><div class="svc-name">Maternity &amp; <em>Newborn</em></div><p class="svc-desc">Gentle sessions capturing the magic of new life.</p></div>
+        <div class="svc-card"><div class="svc-num">05</div><div class="svc-name">Family &amp; <em>Lifestyle</em></div><p class="svc-desc">Relaxed, authentic sessions — in-home or outdoors.</p></div>
+        <div class="svc-card"><div class="svc-num">06</div><div class="svc-name">Commercial &amp; <em>Editorial</em></div><p class="svc-desc">Brand photography, product campaigns, editorial spreads.</p></div>
       </div>
     </div>
-  </div>
+  </section>
   <!-- ░ FILM DIVIDER ░ -->
   <div class="film-gap" aria-hidden="true">
 
@@ -1227,35 +1231,31 @@
   <!-- ════════════════════════════════════════════════════
        SECTION 6 — TESTIMONIALS
   ════════════════════════════════════════════════════ -->
-  <div class="scroll-section" data-index="5" id="sec-testimonials">
-    <div class="scroll-sticky">
-      <div class="scroll-zoom" id="zoom-5">
-        <div class="section-bg" style="background-image:url('https://images.unsplash.com/photo-1520854221256-17451cc331bf?w=1600&q=80&fit=crop');filter:brightness(0.4) saturate(0.75)"></div>
-        <div class="section-overlay" style="background:rgba(8,6,4,0.6)"></div>
-        <div class="section-content" style="padding-top:100px;">
-          <div class="section-eyebrow" style="justify-content:center;">Kind Words</div>
-          <h2 class="section-title-big" style="font-size:clamp(36px,4vw,64px);margin-bottom:48px;">What <em>Couples</em> Say</h2>
-          <div class="testimonials-inner">
-            <div class="t-card">
-              <div class="t-stars">★★★★★</div>
-              <p class="t-text">They captured our wedding's soul. Every photo feels like a painting. We cry every time we look at the album.</p>
-              <div class="t-author"><div class="t-avatar">A</div><div><div class="t-name">Andrea &amp; Luis Santos</div><div class="t-occasion">Wedding · Tagaytay 2024</div></div></div>
-            </div>
-            <div class="t-card">
-              <div class="t-stars">★★★★★</div>
-              <p class="t-text">Our prenup shots are breathtaking. They find the light and make everything look cinematic. Worth every centavo.</p>
-              <div class="t-author"><div class="t-avatar">M</div><div><div class="t-name">Marco &amp; Bea Reyes</div><div class="t-occasion">Prenuptial · Batangas 2024</div></div></div>
-            </div>
-            <div class="t-card">
-              <div class="t-stars">★★★★★</div>
-              <p class="t-text">We've booked Nostalgic Trails three times — engagement, wedding, daughter's birthday. True artists who always exceed expectations.</p>
-              <div class="t-author"><div class="t-avatar">C</div><div><div class="t-name">Carla &amp; James Lim</div><div class="t-occasion">Multiple Sessions · 2022–2024</div></div></div>
-            </div>
-          </div>
+  <section class="static-section" id="sec-testimonials">
+    <div class="section-bg" style="background-image:url('https://images.unsplash.com/photo-1520854221256-17451cc331bf?w=1600&q=80&fit=crop');filter:brightness(0.4) saturate(0.75)"></div>
+    <div class="section-overlay" style="background:rgba(8,6,4,0.6)"></div>
+    <div class="static-content">
+      <div class="section-eyebrow" style="justify-content:center;opacity:1;transform:none;">Kind Words</div>
+      <h2 class="section-title-big" style="font-size:clamp(36px,4vw,64px);margin-bottom:48px;opacity:1;transform:none;">What <em>Couples</em> Say</h2>
+      <div class="testimonials-inner">
+        <div class="t-card">
+          <div class="t-stars">★★★★★</div>
+          <p class="t-text">They captured our wedding's soul. Every photo feels like a painting. We cry every time we look at the album.</p>
+          <div class="t-author"><div class="t-avatar">A</div><div><div class="t-name">Andrea &amp; Luis Santos</div><div class="t-occasion">Wedding · Tagaytay 2024</div></div></div>
+        </div>
+        <div class="t-card">
+          <div class="t-stars">★★★★★</div>
+          <p class="t-text">Our prenup shots are breathtaking. They find the light and make everything look cinematic. Worth every centavo.</p>
+          <div class="t-author"><div class="t-avatar">M</div><div><div class="t-name">Marco &amp; Bea Reyes</div><div class="t-occasion">Prenuptial · Batangas 2024</div></div></div>
+        </div>
+        <div class="t-card">
+          <div class="t-stars">★★★★★</div>
+          <p class="t-text">We've booked Nostalgic Trails three times — engagement, wedding, daughter's birthday. True artists who always exceed expectations.</p>
+          <div class="t-author"><div class="t-avatar">C</div><div><div class="t-name">Carla &amp; James Lim</div><div class="t-occasion">Multiple Sessions · 2022–2024</div></div></div>
         </div>
       </div>
     </div>
-  </div>
+  </section>
   <!-- ░ FILM DIVIDER ░ -->
   <div class="film-gap" aria-hidden="true">
 
@@ -1265,41 +1265,36 @@
   <!-- ════════════════════════════════════════════════════
        SECTION 7 — CONTACT
   ════════════════════════════════════════════════════ -->
-  <div class="scroll-section" data-index="6" id="sec-contact">
-    <div class="scroll-sticky">
-      <div class="scroll-zoom" id="zoom-6">
-        <div class="section-bg" style="background-image:url('https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=1600&q=80&fit=crop');filter:brightness(0.35) saturate(0.65)"></div>
-        <div class="section-overlay" style="background:rgba(8,6,4,0.65)"></div>
-        <div class="section-content section-content--contact" style="padding-top:90px;">
-          <div class="section-eyebrow" style="justify-content:center;">Get In Touch</div>
-          <h2 class="section-title-big" style="font-size:clamp(36px,4vw,72px);margin-bottom:40px;">Let's Create<br><em>Something</em> Beautiful</h2>
-          <div class="contact-inner">
-            <div class="form-row">
-              <input class="form-input" type="text" placeholder="Your Name" />
-              <input class="form-input" type="email" placeholder="Email Address" />
-            </div>
-            <div class="form-row">
-              <input class="form-input" type="tel" placeholder="Phone Number" />
-              <input class="form-input" type="text" placeholder="Event Date" />
-            </div>
-            <select class="form-select">
-              <option value="" disabled selected>Type of Session</option>
-              <option>Wedding Photography</option>
-              <option>Prenuptial Session</option>
-              <option>Portrait Session</option>
-              <option>Event Coverage</option>
-              <option>Maternity / Newborn</option>
-              <option>Family Session</option>
-              <option>Commercial / Editorial</option>
-            </select>
-            <textarea class="form-input" placeholder="Tell us about your vision..."></textarea>
-            <button type="button" class="form-submit" id="formSubmit">Send Inquiry</button>
-
-          </div>
+  <section class="static-section" id="sec-contact">
+    <div class="section-bg" style="background-image:url('https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=1600&q=80&fit=crop');filter:brightness(0.35) saturate(0.65)"></div>
+    <div class="section-overlay" style="background:rgba(8,6,4,0.65)"></div>
+    <div class="static-content">
+      <div class="section-eyebrow" style="justify-content:center;opacity:1;transform:none;">Get In Touch</div>
+      <h2 class="section-title-big" style="font-size:clamp(36px,4vw,72px);margin-bottom:40px;opacity:1;transform:none;">Let's Create<br><em>Something</em> Beautiful</h2>
+      <div class="contact-inner">
+        <div class="form-row">
+          <input class="form-input" type="text" placeholder="Your Name" />
+          <input class="form-input" type="email" placeholder="Email Address" />
         </div>
+        <div class="form-row">
+          <input class="form-input" type="tel" placeholder="Phone Number" />
+          <input class="form-input" type="text" placeholder="Event Date" />
+        </div>
+        <select class="form-select">
+          <option value="" disabled selected>Type of Session</option>
+          <option>Wedding Photography</option>
+          <option>Prenuptial Session</option>
+          <option>Portrait Session</option>
+          <option>Event Coverage</option>
+          <option>Maternity / Newborn</option>
+          <option>Family Session</option>
+          <option>Commercial / Editorial</option>
+        </select>
+        <textarea class="form-input" placeholder="Tell us about your vision..."></textarea>
+        <button type="button" class="form-submit" id="formSubmit">Send Inquiry</button>
       </div>
     </div>
-  </div>
+  </section>
 
   <!-- ════════════════════════════════════════════════════
        MARQUEE — CLIENT GALLERY
