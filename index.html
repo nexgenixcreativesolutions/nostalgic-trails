@@ -286,6 +286,7 @@
       position: relative;
       height: 180vh;
       z-index: 1;
+      /* Strips sit outside scroll-sticky but inside the section lane */
     }
 
     .scroll-sticky {
@@ -324,6 +325,9 @@
     .section-content {
       position: absolute;
       inset: 0;
+      /* Horizontal inset matches film strip width so text never overlaps */
+      left: 28px;
+      right: 28px;
       z-index: 2;
       display: flex;
       flex-direction: column;
@@ -337,12 +341,14 @@
       align-items: flex-start;
       justify-content: flex-end;
       text-align: left;
+      left: 28px; right: 28px;
       padding: 0 60px 80px;
     }
     .section-content.bottom-right {
       align-items: flex-end;
       justify-content: flex-end;
       text-align: right;
+      left: 28px; right: 28px;
       padding: 0 60px 80px;
     }
 
@@ -884,7 +890,12 @@
       /* Tighten section height even further on mobile */
       .scroll-section { height: 160vh; }
 
+      /* Hide vertical film strips on small screens */
+      .scroll-section::before,
+      .scroll-section::after { display: none; }
+
       .section-content {
+        left: 0; right: 0;
         padding: 80px 20px 36px;
         justify-content: flex-end !important;
         align-items: flex-start !important;
@@ -964,20 +975,71 @@
       .section-title-big { font-size: clamp(28px, 9vw, 46px) !important; }
       .marquee-photo { width: 170px; height: 130px; }
     }
-    /* ─── NEGATIVE FILM DIVIDERS ────────────────────────────────── */
-    .film-divider {
-      width: 100%;
-      line-height: 0;
-      overflow: hidden;
-      position: relative;
-      z-index: 1;
+    /* ─── VERTICAL FILM STRIPS ──────────────────────────────────── */
+    /*
+     * Each .scroll-section gets a continuous film strip
+     * running vertically on both its left and right edges.
+     * Sprocket holes are drawn with repeating CSS gradients,
+     * making sections look like frames on a real film reel.
+     */
+
+    .scroll-section::before,
+    .scroll-section::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 28px;
+      z-index: 10;
+      pointer-events: none;
+
+      /* Film base — dark orange-brown celluloid colour */
+      background-color: #1a0c04;
+
+      /* Sprocket holes: repeated white rounded squares */
+      background-image: repeating-linear-gradient(
+        to bottom,
+        transparent 0px,
+        transparent 10px,
+        rgba(255,255,255,0.88) 10px,
+        rgba(255,255,255,0.88) 22px,
+        transparent 22px,
+        transparent 36px
+      );
+      background-size: 100% 36px;
+      background-position: center top;
     }
-    .film-divider-img {
-      width: 100%;
-      display: block;
-      object-fit: cover;
-      opacity: 0.55;
+
+    /* Left strip */
+    .scroll-section::before {
+      left: 0;
+      border-right: 1px solid rgba(200,110,40,0.45);
+      box-shadow: inset -4px 0 12px rgba(0,0,0,0.6), 2px 0 8px rgba(0,0,0,0.4);
     }
+
+    /* Right strip */
+    .scroll-section::after {
+      right: 0;
+      border-left: 1px solid rgba(200,110,40,0.45);
+      box-shadow: inset 4px 0 12px rgba(0,0,0,0.6), -2px 0 8px rgba(0,0,0,0.4);
+    }
+
+    /* Thin amber accent line along the inner edge of each strip */
+    .scroll-section::before {
+      box-shadow:
+        inset -1px 0 0 rgba(200,136,74,0.35),
+        inset -4px 0 14px rgba(0,0,0,0.7),
+        2px 0 6px rgba(0,0,0,0.35);
+    }
+    .scroll-section::after {
+      box-shadow:
+        inset 1px 0 0 rgba(200,136,74,0.35),
+        inset 4px 0 14px rgba(0,0,0,0.7),
+        -2px 0 6px rgba(0,0,0,0.35);
+    }
+
+    /* Hide the old horizontal image dividers — no longer used */
+    .film-divider { display: none; }
 
   </style>
 </head>
