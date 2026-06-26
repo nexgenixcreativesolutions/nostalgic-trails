@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Book a Session — Nostalgic Trails Photography</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Syncopate:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --white: #ffffff;
+      --off-white: #f5f0e8;
+      --sage: #8aaa8e;
+      --sage-dark: #5c7d62;
+      --rose: #c4886e;
+      --rose-light: #d9a892;
+      --amber: #c8884a;
+      --amber-dark: #a06030;
+      --ink: #e8e0d4;
+      --text-muted: #786e64;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { width: 100%; overflow-x: hidden; }
+    body {
+      background-color: #0d0b09;
+      color: var(--ink);
+      font-family: 'DM Sans', sans-serif;
+      min-height: 100vh;
+    }
+
+    /* ─── NOISE ─── */
+    .noise {
+      position: fixed; inset: 0; z-index: 2; pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      opacity: 0.5;
+    }
+
+    /* ─── NAV ─── */
+    #mainNav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      display: flex; align-items: center; padding: 24px 48px;
+      transition: background 0.4s ease, padding 0.4s ease;
+    }
+    #mainNav.scrolled {
+      background: rgba(13,11,9,0.95);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      padding: 14px 48px; border-bottom: 1px solid rgba(122,158,135,0.15);
+    }
+    .nav-logo {
+      font-family: 'Syncopate', sans-serif; font-size: 11px;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--white); text-decoration: none; line-height: 1.55;
+      flex-shrink: 0; white-space: nowrap;
+    }
+    .nav-logo span { display: block; color: var(--sage); font-size: 7.5px; letter-spacing: 0.3em; margin-top: 3px; }
+    .nav-back {
+      margin-left: auto;
+      font-family: 'DM Sans', sans-serif; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase;
+      color: rgba(232,224,212,0.6); text-decoration: none;
+      display: flex; align-items: center; gap: 8px; transition: color 0.3s, gap 0.3s;
+    }
+    .nav-back::before { content: '←'; color: var(--amber); }
+    .nav-back:hover { color: var(--off-white); gap: 12px; }
+
+    /* ─── HERO BANNER ─── */
+    .page-hero {
+      position: relative; min-height: 38vh; display: flex; align-items: flex-end;
+      padding: 120px 60px 60px; overflow: hidden;
+    }
+    .page-hero-bg {
+      position: absolute; inset: 0;
+      background-image: url('https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=1600&q=80&fit=crop');
+      background-size: cover; background-position: center;
+      filter: brightness(0.32) saturate(0.65);
+    }
+    .page-hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(13,11,9,1) 0%, rgba(13,11,9,0.4) 60%, rgba(13,11,9,0.6) 100%);
+    }
+    .page-hero-content { position: relative; z-index: 2; }
+    .page-eyebrow {
+      font-family: 'DM Sans', sans-serif; font-size: 10px;
+      letter-spacing: 0.5em; text-transform: uppercase; color: var(--rose-light);
+      margin-bottom: 16px; display: flex; align-items: center; gap: 14px;
+    }
+    .page-eyebrow::before { content: ''; width: 32px; height: 1px; background: var(--rose); }
+    .page-title {
+      font-family: 'Cormorant Garamond', serif; font-size: clamp(44px, 6vw, 96px);
+      font-weight: 300; line-height: 0.93; color: var(--white);
+    }
+    .page-title em { font-style: italic; color: var(--off-white); }
+
+    /* ─── MAIN LAYOUT ─── */
+    .page-body {
+      position: relative; z-index: 3;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 0; min-height: 62vh;
+    }
+
+    /* ─── LEFT: INFO PANEL ─── */
+    .info-panel {
+      padding: 72px 60px 80px;
+      background: rgba(255,255,255,0.025);
+      border-right: 1px solid rgba(122,158,135,0.1);
+    }
+    .info-label {
+      font-family: 'DM Sans', sans-serif; font-size: 9px;
+      letter-spacing: 0.45em; text-transform: uppercase; color: var(--rose-light);
+      margin-bottom: 28px;
+    }
+    .info-heading {
+      font-family: 'Cormorant Garamond', serif; font-size: clamp(28px, 2.5vw, 48px);
+      font-weight: 300; color: var(--white); line-height: 1.1; margin-bottom: 24px;
+    }
+    .info-heading em { font-style: italic; }
+    .info-body {
+      font-size: 14px; line-height: 1.85; color: rgba(255,255,255,0.6);
+      margin-bottom: 48px; max-width: 380px;
+    }
+    .info-details { display: flex; flex-direction: column; gap: 28px; }
+    .detail-item { display: flex; gap: 20px; align-items: flex-start; }
+    .detail-icon {
+      width: 40px; height: 40px; flex-shrink: 0;
+      border: 1px solid rgba(122,158,135,0.25); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--sage);
+    }
+    .detail-icon svg { width: 16px; height: 16px; }
+    .detail-text {}
+    .detail-title { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.45); margin-bottom: 4px; }
+    .detail-value { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 300; color: var(--white); }
+    .detail-value a { color: var(--rose-light); text-decoration: none; }
+    .detail-value a:hover { color: var(--off-white); }
+
+    /* ─── RIGHT: FORM PANEL ─── */
+    .form-panel { padding: 72px 60px 80px; }
+    .form-section-title {
+      font-family: 'Cormorant Garamond', serif; font-size: 22px;
+      font-weight: 300; color: var(--white); margin-bottom: 6px;
+    }
+    .form-section-title em { font-style: italic; }
+    .form-divider { width: 32px; height: 1px; background: var(--rose); margin-bottom: 28px; }
+
+    .form-group { margin-bottom: 8px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 8px; }
+    .form-input {
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+      color: var(--white); padding: 12px 16px; font-size: 13px; font-family: 'DM Sans', sans-serif;
+      letter-spacing: 0.04em; outline: none; transition: border-color 0.3s, background 0.3s; width: 100%;
+    }
+    .form-input::placeholder { color: rgba(255,255,255,0.28); }
+    .form-input:focus { border-color: var(--amber); background: rgba(255,255,255,0.09); }
+    textarea.form-input { resize: vertical; min-height: 90px; margin-bottom: 0; }
+    .form-select {
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.5); padding: 12px 16px; font-size: 13px;
+      font-family: 'DM Sans', sans-serif; outline: none; transition: border-color 0.3s, background 0.3s;
+      width: 100%; appearance: none; cursor: pointer;
+    }
+    .form-select option { background: #1a1410; color: var(--white); }
+    .form-select:focus { border-color: var(--amber); color: var(--white); background: rgba(255,255,255,0.09); }
+    .form-footer {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-top: 24px; flex-wrap: wrap; gap: 16px;
+    }
+    .form-note { font-size: 11px; color: rgba(255,255,255,0.3); letter-spacing: 0.05em; }
+    .form-submit {
+      font-family: 'Syncopate', sans-serif; font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--white); background: var(--amber-dark); border: none; padding: 14px 40px;
+      cursor: pointer; transition: all 0.3s;
+    }
+    .form-submit:hover:not(:disabled) { background: var(--amber); transform: translateY(-2px); }
+    .form-submit:disabled { opacity: 0.65; cursor: not-allowed; transform: none; }
+
+    /* ─── FOOTER ─── */
+    .site-footer {
+      background: #080605; border-top: 1px solid rgba(122,158,135,0.12);
+      padding: 36px 60px; display: flex; justify-content: space-between;
+      align-items: center; flex-wrap: wrap; gap: 16px; position: relative; z-index: 3;
+    }
+    .footer-brand { font-family: 'Syncopate', sans-serif; font-size: 10px; letter-spacing: 0.35em; color: var(--white); }
+    .footer-brand span { display: block; color: var(--text-muted); font-size: 8px; margin-top: 4px; }
+    .footer-link {
+      font-size: 11px; color: rgba(255,255,255,0.4); text-decoration: none;
+      letter-spacing: 0.1em; transition: color 0.3s;
+    }
+    .footer-link:hover { color: var(--rose-light); }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      #mainNav { padding: 18px 24px; }
+      #mainNav.scrolled { padding: 12px 24px; }
+      .page-hero { padding: 100px 24px 48px; }
+      .page-body { grid-template-columns: 1fr; }
+      .info-panel { padding: 48px 24px 40px; border-right: none; border-bottom: 1px solid rgba(122,158,135,0.1); }
+      .form-panel { padding: 48px 24px 60px; }
+      .form-row { grid-template-columns: 1fr; }
+      .site-footer { padding: 32px 24px; flex-direction: column; gap: 12px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="noise"></div>
+
+  <nav id="mainNav">
+    <a href="index.html" class="nav-logo">Nostalgic Trails<span>Raw unfiltered emotions</span></a>
+    <a href="index.html" class="nav-back">Back to Home</a>
+  </nav>
+
+  <!-- Hero -->
+  <div class="page-hero">
+    <div class="page-hero-bg"></div>
+    <div class="page-hero-overlay"></div>
+    <div class="page-hero-content">
+      <div class="page-eyebrow">Get In Touch</div>
+      <h1 class="page-title">Let's Create<br><em>Something</em><br>Beautiful</h1>
+    </div>
+  </div>
+
+  <!-- Body -->
+  <div class="page-body">
+
+    <!-- Info Panel -->
+    <div class="info-panel">
+      <div class="info-label">Before You Book</div>
+      <h2 class="info-heading">We'd love to hear<br>about your <em>story</em></h2>
+      <p class="info-body">Fill out the form and we'll get back to you within 24–48 hours to confirm availability, discuss your vision, and walk you through your package options.</p>
+      <div class="info-details">
+        <div class="detail-item">
+          <div class="detail-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          </div>
+          <div class="detail-text">
+            <div class="detail-title">Email</div>
+            <div class="detail-value"><a href="mailto:nostalgictrails@gmail.com">nostalgictrails@gmail.com</a></div>
+          </div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+          </div>
+          <div class="detail-text">
+            <div class="detail-title">Phone / Viber</div>
+            <div class="detail-value"><a href="tel:+639287030126">+63 928 703 0126</a></div>
+          </div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+          </div>
+          <div class="detail-text">
+            <div class="detail-title">Response Time</div>
+            <div class="detail-value">Within 24–48 hours</div>
+          </div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          </div>
+          <div class="detail-text">
+            <div class="detail-title">Service Areas</div>
+            <div class="detail-value">Philippines-wide &amp; destination shoots</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Form Panel -->
+    <div class="form-panel">
+      <div class="form-section-title">Your <em>Details</em></div>
+      <div class="form-divider"></div>
+
+      <form id="contactForm" novalidate>
+        <div class="form-row">
+          <input class="form-input" type="text"  name="name"  placeholder="Your Name" />
+          <input class="form-input" type="email" name="email" placeholder="Email Address" />
+        </div>
+        <div class="form-row">
+          <input class="form-input" type="tel"  name="phone" placeholder="Phone / Viber" />
+          <input class="form-input" type="text" name="date"  placeholder="Event Date (MM/DD/YYYY)" />
+        </div>
+        <div class="form-group">
+          <select class="form-select" name="session_type">
+            <option value="" disabled selected>Type of Session</option>
+            <option>Wedding Photography</option>
+            <option>Prenuptial Session</option>
+            <option>Portrait Session</option>
+            <option>Event Coverage</option>
+            <option>Maternity / Newborn</option>
+            <option>Family Session</option>
+            <option>Commercial / Editorial</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <select class="form-select" name="package">
+            <option value="" disabled selected>Interested Package</option>
+            <option>Keepsake — Essentials</option>
+            <option>Heritage — Most Popular</option>
+            <option>Legacy — Full Experience</option>
+            <option>Not Sure Yet</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <input class="form-input" type="text" name="location" placeholder="Event Location / Venue" />
+        </div>
+        <div class="form-group">
+          <textarea class="form-input" name="message" placeholder="Tell us about your vision, special requests, or questions…"></textarea>
+        </div>
+        <div class="form-footer">
+          <span class="form-note">We'll never share your information.</span>
+          <button type="submit" class="form-submit" id="formSubmit">Send Inquiry</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-brand">
+      Nostalgic Trails
+      <span>© 2025 Nostalgic Trails Photography. All rights reserved.</span>
+    </div>
+    <a href="packages.html" class="footer-link">View Packages →</a>
+  </footer>
+
+  <script>
+    // Nav scroll
+    var mainNav = document.getElementById('mainNav');
+    window.addEventListener('scroll', function() {
+      mainNav.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+
+    // Form submit
+    var form      = document.getElementById('contactForm');
+    var submitBtn = document.getElementById('formSubmit');
+
+    form.onsubmit = function() { return false; };
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      var nameVal  = form.querySelector('[name="name"]').value.trim();
+      var emailVal = form.querySelector('[name="email"]').value.trim();
+
+      if (!nameVal || !emailVal) {
+        submitBtn.textContent      = 'Please fill in Name & Email';
+        submitBtn.style.background = '#7a5030';
+        setTimeout(function() {
+          submitBtn.textContent      = 'Send Inquiry';
+          submitBtn.style.background = '';
+        }, 3000);
+        return false;
+      }
+
+      submitBtn.textContent = 'Sending\u2026';
+      submitBtn.disabled    = true;
+
+      fetch('https://formspree.io/f/mnjkjbly', {
+        method:  'POST',
+        body:    new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      })
+      .then(function(res) {
+        if (res.ok) {
+          submitBtn.textContent      = 'Message Sent \u2713';
+          submitBtn.style.background = '#5c7d62';
+          form.reset();
+          setTimeout(function() {
+            submitBtn.textContent      = 'Send Inquiry';
+            submitBtn.style.background = '';
+            submitBtn.disabled         = false;
+          }, 4000);
+        } else {
+          return res.json().then(function(data) {
+            throw new Error(data && data.error ? data.error : 'server error');
+          });
+        }
+      })
+      .catch(function() {
+        submitBtn.textContent      = 'Failed \u2014 Try Again';
+        submitBtn.style.background = '#8b4040';
+        submitBtn.disabled         = false;
+        setTimeout(function() {
+          submitBtn.textContent      = 'Send Inquiry';
+          submitBtn.style.background = '';
+        }, 4000);
+      });
+
+      return false;
+    }, false);
+  </script>
+</body>
+</html>
