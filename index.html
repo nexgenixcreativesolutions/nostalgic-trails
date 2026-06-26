@@ -21,15 +21,13 @@
       --text-mid: #a09888;
       --text-muted: #786e64;
       --border: rgba(138,170,142,0.18);
-      --film-orange: #c86e28;
-      --film-dark: #1a0c04;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html, body { width: 100%; overflow-x: hidden; }
     body { background-color: #0d0b09; color: var(--ink); font-family: 'DM Sans', sans-serif; cursor: none; }
 
-    /* ─── CUSTOM CURSOR ─────────────────────────────────────────── */
+    /* ─── CUSTOM CURSOR ─── */
     .cursor {
       position: fixed; width: 9px; height: 9px;
       background: var(--rose); border-radius: 50%;
@@ -43,7 +41,7 @@
       transform: translate(-50%,-50%); transition: all 0.18s ease; opacity: 0.6;
     }
 
-    /* ─── NAV ───────────────────────────────────────────────────── */
+    /* ─── NAV ─── */
     #mainNav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
       display: flex; align-items: center; padding: 24px 48px;
@@ -61,8 +59,6 @@
       flex-shrink: 0; white-space: nowrap; z-index: 1100;
     }
     .nav-logo span { display: block; color: var(--sage); font-size: 7.5px; letter-spacing: 0.3em; margin-top: 3px; }
-    .nav-desktop { display: none; }
-    .nav-desktop-cta { display: none; }
 
     /* ── MOBILE TOGGLE ── */
     .nav-mobile-toggle {
@@ -82,7 +78,7 @@
     .nav-mobile-toggle.open .ham-line:nth-child(2) { opacity: 0; width: 0; }
     .nav-mobile-toggle.open .ham-line:nth-child(3) { transform: rotate(-45deg) translateY(0); background: var(--rose-light); }
 
-    /* ─── MOBILE MENU OVERLAY ───────────────────────────────────── */
+    /* ─── MOBILE MENU OVERLAY ─── */
     .nav-mobile-menu {
       position: fixed; inset: 0; z-index: 1050;
       background: rgba(8,6,4,0.97);
@@ -154,7 +150,7 @@
     }
     .nav-mobile-menu.open .menu-tagline { opacity: 1; }
 
-    /* ─── SCROLL SECTIONS ───────────────────────────────────────── */
+    /* ─── SCROLL SECTIONS ─── */
     .scroll-section { position: relative; height: 180vh; z-index: 1; }
     .scroll-sticky { position: sticky; top: 0; height: 100vh; overflow: hidden; }
     .scroll-zoom { position: absolute; inset: 0; transform-origin: center center; will-change: transform; }
@@ -169,10 +165,10 @@
       display: flex; flex-direction: column; align-items: center; justify-content: center;
       text-align: center; padding: 60px 40px;
     }
-    .section-content.bottom-left { align-items: flex-start; justify-content: flex-end; text-align: left; padding: 0 60px 80px; }
-    .section-content.bottom-right { align-items: flex-end; justify-content: flex-end; text-align: right; padding: 0 60px 80px; }
+    .section-content.bottom-left  { align-items: flex-start; justify-content: flex-end; text-align: left; padding: 0 60px 80px; }
+    .section-content.bottom-right { align-items: flex-end;   justify-content: flex-end; text-align: right; padding: 0 60px 80px; }
 
-    /* ─── SECTION TEXT ──────────────────────────────────────────── */
+    /* ─── SECTION TEXT ─── */
     .section-eyebrow {
       font-family: 'DM Sans', sans-serif; font-size: clamp(10px, 0.7vw, 14px);
       letter-spacing: 0.5em; text-transform: uppercase; color: var(--rose-light);
@@ -214,7 +210,7 @@
     .btn-ghost:hover { gap: 16px; color: var(--off-white); }
     .btn-ghost::after { content: '→'; color: var(--amber); }
 
-    /* ─── PROGRESS DOTS ─────────────────────────────────────────── */
+    /* ─── PROGRESS DOTS ─── */
     .section-progress {
       position: fixed; right: 32px; top: 50%; transform: translateY(-50%);
       z-index: 800; display: flex; flex-direction: column; gap: 12px;
@@ -226,12 +222,12 @@
     }
     .progress-dot.active { background: var(--amber); border-color: var(--amber); transform: scale(1.4); }
 
-    /* ─── CAMERA HUD ────────────────────────────────────────────── */
+    /* ─── CAMERA HUD ─── */
     .cam-hud { position: fixed; inset: 0; z-index: 500; pointer-events: none; opacity: 0; transition: opacity 0.5s ease; }
     .cam-hud.visible { opacity: 1; }
     .cam-hud svg { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 160px; height: 160px; }
 
-    /* ─── SECTION COUNTER ───────────────────────────────────────── */
+    /* ─── SECTION COUNTER ─── */
     .section-counter {
       position: fixed; left: 40px; bottom: 40px; z-index: 800;
       font-family: 'Syncopate', sans-serif; font-size: 9px;
@@ -239,7 +235,7 @@
     }
     .section-counter span { color: rgba(255,255,255,0.7); }
 
-    /* ─── MARQUEE ───────────────────────────────────────────────── */
+    /* ─── MARQUEE ─── */
     .marquee-section {
       background: linear-gradient(135deg, #0f1410 0%, #111810 40%, #0e1210 100%);
       padding: 100px 0; overflow: hidden; position: relative; z-index: 2;
@@ -274,29 +270,57 @@
     }
     .marquee-photo:hover .photo-label { opacity: 1; }
 
-    /* ─── SERVICES GRID ─────────────────────────────────────────── */
-    .services-inner {
-      display: grid; grid-template-columns: repeat(3,1fr); gap: 1px;
-      background: rgba(255,255,255,0.08); max-width: min(960px, 78vw); margin: 0 auto; width: 100%;
+    /* ─── TESTIMONIALS — FLOATING BG ─── */
+    #sec-testimonials {
+      position: relative; width: 100%; padding: 100px 40px 80px; overflow: hidden; z-index: 2;
     }
-    .svc-card {
-      background: rgba(255,255,255,0.04); padding: clamp(28px,3vw,60px) clamp(20px,2.5vw,48px);
-      backdrop-filter: blur(4px); border: 1px solid rgba(255,255,255,0.06); transition: background 0.3s;
+    /* Dark base layer */
+    #sec-testimonials .section-bg {
+      position: absolute; inset: 0;
+      background-image: url('https://images.unsplash.com/photo-1520854221256-17451cc331bf?w=1600&q=80&fit=crop');
+      background-size: cover; background-position: center;
+      filter: brightness(0.18) saturate(0.5);
+      z-index: 0;
     }
-    .svc-card:hover { background: rgba(255,255,255,0.09); }
-    .svc-num { font-family: 'Cormorant Garamond', serif; font-size: clamp(42px,4vw,80px); font-weight: 300; color: rgba(122,158,135,0.18); line-height: 1; margin-bottom: 16px; }
-    .svc-name { font-family: 'Cormorant Garamond', serif; font-size: clamp(18px,1.5vw,28px); font-weight: 300; color: var(--white); margin-bottom: 12px; }
-    .svc-name em { font-style: italic; color: var(--off-white); }
-    .svc-desc { font-size: clamp(11px,0.85vw,15px); line-height: 1.75; color: rgba(255,255,255,0.55); }
+    #sec-testimonials .section-overlay {
+      position: absolute; inset: 0;
+      background: rgba(8,6,4,0.72);
+      z-index: 1;
+    }
 
-    /* ─── TESTIMONIALS ──────────────────────────────────────────── */
+    /* Floating images container */
+    .t-float-bg {
+      position: absolute; inset: 0; z-index: 2; pointer-events: none; overflow: hidden;
+    }
+    .t-float-img {
+      position: absolute;
+      will-change: transform, opacity, filter;
+      /* start: small + blurry, JS drives to large + clear on scroll */
+      transform: scale(0.45);
+      opacity: 0;
+      filter: blur(14px) saturate(0.5);
+      transition: none; /* driven entirely by JS rAF */
+      border-radius: 2px;
+    }
+    .t-float-img img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+    }
+
+    /* Testimonials content on top */
+    #sec-testimonials .static-content {
+      position: relative; z-index: 3;
+      display: flex; flex-direction: column; align-items: center; text-align: center; width: 100%;
+    }
+
     .testimonials-inner {
       display: grid; grid-template-columns: repeat(3,1fr);
       gap: 24px; max-width: min(1000px, 78vw); margin: 0 auto; width: 100%;
     }
     .t-card {
-      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
-      padding: clamp(24px,2.5vw,56px) clamp(20px,2vw,48px); backdrop-filter: blur(8px); position: relative;
+      background: rgba(8,6,4,0.7); border: 1px solid rgba(255,255,255,0.1);
+      padding: clamp(24px,2.5vw,56px) clamp(20px,2vw,48px);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      position: relative;
     }
     .t-card::before {
       content: '"'; font-family: 'Cormorant Garamond', serif; font-size: clamp(60px,5vw,100px); line-height: 0.7;
@@ -314,33 +338,15 @@
     .t-name { font-size: clamp(11px,0.9vw,15px); font-weight: 500; color: var(--white); margin-bottom: 3px; }
     .t-occasion { font-size: clamp(8px,0.65vw,11px); letter-spacing: 0.2em; text-transform: uppercase; color: var(--rose-light); }
 
-    /* ─── CONTACT FORM ──────────────────────────────────────────── */
-    .contact-inner { width: 100%; max-width: min(560px, 90vw); margin: 0 auto; }
-    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 8px; }
-    .form-input {
-      background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12);
-      color: var(--white); padding: 10px 14px; font-size: 12px; font-family: 'DM Sans', sans-serif;
-      letter-spacing: 0.04em; outline: none; transition: border-color 0.3s; width: 100%;
+    .section-eyebrow-static {
+      font-family: 'DM Sans', sans-serif; font-size: clamp(10px,0.7vw,14px);
+      letter-spacing: 0.5em; text-transform: uppercase; color: var(--rose-light);
+      margin-bottom: 20px; display: flex; align-items: center; justify-content: center; gap: 14px;
     }
-    .form-input::placeholder { color: rgba(255,255,255,0.3); }
-    .form-input:focus { border-color: var(--amber); }
-    textarea.form-input { resize: vertical; min-height: 70px; margin-bottom: 8px; }
-    .form-select {
-      background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12);
-      color: rgba(255,255,255,0.55); padding: 10px 14px; font-size: 12px;
-      font-family: 'DM Sans', sans-serif; outline: none; transition: border-color 0.3s;
-      width: 100%; appearance: none; margin-bottom: 8px;
-    }
-    .form-select:focus { border-color: var(--amber); }
-    .form-submit {
-      font-family: 'Syncopate', sans-serif; font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase;
-      color: var(--white); background: var(--amber-dark); border: none; padding: 12px 36px;
-      cursor: pointer; transition: all 0.3s; display: block; margin: 0 auto;
-    }
-    .form-submit:hover:not(:disabled) { background: var(--amber); }
-    .form-submit:disabled { opacity: 0.7; cursor: not-allowed; }
+    .section-eyebrow-static::before { content: ''; width: 32px; height: 1px; background: var(--rose); }
+    .section-eyebrow-static::after  { content: ''; width: 32px; height: 1px; background: var(--rose); }
 
-    /* ─── FOOTER ────────────────────────────────────────────────── */
+    /* ─── FOOTER ─── */
     .site-footer {
       background: #080605; border-top: 1px solid rgba(122,158,135,0.12);
       padding: 40px 60px; display: flex; justify-content: space-between;
@@ -356,145 +362,19 @@
     }
     .social-link:hover { border-color: var(--amber); color: var(--off-white); background: rgba(200,136,74,0.1); }
 
-    /* ─── STATIC SECTIONS ───────────────────────────────────────── */
-    .static-section { position: relative; width: 100%; padding: 100px 40px 80px; overflow: visible; z-index: 2; }
-    .static-section .section-bg { position: absolute; inset: 0; background-size: cover; background-position: center; background-repeat: no-repeat; z-index: 0; }
-    .static-section .section-overlay { position: absolute; inset: 0; z-index: 1; }
-    .static-content { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; text-align: center; width: 100%; }
-
-    /* ─── NOISE TEXTURE ─────────────────────────────────────────── */
+    /* ─── NOISE ─── */
     .noise {
       position: fixed; inset: 0; z-index: 2; pointer-events: none;
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
       opacity: 0.5;
     }
 
-    /* ─── FILM STRIP ────────────────────────────────────────────── */
-    .scroll-section:not(#sec-testimonials):not(#sec-contact)::before,
-    .scroll-section:not(#sec-testimonials):not(#sec-contact)::after {
-      content: ''; position: absolute; top: 100vh; bottom: 0; width: 22px; z-index: 2; pointer-events: none;
-      background-color: #1c0e05;
-      background-image: repeating-linear-gradient(to bottom, transparent 0px, transparent 6px, rgba(255,255,255,0.75) 6px, rgba(255,255,255,0.75) 14px, transparent 14px, transparent 22px);
-      background-size: 100% 22px; background-repeat: repeat-y;
-    }
-    .scroll-section:not(#sec-testimonials):not(#sec-contact)::before { left: 0; border-right: 1.5px solid rgba(200,110,40,0.6); }
-    .scroll-section:not(#sec-testimonials):not(#sec-contact)::after  { right: 0; border-left:  1.5px solid rgba(200,110,40,0.6); }
-    .film-gap { display: none; }
-
-    /* ─── RESPONSIVE: 1440px+ ───────────────────────────────────── */
-    @media (min-width: 1440px) {
-      nav { padding: 28px 5vw; } nav.scrolled { padding: 18px 5vw; }
-      .nav-logo { font-size: 12px; letter-spacing: 0.28em; }
-      .nav-logo span { font-size: 8.5px; letter-spacing: 0.38em; }
-      .section-content { padding: 80px 6vw; }
-      .section-content.bottom-left { padding: 0 6vw 6vw; }
-      .section-content.bottom-right { padding: 0 6vw 6vw; }
-      .section-title-big { font-size: clamp(60px, 5vw, 120px); }
-      .section-body { font-size: 15px; max-width: 560px; line-height: 1.85; }
-      .section-eyebrow { font-size: 11px; }
-      .services-inner { max-width: min(1200px, 80vw); }
-      .svc-card { padding: 48px 36px; } .svc-num { font-size: 56px; } .svc-name { font-size: 22px; } .svc-desc { font-size: 13px; }
-      .testimonials-inner { max-width: min(1200px, 80vw); gap: 28px; }
-      .t-card { padding: 44px 36px; } .t-text { font-size: 17px; }
-      .contact-inner { max-width: 640px; }
-      .form-input { font-size: 14px; padding: 16px 20px; }
-      .form-select { font-size: 14px; padding: 16px 20px; }
-      textarea.form-input { min-height: 120px; }
-      .marquee-photo { width: 380px; height: 260px; }
-      .marquee-header { padding: 0 6vw 72px; }
-      .marquee-title { font-size: clamp(40px, 3.5vw, 64px); }
-      .section-counter { font-size: 10px; left: 44px; bottom: 44px; }
-      .section-progress { right: 36px; }
-      .site-footer { padding: 70px 6vw; } .footer-brand { font-size: 11px; }
-      .social-link { width: 40px; height: 40px; }
-    }
-
-    /* ─── RESPONSIVE: 1920px+ ───────────────────────────────────── */
-    @media (min-width: 1920px) {
-      nav { padding: 32px 6vw; } nav.scrolled { padding: 20px 6vw; }
-      .nav-logo { font-size: 13px; letter-spacing: 0.3em; }
-      .nav-logo span { font-size: 9.5px; letter-spacing: 0.42em; }
-      .section-content { padding: 100px 7vw; }
-      .section-content.bottom-left { padding: 0 7vw 5vw; }
-      .section-content.bottom-right { padding: 0 7vw 5vw; }
-      .section-title-big { font-size: clamp(72px, 4.8vw, 160px) !important; line-height: 0.9; }
-      .section-body { font-size: 18px; max-width: 680px; line-height: 1.9; margin-top: 36px; }
-      .section-eyebrow { font-size: 12px; letter-spacing: 0.55em; margin-bottom: 28px; }
-      .section-actions { margin-top: 52px; gap: 28px; }
-      .btn-primary { font-size: 10px; padding: 20px 44px; } .btn-ghost { font-size: 12px; }
-      .services-inner { max-width: min(1480px, 78vw); gap: 2px; }
-      .svc-card { padding: 60px 48px; } .svc-num { font-size: 72px; margin-bottom: 20px; } .svc-name { font-size: 28px; margin-bottom: 16px; } .svc-desc { font-size: 14px; line-height: 1.8; }
-      .testimonials-inner { max-width: min(1480px, 78vw); gap: 40px; }
-      .t-card { padding: 56px 48px; } .t-card::before { font-size: 100px; }
-      .t-stars { font-size: 13px; letter-spacing: 4px; margin-bottom: 16px; }
-      .t-text { font-size: 20px; line-height: 1.75; margin-bottom: 32px; margin-top: 20px; }
-      .t-avatar { width: 52px; height: 52px; font-size: 20px; } .t-name { font-size: 14px; } .t-occasion { font-size: 10px; }
-      .contact-inner { max-width: 760px; }
-      .form-input { font-size: 15px; padding: 18px 24px; }
-      .form-select { font-size: 15px; padding: 18px 24px; }
-      textarea.form-input { min-height: 140px; }
-      .form-submit { font-size: 11px; padding: 22px 60px; }
-      .marquee-photo { width: 500px; height: 340px; }
-      .marquee-section { padding: 130px 0; }
-      .marquee-header { padding: 0 7vw 80px; } .marquee-title { font-size: clamp(52px, 3.2vw, 80px); }
-      .marquee-tag { font-size: 11px; } .marquee-track-wrap { margin-bottom: 20px; }
-      .section-counter { font-size: 11px; letter-spacing: 0.45em; left: 56px; bottom: 56px; }
-      .section-progress { right: 48px; gap: 16px; } .progress-dot { width: 8px; height: 8px; }
-      .cam-hud svg { width: 200px; height: 200px; }
-      .site-footer { padding: 90px 7vw; } .footer-brand { font-size: 12px; letter-spacing: 0.4em; }
-      .footer-brand span { font-size: 10px; margin-top: 6px; }
-      .social-link { width: 48px; height: 48px; } .social-link svg { width: 16px; height: 16px; }
-    }
-
-    /* ─── RESPONSIVE: 2560px+ ───────────────────────────────────── */
-    @media (min-width: 2560px) {
-      nav { padding: 40px 7vw; } nav.scrolled { padding: 24px 7vw; }
-      .nav-logo { font-size: 15px; letter-spacing: 0.32em; }
-      .nav-logo span { font-size: 11px; letter-spacing: 0.45em; }
-      .section-content { padding: 120px 8vw; }
-      .section-content.bottom-left { padding: 0 8vw 4.5vw; }
-      .section-content.bottom-right { padding: 0 8vw 4.5vw; }
-      .section-title-big { font-size: clamp(90px, 4.2vw, 200px) !important; }
-      .section-body { font-size: 22px; max-width: 860px; line-height: 1.95; margin-top: 44px; }
-      .section-eyebrow { font-size: 14px; letter-spacing: 0.6em; margin-bottom: 36px; }
-      .section-actions { margin-top: 64px; gap: 36px; }
-      .btn-primary { font-size: 12px; padding: 24px 56px; } .btn-ghost { font-size: 14px; }
-      .services-inner { max-width: min(1900px, 75vw); gap: 2px; }
-      .svc-card { padding: 80px 60px; } .svc-num { font-size: 96px; margin-bottom: 28px; } .svc-name { font-size: 36px; margin-bottom: 20px; } .svc-desc { font-size: 17px; line-height: 1.85; }
-      .testimonials-inner { max-width: min(1900px, 75vw); gap: 52px; }
-      .t-card { padding: 72px 60px; } .t-text { font-size: 26px; } .t-name { font-size: 17px; } .t-occasion { font-size: 12px; } .t-avatar { width: 64px; height: 64px; font-size: 24px; }
-      .contact-inner { max-width: 960px; }
-      .form-input { font-size: 18px; padding: 22px 28px; }
-      .form-select { font-size: 18px; padding: 22px 28px; }
-      textarea.form-input { min-height: 180px; }
-      .form-submit { font-size: 13px; padding: 26px 80px; }
-      .marquee-photo { width: 680px; height: 460px; }
-      .marquee-section { padding: 180px 0; } .marquee-title { font-size: clamp(72px, 3vw, 110px); }
-      .section-counter { font-size: 14px; left: 72px; bottom: 72px; }
-      .section-progress { right: 64px; gap: 20px; } .progress-dot { width: 10px; height: 10px; }
-      .cam-hud svg { width: 280px; height: 280px; }
-      .site-footer { padding: 120px 8vw; } .footer-brand { font-size: 15px; } .footer-brand span { font-size: 12px; }
-      .social-link { width: 60px; height: 60px; } .social-link svg { width: 20px; height: 20px; }
-    }
-
-    /* ─── RESPONSIVE: tablet 1024px ────────────────────────────── */
-    @media (max-width: 1024px) {
-      nav { padding: 22px 40px; } nav.scrolled { padding: 14px 40px; }
-      .section-content { padding: 60px 40px; }
-      .section-content.bottom-left, .section-content.bottom-right { padding: 0 40px 60px; }
-      .services-inner { grid-template-columns: repeat(2, 1fr); max-width: 700px; }
-      .testimonials-inner { grid-template-columns: repeat(2, 1fr); max-width: 700px; }
-    }
-    @media (min-width: 769px) and (max-width: 1024px) {
-      .services-inner { grid-template-columns: repeat(2, 1fr) !important; }
-      .testimonials-inner { grid-template-columns: 1fr !important; }
-    }
-
-    /* ─── RESPONSIVE: mobile 768px ─────────────────────────────── */
+    /* ─── RESPONSIVE 768px ─── */
     @media (max-width: 768px) {
       body { cursor: auto; }
       .cursor, .cursor-ring { display: none; }
-      nav { padding: 18px 20px; } nav.scrolled { padding: 12px 20px; }
+      #mainNav { padding: 18px 20px; }
+      #mainNav.scrolled { padding: 12px 20px; }
       .scroll-section { height: 160vh; }
       .section-content { padding: 80px 20px 36px; justify-content: flex-end !important; align-items: flex-start !important; text-align: left !important; }
       .section-content.bottom-left, .section-content.bottom-right { padding: 0 20px 44px; align-items: flex-start !important; text-align: left !important; }
@@ -503,29 +383,19 @@
       .section-body { font-size: 13px; max-width: 85% !important; margin-top: 14px; }
       .section-actions { flex-wrap: wrap; gap: 12px; margin-top: 20px; }
       .client-tag { display: none !important; }
-      .static-section { padding: 80px 20px 60px; }
-      .services-inner { grid-template-columns: 1fr !important; max-width: 100% !important; gap: 1px; }
-      .svc-card { padding: 28px 20px; } .svc-num { font-size: 38px; } .svc-name { font-size: 18px; }
-      .testimonials-inner { grid-template-columns: 1fr !important; max-width: 100% !important; gap: 16px; max-height: 60vh; overflow-y: auto; padding-right: 4px; }
+      #sec-testimonials { padding: 80px 20px 60px; }
+      .testimonials-inner { grid-template-columns: 1fr !important; max-width: 100% !important; gap: 16px; }
       .t-card { padding: 24px 20px; } .t-text { font-size: 14px; }
-      .form-row { grid-template-columns: 1fr !important; }
-      .contact-inner { max-width: 100%; }
-      textarea.form-input { min-height: 80px; }
       .section-progress { right: 14px; }
       .section-counter { left: 20px; bottom: 20px; }
       .marquee-section { padding: 60px 0; }
       .marquee-header { padding: 0 20px 40px; }
       .marquee-photo { width: 200px; height: 150px; }
       .site-footer { flex-direction: column; gap: 24px; text-align: center; padding: 40px 20px; }
-      .footer-links { flex-wrap: wrap; justify-content: center; gap: 16px; }
-      [style*="writing-mode:vertical"] { display: none; }
+      .t-float-img { display: none; } /* hide floaters on very small screens */
     }
-
-    /* ─── RESPONSIVE: very small 400px ─────────────────────────── */
-    @media (max-width: 400px) {
-      .scroll-section { height: 150vh; }
-      .section-title-big { font-size: clamp(28px, 9vw, 46px) !important; }
-      .marquee-photo { width: 170px; height: 130px; }
+    @media (min-width: 769px) and (max-width: 1024px) {
+      .testimonials-inner { grid-template-columns: 1fr !important; }
     }
   </style>
 </head>
@@ -569,19 +439,19 @@
       <span class="menu-close-line"></span>
     </button>
     <ul>
-      <li><a href="#sec-weddings" class="menu-link">Works</a></li>
-      <li><a href="#sec-services" class="menu-link">Services</a></li>
-      <li><a href="#sec-about"    class="menu-link">About</a></li>
-      <li><a href="#sec-contact"  class="menu-link">Contact</a></li>
+      <li><a href="#sec-weddings"     class="menu-link">Works</a></li>
+      <li><a href="#sec-testimonials" class="menu-link">Reviews</a></li>
+      <li><a href="#sec-about"        class="menu-link">About</a></li>
+      <li><a href="contact.html"      class="menu-link">Contact</a></li>
     </ul>
-    <a href="#sec-contact" class="menu-book-btn menu-link">Book a Session</a>
+    <a href="contact.html" class="menu-book-btn">Book a Session</a>
     <div class="menu-tagline">Documentary Photography · Est. 2014</div>
   </div>
 
   <div class="section-progress" id="sectionProgress"></div>
-  <div class="section-counter"  id="sectionCounter"><span>01</span> / 07</div>
+  <div class="section-counter"  id="sectionCounter"><span>01</span> / 05</div>
 
-  <!-- ══ SECTION 1 — HERO ══════════════════════════════════════ -->
+  <!-- ══ SECTION 1 — HERO ══ -->
   <div class="scroll-section" data-index="0" id="sec-hero">
     <div class="scroll-sticky">
       <div class="scroll-zoom" id="zoom-0">
@@ -593,15 +463,14 @@
           <p class="section-body">We capture the moments you feel but cannot hold — turning fleeting emotion into timeless, cinematic imagery that lives forever.</p>
           <div class="section-actions">
             <a href="#sec-weddings" class="btn-primary">Explore Works</a>
-            <a href="#sec-services" class="btn-ghost">View Services</a>
+            <a href="packages.html" class="btn-ghost">View Packages</a>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="film-gap" aria-hidden="true"></div>
 
-  <!-- ══ SECTION 2 — WEDDINGS ══════════════════════════════════ -->
+  <!-- ══ SECTION 2 — WEDDINGS ══ -->
   <div class="scroll-section" data-index="1" id="sec-weddings">
     <div class="scroll-sticky">
       <div class="scroll-zoom" id="zoom-1">
@@ -612,7 +481,8 @@
           <h2 class="section-title-big">Weddings &amp;<br><em>Prenuptials</em></h2>
           <p class="section-body">Full-day wedding coverage with cinematic precision. Every vow, every tear, every laugh — preserved forever in images that feel like paintings.</p>
           <div class="section-actions">
-            <a href="#sec-contact" class="btn-primary">Book Now</a>
+            <a href="contact.html" class="btn-primary">Book Now</a>
+            <a href="packages.html" class="btn-ghost">See Packages</a>
           </div>
         </div>
         <div class="client-tag" style="position:absolute;bottom:80px;right:60px;z-index:3;text-align:right;">
@@ -622,9 +492,8 @@
       </div>
     </div>
   </div>
-  <div class="film-gap" aria-hidden="true"></div>
 
-  <!-- ══ SECTION 3 — PORTRAITS ══════════════════════════════════ -->
+  <!-- ══ SECTION 3 — PORTRAITS ══ -->
   <div class="scroll-section" data-index="2" id="sec-portraits">
     <div class="scroll-sticky">
       <div class="scroll-zoom" id="zoom-2">
@@ -639,9 +508,8 @@
       </div>
     </div>
   </div>
-  <div class="film-gap" aria-hidden="true"></div>
 
-  <!-- ══ SECTION 4 — ABOUT ══════════════════════════════════════ -->
+  <!-- ══ SECTION 4 — ABOUT ══ -->
   <div class="scroll-section" data-index="3" id="sec-about">
     <div class="scroll-sticky">
       <div class="scroll-zoom" id="zoom-3">
@@ -665,33 +533,33 @@
       </div>
     </div>
   </div>
-  <div class="film-gap" aria-hidden="true"></div>
 
-  <!-- ══ SECTION 5 — SERVICES ══════════════════════════════════ -->
-  <section class="static-section" id="sec-services">
-    <div class="section-bg" style="background-image:url('https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=1600&q=80&fit=crop');filter:brightness(0.35) saturate(0.7)"></div>
-    <div class="section-overlay" style="background:rgba(8,6,4,0.55)"></div>
-    <div class="static-content">
-      <div class="section-eyebrow" style="justify-content:center;opacity:1;transform:none;">What We Offer</div>
-      <h2 class="section-title-big" style="font-size:clamp(36px,4vw,64px);margin-bottom:48px;opacity:1;transform:none;">Every Occasion,<br><em>Immortalized</em></h2>
-      <div class="services-inner">
-        <div class="svc-card"><div class="svc-num">01</div><div class="svc-name">Weddings &amp; <em>Prenuptials</em></div><p class="svc-desc">Full-day coverage, cinematic precision. Bespoke prenup locations.</p></div>
-        <div class="svc-card"><div class="svc-num">02</div><div class="svc-name">Portraits &amp; <em>Headshots</em></div><p class="svc-desc">Studio and outdoor — individuals, couples, families, and corporate.</p></div>
-        <div class="svc-card"><div class="svc-num">03</div><div class="svc-name">Events &amp; <em>Celebrations</em></div><p class="svc-desc">Birthdays, debut balls, anniversaries, corporate gatherings.</p></div>
-        <div class="svc-card"><div class="svc-num">04</div><div class="svc-name">Maternity &amp; <em>Newborn</em></div><p class="svc-desc">Gentle sessions capturing the magic of new life.</p></div>
-        <div class="svc-card"><div class="svc-num">05</div><div class="svc-name">Family &amp; <em>Lifestyle</em></div><p class="svc-desc">Relaxed, authentic sessions — in-home or outdoors.</p></div>
-        <div class="svc-card"><div class="svc-num">06</div><div class="svc-name">Commercial &amp; <em>Editorial</em></div><p class="svc-desc">Brand photography, product campaigns, editorial spreads.</p></div>
+  <!-- ══ SECTION 5 — TESTIMONIALS ══ -->
+  <section id="sec-testimonials">
+    <div class="section-bg"></div>
+    <div class="section-overlay"></div>
+
+    <!-- Floating background images — JS will animate these -->
+    <div class="t-float-bg" id="tFloatBg">
+      <div class="t-float-img" id="fi0" style="width:260px;height:180px;left:4%;top:8%;">
+        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=400&q=70&fit=crop" alt="" />
+      </div>
+      <div class="t-float-img" id="fi1" style="width:200px;height:260px;right:6%;top:5%;">
+        <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=400&q=70&fit=crop" alt="" />
+      </div>
+      <div class="t-float-img" id="fi2" style="width:220px;height:160px;left:2%;bottom:10%;">
+        <img src="https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=400&q=70&fit=crop" alt="" />
+      </div>
+      <div class="t-float-img" id="fi3" style="width:180px;height:240px;right:3%;bottom:8%;">
+        <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=400&q=70&fit=crop" alt="" />
+      </div>
+      <div class="t-float-img" id="fi4" style="width:150px;height:150px;left:50%;top:4%;transform-origin:center center;">
+        <img src="https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=400&q=70&fit=crop" alt="" />
       </div>
     </div>
-  </section>
-  <div class="film-gap" aria-hidden="true"></div>
 
-  <!-- ══ SECTION 6 — TESTIMONIALS ══════════════════════════════ -->
-  <section class="static-section" id="sec-testimonials">
-    <div class="section-bg" style="background-image:url('https://images.unsplash.com/photo-1520854221256-17451cc331bf?w=1600&q=80&fit=crop');filter:brightness(0.4) saturate(0.75)"></div>
-    <div class="section-overlay" style="background:rgba(8,6,4,0.6)"></div>
     <div class="static-content">
-      <div class="section-eyebrow" style="justify-content:center;opacity:1;transform:none;">Kind Words</div>
+      <div class="section-eyebrow-static">Kind Words</div>
       <h2 class="section-title-big" style="font-size:clamp(36px,4vw,64px);margin-bottom:48px;opacity:1;transform:none;">What <em>Couples</em> Say</h2>
       <div class="testimonials-inner">
         <div class="t-card">
@@ -712,49 +580,13 @@
       </div>
     </div>
   </section>
-  <div class="film-gap" aria-hidden="true"></div>
 
-  <!-- ══ SECTION 7 — CONTACT ════════════════════════════════════ -->
-  <section class="static-section" id="sec-contact">
-    <div class="section-bg" style="background-image:url('https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=1600&q=80&fit=crop');filter:brightness(0.35) saturate(0.65)"></div>
-    <div class="section-overlay" style="background:rgba(8,6,4,0.65)"></div>
-    <div class="static-content">
-      <div class="section-eyebrow" style="justify-content:center;opacity:1;transform:none;">Get In Touch</div>
-      <h2 class="section-title-big" style="font-size:clamp(36px,4vw,72px);margin-bottom:40px;opacity:1;transform:none;">Let's Create<br><em>Something</em> Beautiful</h2>
-
-      <!-- novalidate + no action = page NEVER navigates away; JS handles everything -->
-      <form class="contact-inner" id="contactForm" novalidate>
-        <div class="form-row">
-          <input class="form-input" type="text"  name="name"         placeholder="Your Name"      />
-          <input class="form-input" type="email" name="email"        placeholder="Email Address"  />
-        </div>
-        <div class="form-row">
-          <input class="form-input" type="tel"   name="phone"        placeholder="Phone Number"   />
-          <input class="form-input" type="text"  name="date"         placeholder="Event Date"     />
-        </div>
-        <select class="form-select" name="session_type">
-          <option value="" disabled selected>Type of Session</option>
-          <option>Wedding Photography</option>
-          <option>Prenuptial Session</option>
-          <option>Portrait Session</option>
-          <option>Event Coverage</option>
-          <option>Maternity / Newborn</option>
-          <option>Family Session</option>
-          <option>Commercial / Editorial</option>
-        </select>
-        <textarea class="form-input" name="message" placeholder="Tell us about your vision..."></textarea>
-        <button type="submit" class="form-submit" id="formSubmit">Send Inquiry</button>
-      </form>
-    </div>
-  </section>
-
-  <!-- ══ MARQUEE ════════════════════════════════════════════════ -->
+  <!-- ══ MARQUEE ══ -->
   <section class="marquee-section">
     <div class="marquee-header">
       <div class="marquee-tag">Captured Moments</div>
       <h2 class="marquee-title">From Our <em>Clients</em></h2>
     </div>
-    <!-- Row 1 -->
     <div class="marquee-track-wrap">
       <div class="marquee-track">
         <div class="marquee-photo"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=640&q=75&fit=crop" alt="Wedding"><div class="photo-label">Andrea &amp; Luis · Wedding</div></div>
@@ -764,6 +596,7 @@
         <div class="marquee-photo"><img src="https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=640&q=75&fit=crop" alt="Family"><div class="photo-label">Carla &amp; James · Family</div></div>
         <div class="marquee-photo"><img src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?w=640&q=75&fit=crop" alt="Event"><div class="photo-label">The Rivera Debut · Event</div></div>
         <div class="marquee-photo"><img src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=640&q=75&fit=crop" alt="Wedding 2"><div class="photo-label">Miguel &amp; Claire · Wedding</div></div>
+        <!-- duplicates for seamless loop -->
         <div class="marquee-photo"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=640&q=75&fit=crop" alt="Wedding"><div class="photo-label">Andrea &amp; Luis · Wedding</div></div>
         <div class="marquee-photo"><img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=640&q=75&fit=crop" alt="Prenuptial"><div class="photo-label">Marco &amp; Bea · Prenuptial</div></div>
         <div class="marquee-photo"><img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=640&q=75&fit=crop" alt="Portrait"><div class="photo-label">Sofia R. · Portrait</div></div>
@@ -773,7 +606,6 @@
         <div class="marquee-photo"><img src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=640&q=75&fit=crop" alt="Wedding 2"><div class="photo-label">Miguel &amp; Claire · Wedding</div></div>
       </div>
     </div>
-    <!-- Row 2 reverse -->
     <div class="marquee-track-wrap">
       <div class="marquee-track reverse">
         <div class="marquee-photo"><img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=640&q=75&fit=crop" alt="Prenup 2"><div class="photo-label">Nico &amp; Dana · Prenuptial</div></div>
@@ -783,6 +615,7 @@
         <div class="marquee-photo"><img src="https://images.unsplash.com/photo-1525267219888-bb077b8792cc?w=640&q=75&fit=crop" alt="Event 2"><div class="photo-label">Garcia Anniversary · Event</div></div>
         <div class="marquee-photo"><img src="https://images.unsplash.com/photo-1524824267900-2b39b93f98f4?w=640&q=75&fit=crop" alt="Debut"><div class="photo-label">Isabelle's Debut · 2024</div></div>
         <div class="marquee-photo"><img src="https://images.unsplash.com/photo-1532712938310-34cb3982ef74?w=640&q=75&fit=crop" alt="Couple"><div class="photo-label">Ryan &amp; Lea · Prenuptial</div></div>
+        <!-- duplicates -->
         <div class="marquee-photo"><img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=640&q=75&fit=crop" alt="Prenup 2"><div class="photo-label">Nico &amp; Dana · Prenuptial</div></div>
         <div class="marquee-photo"><img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=640&q=75&fit=crop" alt="Wedding 3"><div class="photo-label">Paolo &amp; Mia · Wedding</div></div>
         <div class="marquee-photo"><img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=640&q=75&fit=crop" alt="Portrait 2"><div class="photo-label">The Tan Family · Portrait</div></div>
@@ -817,21 +650,19 @@
   </footer>
 
   <script>
-    // ─── HAMBURGER MENU ───────────────────────────────────────────────────────
+    // ─── HAMBURGER ───────────────────────────────────────────────
     var hamburger  = document.getElementById('navHamburger');
     var mobileMenu = document.getElementById('navMobileMenu');
     var menuLinks  = document.querySelectorAll('.menu-link');
     var closeBtn   = document.getElementById('menuCloseBtn');
-
     function openMenu()  { hamburger.classList.add('open');    mobileMenu.classList.add('open');    document.body.style.overflow = 'hidden'; }
     function closeMenu() { hamburger.classList.remove('open'); mobileMenu.classList.remove('open'); document.body.style.overflow = ''; }
-
     hamburger.addEventListener('click', function() { hamburger.classList.contains('open') ? closeMenu() : openMenu(); });
     closeBtn.addEventListener('click', closeMenu);
     menuLinks.forEach(function(link) { link.addEventListener('click', closeMenu); });
     document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeMenu(); });
 
-    // ─── CUSTOM CURSOR ────────────────────────────────────────────────────────
+    // ─── CUSTOM CURSOR ───────────────────────────────────────────
     var cursor     = document.getElementById('cursor');
     var cursorRing = document.getElementById('cursorRing');
     var mx = 0, my = 0, rx = 0, ry = 0;
@@ -857,87 +688,13 @@
       });
     });
 
-    // ─── NAV SCROLL ──────────────────────────────────────────────────────────
+    // ─── NAV SCROLL ──────────────────────────────────────────────
     var mainNav = document.getElementById('mainNav');
     window.addEventListener('scroll', function() {
       mainNav.classList.toggle('scrolled', window.scrollY > 60);
     }, { passive: true });
 
-    // ─── CONTACT FORM — FORMSPREE, NO PAGE RELOAD ────────────────────────────
-    var contactForm = document.getElementById('contactForm');
-    var submitBtn   = document.getElementById('formSubmit');
-
-    // Hard-block any native form submission at the DOM level
-    contactForm.onsubmit = function() { return false; };
-
-    contactForm.addEventListener('submit', function(e) {
-      // Stop the event every possible way
-      e.preventDefault();
-      e.stopPropagation();
-      e.stopImmediatePropagation();
-
-      // Basic validation — name and email required
-      var nameVal  = contactForm.querySelector('[name="name"]').value.trim();
-      var emailVal = contactForm.querySelector('[name="email"]').value.trim();
-
-      if (!nameVal || !emailVal) {
-        submitBtn.textContent      = 'Please fill in Name & Email';
-        submitBtn.style.background = '#7a5030';
-        setTimeout(function() {
-          submitBtn.textContent      = 'Send Inquiry';
-          submitBtn.style.background = '';
-        }, 3000);
-        return false;
-      }
-
-      // Sending state
-      submitBtn.textContent = 'Sending\u2026';
-      submitBtn.disabled    = true;
-
-      // POST to Formspree via fetch — no navigation, no reload
-      fetch('https://formspree.io/f/mnjkjbly', {
-        method:  'POST',
-        body:    new FormData(contactForm),
-        headers: { 'Accept': 'application/json' }
-      })
-      .then(function(res) {
-        if (res.ok) {
-          submitBtn.textContent      = 'Message Sent \u2713';
-          submitBtn.style.background = '#5c7d62';
-          contactForm.reset();
-          setTimeout(function() {
-            submitBtn.textContent      = 'Send Inquiry';
-            submitBtn.style.background = '';
-            submitBtn.disabled         = false;
-          }, 4000);
-        } else {
-          return res.json().then(function(data) {
-            throw new Error(data && data.error ? data.error : 'server error');
-          });
-        }
-      })
-      .catch(function() {
-        submitBtn.textContent      = 'Failed \u2014 Try Again';
-        submitBtn.style.background = '#8b4040';
-        submitBtn.disabled         = false;
-        setTimeout(function() {
-          submitBtn.textContent      = 'Send Inquiry';
-          submitBtn.style.background = '';
-        }, 4000);
-      });
-
-      return false; // belt-and-suspenders
-    }, false);
-
-    // tel/mailto — handle natively without preview-env issues
-    document.querySelectorAll('a[href^="tel:"], a[href^="mailto:"]').forEach(function(link) {
-      link.addEventListener('click', function(e) {
-        e.preventDefault();
-        window.location.href = this.href;
-      });
-    });
-
-    // ─── CAMERA ZOOM ENGINE ──────────────────────────────────────────────────
+    // ─── CAMERA ZOOM ENGINE ──────────────────────────────────────
     var SECTIONS      = document.querySelectorAll('.scroll-section');
     var N             = SECTIONS.length;
     var HUD           = document.getElementById('camHud');
@@ -961,6 +718,46 @@
     function easeIn3(t)  { return t * t * t; }
 
     var activeIdx = -1;
+
+    // ─── FLOATING IMAGE ANIMATION ─────────────────────────────────
+    // Each floater has its own stagger offset so they don't all arrive at once
+    var floaters = [
+      { el: document.getElementById('fi0'), delay: 0.00 },
+      { el: document.getElementById('fi1'), delay: 0.08 },
+      { el: document.getElementById('fi2'), delay: 0.14 },
+      { el: document.getElementById('fi3'), delay: 0.06 },
+      { el: document.getElementById('fi4'), delay: 0.11 }
+    ];
+    var tSection = document.getElementById('sec-testimonials');
+
+    function getTestimonialsProgress() {
+      if (!tSection) return 0;
+      var rect     = tSection.getBoundingClientRect();
+      var vH       = window.innerHeight;
+      // 0 = section just entered viewport bottom, 1 = section top at viewport top
+      var raw = 1 - (rect.top / vH);
+      return Math.max(0, Math.min(1, raw));
+    }
+
+    function animateFloaters(p) {
+      floaters.forEach(function(f) {
+        if (!f.el) return;
+        // Each floater starts its reveal slightly later
+        var localP = Math.max(0, Math.min(1, (p - f.delay) / (1 - f.delay)));
+        var eased  = easeOut3(localP);
+
+        var scale  = 0.45 + eased * 0.6;          // 0.45 → 1.05
+        var blur   = 14  * (1 - eased);            // 14px → 0px
+        var sat    = 0.4 + eased * 0.65;           // 0.4 → 1.05
+        var op     = Math.min(1, eased * 2.2);     // fades in faster, caps at 1
+
+        // Apply — read existing left/top/width/height from inline style, only touch filter/opacity/scale
+        f.el.style.opacity = op.toFixed(3);
+        f.el.style.filter  = 'blur(' + blur.toFixed(2) + 'px) saturate(' + sat.toFixed(2) + ')';
+        // Scale via transform without clobbering left/top (use a wrapper scale)
+        f.el.style.transform = 'scale(' + scale.toFixed(3) + ')';
+      });
+    }
 
     function onScroll() {
       var scrollY    = window.scrollY;
@@ -1010,6 +807,9 @@
         var num = String(nowActive + 1).padStart(2, '0');
         COUNTER.innerHTML = '<span>' + num + '</span> / ' + String(N).padStart(2, '0');
       }
+
+      // Drive floating images
+      animateFloaters(getTestimonialsProgress());
     }
 
     window.addEventListener('scroll', onScroll, { passive: true });
