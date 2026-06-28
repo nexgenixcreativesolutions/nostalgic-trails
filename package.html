@@ -7,319 +7,139 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Syncopate:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --white: #ffffff;
-      --off-white: #f5f0e8;
-      --sage: #8aaa8e;
-      --sage-dark: #5c7d62;
-      --rose: #c4886e;
-      --rose-light: #d9a892;
-      --amber: #c8884a;
-      --amber-dark: #a06030;
-      --ink: #e8e0d4;
-      --text-muted: #786e64;
+      --white: #ffffff; --off-white: #f5f0e8;
+      --sage: #8aaa8e; --sage-dark: #5c7d62;
+      --rose: #c4886e; --rose-light: #d9a892;
+      --amber: #c8884a; --amber-dark: #a06030;
+      --ink: #e8e0d4; --text-muted: #786e64;
     }
-
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html, body { width: 100%; overflow-x: hidden; }
-    body {
-      background-color: #0d0b09;
-      color: var(--ink);
-      font-family: 'DM Sans', sans-serif;
-      min-height: 100vh;
-    }
+    body { background-color: #0d0b09; color: var(--ink); font-family: 'DM Sans', sans-serif; min-height: 100vh; }
 
-    /* ─── NOISE ─── */
-    .noise {
-      position: fixed; inset: 0; z-index: 2; pointer-events: none;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
-      opacity: 0.5;
-    }
+    .noise { position: fixed; inset: 0; z-index: 2; pointer-events: none; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E"); opacity: 0.5; }
 
-    /* ─── NAV ─── */
-    #mainNav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-      display: flex; align-items: center; padding: 24px 48px;
-      transition: background 0.4s ease, padding 0.4s ease;
-    }
-    #mainNav.scrolled {
-      background: rgba(13,11,9,0.95);
-      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-      padding: 14px 48px; border-bottom: 1px solid rgba(122,158,135,0.15);
-    }
-    .nav-logo {
-      font-family: 'Syncopate', sans-serif; font-size: 11px;
-      letter-spacing: 0.22em; text-transform: uppercase;
-      color: var(--white); text-decoration: none; line-height: 1.55;
-      flex-shrink: 0; white-space: nowrap;
-    }
+    /* NAV */
+    #mainNav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; display: flex; align-items: center; padding: 24px 48px; transition: background 0.4s, padding 0.4s; }
+    #mainNav.scrolled { background: rgba(13,11,9,0.95); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); padding: 14px 48px; border-bottom: 1px solid rgba(122,158,135,0.15); }
+    .nav-logo { font-family: 'Syncopate', sans-serif; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--white); text-decoration: none; line-height: 1.55; white-space: nowrap; }
     .nav-logo span { display: block; color: var(--sage); font-size: 7.5px; letter-spacing: 0.3em; margin-top: 3px; }
-    .nav-back {
-      margin-left: auto;
-      font-family: 'DM Sans', sans-serif; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase;
-      color: rgba(232,224,212,0.6); text-decoration: none;
-      display: flex; align-items: center; gap: 8px; transition: color 0.3s, gap 0.3s;
-    }
+    .nav-back { margin-left: auto; font-family: 'DM Sans', sans-serif; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(232,224,212,0.6); text-decoration: none; display: flex; align-items: center; gap: 8px; transition: color 0.3s, gap 0.3s; }
     .nav-back::before { content: '←'; color: var(--amber); }
     .nav-back:hover { color: var(--off-white); gap: 12px; }
 
-    /* ─── HERO BANNER ─── */
-    .page-hero {
-      position: relative; min-height: 42vh; display: flex; align-items: flex-end;
-      padding: 120px 60px 64px; overflow: hidden;
-    }
-    .page-hero-bg {
-      position: absolute; inset: 0;
-      background-image: url('https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=1600&q=80&fit=crop');
-      background-size: cover; background-position: center top;
-      filter: brightness(0.28) saturate(0.6);
-    }
-    .page-hero-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(13,11,9,1) 0%, rgba(13,11,9,0.3) 60%, rgba(13,11,9,0.55) 100%);
-    }
+    /* HERO */
+    .page-hero { position: relative; min-height: 40vh; display: flex; align-items: flex-end; padding: 120px 60px 64px; overflow: hidden; }
+    .page-hero-bg { position: absolute; inset: 0; background-image: url('https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=1600&q=80&fit=crop'); background-size: cover; background-position: center top; filter: brightness(0.26) saturate(0.6); }
+    .page-hero-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(13,11,9,1) 0%, rgba(13,11,9,0.3) 60%, rgba(13,11,9,0.55) 100%); }
     .page-hero-content { position: relative; z-index: 2; }
-    .page-eyebrow {
-      font-family: 'DM Sans', sans-serif; font-size: 10px;
-      letter-spacing: 0.5em; text-transform: uppercase; color: var(--rose-light);
-      margin-bottom: 16px; display: flex; align-items: center; gap: 14px;
-    }
+    .page-eyebrow { font-family: 'DM Sans', sans-serif; font-size: 10px; letter-spacing: 0.5em; text-transform: uppercase; color: var(--rose-light); margin-bottom: 16px; display: flex; align-items: center; gap: 14px; }
     .page-eyebrow::before { content: ''; width: 32px; height: 1px; background: var(--rose); }
-    .page-title {
-      font-family: 'Cormorant Garamond', serif; font-size: clamp(44px, 6vw, 96px);
-      font-weight: 300; line-height: 0.93; color: var(--white);
-    }
+    .page-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(44px,6vw,96px); font-weight: 300; line-height: 0.93; color: var(--white); }
     .page-title em { font-style: italic; color: var(--off-white); }
-    .page-subtitle {
-      font-size: 14px; color: rgba(255,255,255,0.55); line-height: 1.8;
-      margin-top: 20px; max-width: 480px;
-    }
+    .page-subtitle { font-size: 14px; color: rgba(255,255,255,0.5); margin-top: 20px; max-width: 520px; line-height: 1.8; }
 
-    /* ─── PACKAGES SECTION ─── */
-    .packages-section {
+    /* WHAT WE DO blurb */
+    .philosophy-strip {
       position: relative; z-index: 3;
-      padding: 72px 48px 100px;
+      max-width: 900px; margin: 0 auto;
+      padding: 64px 60px 0;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 40px;
     }
+    .phil-block {}
+    .phil-label { font-family: 'DM Sans', sans-serif; font-size: 9px; letter-spacing: 0.45em; text-transform: uppercase; color: var(--rose-light); margin-bottom: 12px; }
+    .phil-text { font-family: 'Cormorant Garamond', serif; font-size: clamp(17px,1.5vw,22px); font-weight: 300; line-height: 1.65; color: rgba(255,255,255,0.72); font-style: italic; }
 
-    /* ─── PACKAGE CARDS ─── */
-    .packages-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 1px; background: rgba(255,255,255,0.07);
-      max-width: 1100px; margin: 0 auto;
-    }
+    /* CATEGORY TABS */
+    .cat-tabs { position: relative; z-index: 3; padding: 64px 60px 0; display: flex; gap: 4px; flex-wrap: wrap; }
+    .cat-tab { font-family: 'DM Sans', sans-serif; font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255,255,255,0.45); background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); padding: 10px 24px; cursor: pointer; transition: all 0.3s; }
+    .cat-tab:hover { color: var(--off-white); border-color: rgba(255,255,255,0.2); }
+    .cat-tab.active { color: var(--white); background: rgba(160,96,48,0.18); border-color: var(--amber-dark); }
 
-    .pkg-card {
-      background: rgba(255,255,255,0.03);
-      padding: 48px 36px 52px;
-      display: flex; flex-direction: column;
-      transition: background 0.35s ease;
-      position: relative; overflow: hidden;
-    }
+    /* PACKAGES AREA */
+    .packages-area { position: relative; z-index: 3; padding: 40px 60px 80px; }
+
+    /* Each category group */
+    .pkg-category { display: none; }
+    .pkg-category.visible { display: block; }
+
+    .cat-header { margin-bottom: 36px; }
+    .cat-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(32px,3.5vw,56px); font-weight: 300; color: var(--white); line-height: 1; }
+    .cat-title em { font-style: italic; }
+    .cat-desc { font-size: 13px; color: rgba(255,255,255,0.45); margin-top: 10px; max-width: 560px; line-height: 1.7; }
+
+    /* Package cards grid — 3 across max */
+    .pkg-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: rgba(255,255,255,0.07); }
+    .pkg-grid.two-col { grid-template-columns: repeat(2,1fr); max-width: 720px; }
+    .pkg-grid.one-col { grid-template-columns: 1fr; max-width: 400px; }
+
+    .pkg-card { background: rgba(255,255,255,0.03); padding: 44px 36px 48px; display: flex; flex-direction: column; transition: background 0.3s; position: relative; }
     .pkg-card:hover { background: rgba(255,255,255,0.07); }
+    .pkg-card.best { background: rgba(160,96,48,0.1); }
+    .pkg-card.best:hover { background: rgba(160,96,48,0.16); }
+    .pkg-card.best::after { content: 'Best Value'; position: absolute; top: 0; right: 0; font-family: 'Syncopate', sans-serif; font-size: 7px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--amber-dark); background: rgba(200,136,74,0.14); border-bottom: 1px solid rgba(200,136,74,0.3); border-left: 1px solid rgba(200,136,74,0.3); padding: 5px 12px; }
 
-    /* Featured card */
-    .pkg-card.featured {
-      background: rgba(160,96,48,0.1);
-    }
-    .pkg-card.featured:hover { background: rgba(160,96,48,0.16); }
-    .pkg-card.featured::before {
-      content: 'Most Popular';
-      position: absolute; top: 0; right: 0;
-      font-family: 'Syncopate', sans-serif; font-size: 7px; letter-spacing: 0.3em;
-      text-transform: uppercase; color: var(--amber-dark);
-      background: rgba(200,136,74,0.15); border-bottom: 1px solid rgba(200,136,74,0.3); border-left: 1px solid rgba(200,136,74,0.3);
-      padding: 6px 12px;
-    }
+    .pkg-tier { font-family: 'DM Sans', sans-serif; font-size: 9px; letter-spacing: 0.45em; text-transform: uppercase; color: var(--rose-light); margin-bottom: 14px; }
+    .pkg-name { font-family: 'Cormorant Garamond', serif; font-size: clamp(26px,2.2vw,42px); font-weight: 300; color: var(--white); line-height: 1.05; margin-bottom: 22px; padding-bottom: 22px; border-bottom: 1px solid rgba(255,255,255,0.07); }
+    .pkg-name em { font-style: italic; }
 
-    .pkg-tier {
-      font-family: 'DM Sans', sans-serif; font-size: 9px;
-      letter-spacing: 0.45em; text-transform: uppercase; color: var(--rose-light);
-      margin-bottom: 16px;
-    }
-    .pkg-name {
-      font-family: 'Cormorant Garamond', serif; font-size: clamp(30px, 2.5vw, 48px);
-      font-weight: 300; color: var(--white); line-height: 1; margin-bottom: 6px;
-    }
-    .pkg-name em { font-style: italic; color: var(--off-white); }
-    .pkg-tagline {
-      font-size: 12px; color: rgba(255,255,255,0.4); letter-spacing: 0.08em;
-      margin-bottom: 32px; padding-bottom: 32px;
-      border-bottom: 1px solid rgba(255,255,255,0.07);
-    }
+    .pkg-price { display: flex; align-items: baseline; gap: 4px; margin-bottom: 4px; }
+    .pkg-currency { font-family: 'DM Sans', sans-serif; font-size: 13px; color: rgba(255,255,255,0.45); align-self: flex-start; margin-top: 6px; }
+    .pkg-amount { font-family: 'Cormorant Garamond', serif; font-size: clamp(36px,3.2vw,58px); font-weight: 300; color: var(--white); line-height: 1; }
+    .pkg-note { font-size: 10px; color: rgba(255,255,255,0.28); letter-spacing: 0.1em; margin-bottom: 28px; }
 
-    .pkg-price {
-      display: flex; align-items: baseline; gap: 6px;
-      margin-bottom: 8px;
-    }
-    .pkg-currency {
-      font-family: 'DM Sans', sans-serif; font-size: 14px;
-      color: rgba(255,255,255,0.5); align-self: flex-start; margin-top: 8px;
-    }
-    .pkg-amount {
-      font-family: 'Cormorant Garamond', serif; font-size: clamp(40px, 3.5vw, 64px);
-      font-weight: 300; color: var(--white); line-height: 1;
-    }
-    .pkg-unit {
-      font-size: 11px; color: rgba(255,255,255,0.35); letter-spacing: 0.15em;
-    }
-    .pkg-price-note {
-      font-size: 10px; color: rgba(255,255,255,0.3); letter-spacing: 0.1em;
-      margin-bottom: 36px;
-    }
+    .pkg-features { list-style: none; flex: 1; display: flex; flex-direction: column; gap: 11px; margin-bottom: 36px; }
+    .pkg-features li { display: flex; align-items: flex-start; gap: 11px; font-size: 13px; color: rgba(255,255,255,0.62); line-height: 1.45; }
+    .pkg-features li::before { content: ''; flex-shrink: 0; width: 5px; height: 5px; border-radius: 50%; background: var(--sage); margin-top: 5px; }
 
-    .pkg-features {
-      list-style: none; flex: 1;
-      display: flex; flex-direction: column; gap: 13px;
-      margin-bottom: 40px;
-    }
-    .pkg-features li {
-      display: flex; align-items: flex-start; gap: 12px;
-      font-size: 13px; color: rgba(255,255,255,0.65); line-height: 1.5;
-    }
-    .pkg-features li::before {
-      content: ''; flex-shrink: 0;
-      width: 5px; height: 5px; border-radius: 50%;
-      background: var(--sage); margin-top: 6px;
-    }
-    .pkg-features li.muted { color: rgba(255,255,255,0.28); }
-    .pkg-features li.muted::before { background: rgba(255,255,255,0.15); }
+    .pkg-cta { font-family: 'Syncopate', sans-serif; font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--white); background: transparent; border: 1px solid rgba(255,255,255,0.18); padding: 14px 28px; text-decoration: none; display: block; text-align: center; transition: all 0.3s; }
+    .pkg-cta:hover { border-color: var(--amber); background: rgba(160,96,48,0.14); }
+    .pkg-card.best .pkg-cta { background: var(--amber-dark); border-color: var(--amber-dark); }
+    .pkg-card.best .pkg-cta:hover { background: var(--amber); border-color: var(--amber); }
 
-    .pkg-cta {
-      font-family: 'Syncopate', sans-serif; font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase;
-      color: var(--white); background: transparent;
-      border: 1px solid rgba(255,255,255,0.2);
-      padding: 14px 28px; text-decoration: none; display: block; text-align: center;
-      transition: all 0.3s;
-    }
-    .pkg-cta:hover { border-color: var(--amber); background: rgba(160,96,48,0.15); }
-    .pkg-card.featured .pkg-cta {
-      background: var(--amber-dark); border-color: var(--amber-dark);
-    }
-    .pkg-card.featured .pkg-cta:hover { background: var(--amber); border-color: var(--amber); }
-
-    /* ─── ADD-ONS ─── */
-    .addons-section {
-      position: relative; z-index: 3;
-      padding: 0 48px 100px;
-    }
-    .addons-label {
-      font-family: 'DM Sans', sans-serif; font-size: 9px;
-      letter-spacing: 0.45em; text-transform: uppercase; color: var(--rose-light);
-      text-align: center; margin-bottom: 16px;
-    }
-    .addons-heading {
-      font-family: 'Cormorant Garamond', serif; font-size: clamp(30px, 3vw, 52px);
-      font-weight: 300; color: var(--white); text-align: center; line-height: 1.1;
-      margin-bottom: 48px;
-    }
-    .addons-heading em { font-style: italic; }
-    .addons-grid {
-      display: grid; grid-template-columns: repeat(4, 1fr);
-      gap: 1px; background: rgba(255,255,255,0.07);
-      max-width: 1100px; margin: 0 auto 64px;
-    }
-    .addon-item {
-      background: rgba(255,255,255,0.03); padding: 32px 28px;
-      transition: background 0.3s;
-    }
-    .addon-item:hover { background: rgba(255,255,255,0.07); }
-    .addon-name {
-      font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 300;
-      color: var(--white); margin-bottom: 8px;
-    }
-    .addon-name em { font-style: italic; }
-    .addon-desc { font-size: 12px; color: rgba(255,255,255,0.45); line-height: 1.65; margin-bottom: 16px; }
-    .addon-price {
-      font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 300;
-      color: var(--rose-light);
-    }
-
-    /* ─── FAQ STRIP ─── */
-    .faq-section {
-      position: relative; z-index: 3;
-      padding: 0 48px 100px; max-width: 900px; margin: 0 auto;
-    }
-    .faq-label {
-      font-family: 'DM Sans', sans-serif; font-size: 9px;
-      letter-spacing: 0.45em; text-transform: uppercase; color: var(--rose-light);
-      margin-bottom: 48px; display: flex; align-items: center; gap: 14px;
-    }
+    /* FAQ */
+    .faq-section { position: relative; z-index: 3; padding: 0 60px 80px; max-width: 860px; }
+    .faq-label { font-family: 'DM Sans', sans-serif; font-size: 9px; letter-spacing: 0.45em; text-transform: uppercase; color: var(--rose-light); margin-bottom: 36px; display: flex; align-items: center; gap: 14px; }
     .faq-label::before { content: ''; width: 32px; height: 1px; background: var(--rose); }
-    .faq-item {
-      border-bottom: 1px solid rgba(255,255,255,0.07);
-      padding: 28px 0;
-    }
+    .faq-item { border-bottom: 1px solid rgba(255,255,255,0.07); padding: 24px 0; }
     .faq-item:first-of-type { border-top: 1px solid rgba(255,255,255,0.07); }
-    .faq-q {
-      font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 300;
-      color: var(--white); cursor: pointer; display: flex; justify-content: space-between;
-      align-items: center; gap: 16px; user-select: none;
-    }
-    .faq-q::after {
-      content: '+'; font-family: 'DM Sans', sans-serif; font-size: 20px; font-weight: 300;
-      color: var(--amber); flex-shrink: 0; transition: transform 0.3s ease;
-    }
+    .faq-q { font-family: 'Cormorant Garamond', serif; font-size: 19px; font-weight: 300; color: var(--white); cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 16px; user-select: none; }
+    .faq-q::after { content: '+'; font-family: 'DM Sans', sans-serif; font-size: 20px; font-weight: 300; color: var(--amber); flex-shrink: 0; transition: transform 0.3s; }
     .faq-item.open .faq-q::after { transform: rotate(45deg); }
-    .faq-a {
-      font-size: 13px; line-height: 1.85; color: rgba(255,255,255,0.55);
-      max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.3s ease;
-    }
-    .faq-item.open .faq-a { max-height: 200px; padding-top: 16px; }
+    .faq-a { font-size: 13px; line-height: 1.85; color: rgba(255,255,255,0.5); max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.3s; }
+    .faq-item.open .faq-a { max-height: 220px; padding-top: 14px; }
 
-    /* ─── CTA STRIP ─── */
-    .cta-strip {
-      position: relative; z-index: 3;
-      background: rgba(255,255,255,0.025); border-top: 1px solid rgba(122,158,135,0.1);
-      padding: 72px 48px; text-align: center;
-    }
-    .cta-heading {
-      font-family: 'Cormorant Garamond', serif; font-size: clamp(32px, 3.5vw, 60px);
-      font-weight: 300; color: var(--white); margin-bottom: 12px;
-    }
+    /* CTA STRIP */
+    .cta-strip { position: relative; z-index: 3; background: rgba(255,255,255,0.025); border-top: 1px solid rgba(122,158,135,0.1); padding: 72px 60px; text-align: center; }
+    .cta-heading { font-family: 'Cormorant Garamond', serif; font-size: clamp(32px,3.5vw,56px); font-weight: 300; color: var(--white); margin-bottom: 12px; }
     .cta-heading em { font-style: italic; }
-    .cta-sub { font-size: 14px; color: rgba(255,255,255,0.45); margin-bottom: 36px; }
-    .btn-primary {
-      font-family: 'Syncopate', sans-serif; font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase;
-      color: var(--off-white); background: var(--amber-dark); border: none; padding: 16px 44px;
-      cursor: pointer; transition: all 0.3s; text-decoration: none; display: inline-block;
-    }
+    .cta-sub { font-size: 14px; color: rgba(255,255,255,0.42); margin-bottom: 36px; }
+    .btn-primary { font-family: 'Syncopate', sans-serif; font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--off-white); background: var(--amber-dark); border: none; padding: 16px 44px; cursor: pointer; transition: all 0.3s; text-decoration: none; display: inline-block; }
     .btn-primary:hover { background: var(--amber); transform: translateY(-2px); }
 
-    /* ─── FOOTER ─── */
-    .site-footer {
-      background: #080605; border-top: 1px solid rgba(122,158,135,0.12);
-      padding: 36px 60px; display: flex; justify-content: space-between;
-      align-items: center; flex-wrap: wrap; gap: 16px; position: relative; z-index: 3;
-    }
+    /* FOOTER */
+    .site-footer { background: #080605; border-top: 1px solid rgba(122,158,135,0.12); padding: 36px 60px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; position: relative; z-index: 3; }
     .footer-brand { font-family: 'Syncopate', sans-serif; font-size: 10px; letter-spacing: 0.35em; color: var(--white); }
     .footer-brand span { display: block; color: var(--text-muted); font-size: 8px; margin-top: 4px; }
-    .footer-link {
-      font-size: 11px; color: rgba(255,255,255,0.4); text-decoration: none;
-      letter-spacing: 0.1em; transition: color 0.3s;
-    }
+    .footer-link { font-size: 11px; color: rgba(255,255,255,0.4); text-decoration: none; letter-spacing: 0.1em; transition: color 0.3s; }
     .footer-link:hover { color: var(--rose-light); }
 
-    /* ─── RESPONSIVE ─── */
-    @media (max-width: 1024px) {
-      .packages-grid { grid-template-columns: 1fr 1fr; }
-      .addons-grid { grid-template-columns: 1fr 1fr; }
-    }
-    @media (max-width: 768px) {
-      #mainNav { padding: 18px 20px; }
-      #mainNav.scrolled { padding: 12px 20px; }
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      #mainNav { padding: 18px 24px; } #mainNav.scrolled { padding: 12px 24px; }
       .page-hero { padding: 100px 24px 48px; }
-      .packages-section, .addons-section, .faq-section { padding-left: 20px; padding-right: 20px; }
-      .packages-grid { grid-template-columns: 1fr; }
-      .addons-grid { grid-template-columns: 1fr 1fr; }
+      .philosophy-strip { padding: 48px 24px 0; grid-template-columns: 1fr; gap: 24px; }
+      .cat-tabs { padding: 48px 24px 0; }
+      .packages-area { padding: 36px 24px 60px; }
+      .pkg-grid { grid-template-columns: 1fr !important; }
+      .pkg-grid.two-col, .pkg-grid.one-col { max-width: 100%; }
+      .faq-section { padding: 0 24px 60px; }
       .cta-strip { padding: 56px 24px; }
       .site-footer { padding: 32px 24px; flex-direction: column; gap: 12px; text-align: center; }
-    }
-    @media (max-width: 480px) {
-      .addons-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
-
   <div class="noise"></div>
 
   <nav id="mainNav">
@@ -327,169 +147,303 @@
     <a href="index.html" class="nav-back">Back to Home</a>
   </nav>
 
-  <!-- Hero -->
   <div class="page-hero">
     <div class="page-hero-bg"></div>
     <div class="page-hero-overlay"></div>
     <div class="page-hero-content">
       <div class="page-eyebrow">Investment</div>
       <h1 class="page-title">Choose Your<br><em>Chapter</em></h1>
-      <p class="page-subtitle">Every package is crafted to give your story the space it deserves — from intimate sessions to full cinematic coverage.</p>
+      <p class="page-subtitle">Every package is crafted around your story — real moments, no staging, no posing. Just us, you, and one beautiful day.</p>
     </div>
   </div>
 
-  <!-- Package Cards -->
-  <section class="packages-section">
-    <div class="packages-grid">
-
-      <!-- Keepsake -->
-      <div class="pkg-card">
-        <div class="pkg-tier">Package 01</div>
-        <div class="pkg-name"><em>Keepsake</em></div>
-        <div class="pkg-tagline">Essentials · Ideal for portraits &amp; intimate sessions</div>
-        <div class="pkg-price">
-          <span class="pkg-currency">₱</span>
-          <span class="pkg-amount">18,000</span>
-        </div>
-        <div class="pkg-price-note">Starting price · VAT inclusive</div>
-        <ul class="pkg-features">
-          <li>4-hour photo coverage</li>
-          <li>1 professional photographer</li>
-          <li>200+ edited digital photos</li>
-          <li>Private online gallery (30-day access)</li>
-          <li>Print-ready high-resolution files</li>
-          <li class="muted">Second shooter not included</li>
-          <li class="muted">Photo album not included</li>
-          <li class="muted">Same-day preview not included</li>
-        </ul>
-        <a href="contact.html" class="pkg-cta">Book Keepsake</a>
-      </div>
-
-      <!-- Heritage (featured) -->
-      <div class="pkg-card featured">
-        <div class="pkg-tier">Package 02</div>
-        <div class="pkg-name"><em>Heritage</em></div>
-        <div class="pkg-tagline">Signature · Full-day weddings &amp; prenuptials</div>
-        <div class="pkg-price">
-          <span class="pkg-currency">₱</span>
-          <span class="pkg-amount">38,000</span>
-        </div>
-        <div class="pkg-price-note">Starting price · VAT inclusive</div>
-        <ul class="pkg-features">
-          <li>8-hour photo coverage</li>
-          <li>2 professional photographers</li>
-          <li>500+ edited digital photos</li>
-          <li>Private online gallery (90-day access)</li>
-          <li>Print-ready high-resolution files</li>
-          <li>20-page premium photo album (8×10")</li>
-          <li>Same-day preview slideshow</li>
-          <li class="muted">Engagement session not included</li>
-        </ul>
-        <a href="contact.html" class="pkg-cta">Book Heritage</a>
-      </div>
-
-      <!-- Legacy -->
-      <div class="pkg-card">
-        <div class="pkg-tier">Package 03</div>
-        <div class="pkg-name"><em>Legacy</em></div>
-        <div class="pkg-tagline">Full Experience · For those who want everything</div>
-        <div class="pkg-price">
-          <span class="pkg-currency">₱</span>
-          <span class="pkg-amount">68,000</span>
-        </div>
-        <div class="pkg-price-note">Starting price · VAT inclusive</div>
-        <ul class="pkg-features">
-          <li>12-hour full photo coverage</li>
-          <li>2 photographers + 1 assistant</li>
-          <li>700+ edited digital photos</li>
-          <li>Private online gallery (permanent)</li>
-          <li>Print-ready high-resolution files</li>
-          <li>30-page luxury lay-flat album (12×12")</li>
-          <li>Same-day preview slideshow</li>
-          <li>Complimentary engagement session</li>
-        </ul>
-        <a href="contact.html" class="pkg-cta">Book Legacy</a>
-      </div>
-
+  <!-- Philosophy blurb from the PDF -->
+  <div class="philosophy-strip">
+    <div class="phil-block">
+      <div class="phil-label">What We Do</div>
+      <p class="phil-text">"We aim to tell your story with intention and empathy — to represent you as accurately as possible and convey something important through documentary photography."</p>
     </div>
-  </section>
+    <div class="phil-block">
+      <div class="phil-label">Creative Freedom</div>
+      <p class="phil-text">"Think of your session as a day trip — forget about cameras and lenses. We just want to witness real moments and spend the day with you."</p>
+    </div>
+  </div>
 
-  <!-- Add-ons -->
-  <section class="addons-section">
-    <div class="addons-label">Customize Your Package</div>
-    <h2 class="addons-heading">Optional <em>Add-ons</em></h2>
-    <div class="addons-grid">
-      <div class="addon-item">
-        <div class="addon-name">Extra <em>Hours</em></div>
-        <p class="addon-desc">Need more time? Extend your coverage seamlessly.</p>
-        <div class="addon-price">₱3,500 / hr</div>
+  <!-- Category tabs -->
+  <div class="cat-tabs" id="catTabs">
+    <button class="cat-tab active" data-cat="portrait">Individual Portrait</button>
+    <button class="cat-tab" data-cat="debut">Pre-Debut &amp; Debut</button>
+    <button class="cat-tab" data-cat="engagement">Engagement Session</button>
+    <button class="cat-tab" data-cat="wedding">Wedding</button>
+    <button class="cat-tab" data-cat="events">Birthdays &amp; Events</button>
+  </div>
+
+  <div class="packages-area">
+
+    <!-- ── INDIVIDUAL PORTRAIT ── -->
+    <div class="pkg-category visible" id="cat-portrait">
+      <div class="cat-header">
+        <h2 class="cat-title">Individual <em>Portrait</em></h2>
+        <p class="cat-desc">Studio and outdoor sessions — for individuals looking to capture their authentic self with intentional light and quiet composition.</p>
       </div>
-      <div class="addon-item">
-        <div class="addon-name">Second <em>Shooter</em></div>
-        <p class="addon-desc">An additional photographer for more angles and moments.</p>
-        <div class="addon-price">₱6,000</div>
-      </div>
-      <div class="addon-item">
-        <div class="addon-name">Fine Art <em>Prints</em></div>
-        <p class="addon-desc">Museum-quality prints in your choice of size and finish.</p>
-        <div class="addon-price">from ₱1,200</div>
-      </div>
-      <div class="addon-item">
-        <div class="addon-name">Rush <em>Delivery</em></div>
-        <p class="addon-desc">Receive your edited gallery within 7 days instead of 4–6 weeks.</p>
-        <div class="addon-price">₱4,500</div>
+      <div class="pkg-grid">
+        <div class="pkg-card best">
+          <div class="pkg-tier">Package A</div>
+          <div class="pkg-name">Full <em>Portrait</em></div>
+          <div class="pkg-price"><span class="pkg-currency">₱</span><span class="pkg-amount">10,000</span></div>
+          <div class="pkg-note">Natural &amp; Strobe Lighting</div>
+          <ul class="pkg-features">
+            <li>4-hour photo session</li>
+            <li>30 curated edited outputs</li>
+            <li>3 outfit changes</li>
+            <li>Natural and Strobe lighting</li>
+          </ul>
+          <a href="https://nexgenixcreativesolutions.github.io/nostalgic-trails#sec-contact" class="pkg-cta">Book Package A</a>
+        </div>
+        <div class="pkg-card">
+          <div class="pkg-tier">Package B</div>
+          <div class="pkg-name">Half-Day <em>Portrait</em></div>
+          <div class="pkg-price"><span class="pkg-currency">₱</span><span class="pkg-amount">7,500</span></div>
+          <div class="pkg-note">Natural Lighting</div>
+          <ul class="pkg-features">
+            <li>3.5-hour photo session</li>
+            <li>24 curated edited outputs</li>
+            <li>2 outfit changes</li>
+            <li>Natural lighting</li>
+          </ul>
+          <a href="https://nexgenixcreativesolutions.github.io/nostalgic-trails#sec-contact" class="pkg-cta">Book Package B</a>
+        </div>
+        <div class="pkg-card">
+          <div class="pkg-tier">Package C</div>
+          <div class="pkg-name">Express <em>Portrait</em></div>
+          <div class="pkg-price"><span class="pkg-currency">₱</span><span class="pkg-amount">5,000</span></div>
+          <div class="pkg-note">Natural Lighting</div>
+          <ul class="pkg-features">
+            <li>2.5-hour photo session</li>
+            <li>15 edited outputs</li>
+            <li>Natural lighting</li>
+          </ul>
+          <a href="https://nexgenixcreativesolutions.github.io/nostalgic-trails#sec-contact" class="pkg-cta">Book Package C</a>
+        </div>
       </div>
     </div>
-  </section>
+
+    <!-- ── PRE-DEBUT & DEBUT ── -->
+    <div class="pkg-category" id="cat-debut">
+      <div class="cat-header">
+        <h2 class="cat-title">Pre-Debut &amp; <em>Debut</em></h2>
+        <p class="cat-desc">From pre-debut sessions to full event coverage — celebrating your milestone with cinematic detail and emotional storytelling.</p>
+      </div>
+      <div class="pkg-grid">
+        <div class="pkg-card best">
+          <div class="pkg-tier">Package A</div>
+          <div class="pkg-name">Full <em>Debut</em> Experience</div>
+          <div class="pkg-price"><span class="pkg-currency">₱</span><span class="pkg-amount">35,000</span></div>
+          <div class="pkg-note">Strobe &amp; Natural Lighting</div>
+          <ul class="pkg-features">
+            <li>Pre-debut photo session</li>
+            <li>3 outfits, multi-location</li>
+            <li>40 edited outputs with slideshow</li>
+            <li>Whole-day event coverage</li>
+            <li>From make-up to after-party</li>
+            <li>Quick portrait session</li>
+            <li>Event details coverage</li>
+            <li>Strobe and Natural lighting</li>
+          </ul>
+          <a href="https://nexgenixcreativesolutions.github.io/nostalgic-trails#sec-contact" class="pkg-cta">Book Package A</a>
+        </div>
+        <div class="pkg-card">
+          <div class="pkg-tier">Package B</div>
+          <div class="pkg-name">Debut <em>Session</em></div>
+          <div class="pkg-price"><span class="pkg-currency">₱</span><span class="pkg-amount">15,000</span></div>
+          <div class="pkg-note">Strobe &amp; Natural Lighting</div>
+          <ul class="pkg-features">
+            <li>3.5-hour photo session</li>
+            <li>35 curated outputs</li>
+            <li>2 outfit changes</li>
+            <li>Strobe and Natural lighting</li>
+          </ul>
+          <a href="https://nexgenixcreativesolutions.github.io/nostalgic-trails#sec-contact" class="pkg-cta">Book Package B</a>
+        </div>
+        <div class="pkg-card">
+          <div class="pkg-tier">Package C</div>
+          <div class="pkg-name">Debut <em>Essentials</em></div>
+          <div class="pkg-price"><span class="pkg-currency">₱</span><span class="pkg-amount">10,000</span></div>
+          <div class="pkg-note">Natural Lighting · Within Cebu</div>
+          <ul class="pkg-features">
+            <li>2 outfit changes</li>
+            <li>Half-day session</li>
+            <li>Within Cebu shoot</li>
+            <li>24 curated outputs</li>
+            <li>Natural lighting</li>
+          </ul>
+          <a href="https://nexgenixcreativesolutions.github.io/nostalgic-trails#sec-contact" class="pkg-cta">Book Package C</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── ENGAGEMENT SESSION ── -->
+    <div class="pkg-category" id="cat-engagement">
+      <div class="cat-header">
+        <h2 class="cat-title">Engagement <em>Session</em></h2>
+        <p class="cat-desc">A day trip for two — forget the cameras and just be yourselves. We'll be there to document every real, unguarded moment.</p>
+      </div>
+      <div class="pkg-grid">
+        <div class="pkg-card best">
+          <div class="pkg-tier">Package A</div>
+          <div class="pkg-name">Full-Day <em>Engagement</em></div>
+          <div class="pkg-price"><span class="pkg-currency">₱</span><span class="pkg-amount">25,000</span></div>
+          <div class="pkg-note">With Strobe Lights &amp; Assistant</div>
+          <ul class="pkg-features">
+            <li>Whole-day session</li>
+            <li>3 outfit changes</li>
+            <li>Multi-location shoot</li>
+            <li>Strobe lights + 1 assistant</li>
+            <li>90 curated pictures</li>
+            <li>Soft copy delivery</li>
+            <li>10 printed photos</li>
+            <li>Slideshow included</li>
+          </ul>
+          <a href="https://nexgenixcreativesolutions.github.io/nostalgic-trails#sec-contact" class="pkg-cta">Book Package A</a>
+        </div>
+        <div class="pkg-card">
+          <div class="pkg-tier">Package B</div>
+          <div class="pkg-name">Half-Day <em>Engagement</em></div>
+          <div class="pkg-price"><span class="pkg-currency">₱</span><span class="pkg-amount">15,000</span></div>
+          <div class="pkg-note">Mixed Lighting</div>
+          <ul class="pkg-features">
+            <li>Half-day session</li>
+            <li>2 outfit changes</li>
+            <li>2 locations</li>
+            <li>Mixed lighting</li>
+            <li>75 curated photos</li>
+            <li>Soft copy delivery</li>
+            <li>Slideshow included</li>
+          </ul>
+          <a href="https://nexgenixcreativesolutions.github.io/nostalgic-trails#sec-contact" class="pkg-cta">Book Package B</a>
+        </div>
+        <div class="pkg-card">
+          <div class="pkg-tier">Package C</div>
+          <div class="pkg-name">City <em>Engagement</em></div>
+          <div class="pkg-price"><span class="pkg-currency">₱</span><span class="pkg-amount">10,000</span></div>
+          <div class="pkg-note">Natural Light · Within the City</div>
+          <ul class="pkg-features">
+            <li>Half-day session</li>
+            <li>1 outfit change</li>
+            <li>Within-city shoot</li>
+            <li>Natural light</li>
+            <li>50 curated pictures</li>
+            <li>Soft copy delivery</li>
+          </ul>
+          <a href="https://nexgenixcreativesolutions.github.io/nostalgic-trails#sec-contact" class="pkg-cta">Book Package C</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── WEDDING ── -->
+    <div class="pkg-category" id="cat-wedding">
+      <div class="cat-header">
+        <h2 class="cat-title"><em>Wedding</em></h2>
+        <p class="cat-desc">Full-event documentary coverage — from the quiet morning preparations to the last dance. Every vow, every tear, every laugh preserved as it happened.</p>
+      </div>
+      <div class="pkg-grid one-col">
+        <div class="pkg-card best">
+          <div class="pkg-tier">Package A</div>
+          <div class="pkg-name">Full <em>Wedding</em> Coverage</div>
+          <div class="pkg-price"><span class="pkg-currency">₱</span><span class="pkg-amount">35,000</span></div>
+          <div class="pkg-note">Starting price · Contact us for custom quotes</div>
+          <ul class="pkg-features">
+            <li>Full event coverage</li>
+            <li>600++ curated pictures</li>
+            <li>Soft copy delivery</li>
+            <li>Slideshow included</li>
+            <li>20 printed pictures</li>
+          </ul>
+          <a href="https://nexgenixcreativesolutions.github.io/nostalgic-trails#sec-contact" class="pkg-cta">Book Wedding Coverage</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── BIRTHDAYS / EVENTS ── -->
+    <div class="pkg-category" id="cat-events">
+      <div class="cat-header">
+        <h2 class="cat-title">Birthdays, Baptism,<br>Anniversary, <em>Proposal…</em></h2>
+        <p class="cat-desc">Life's smaller celebrations deserve to be remembered just as beautifully. Full event documentary coverage for every milestone.</p>
+      </div>
+      <div class="pkg-grid one-col">
+        <div class="pkg-card best">
+          <div class="pkg-tier">Package A</div>
+          <div class="pkg-name">Full <em>Event</em> Coverage</div>
+          <div class="pkg-price"><span class="pkg-currency">₱</span><span class="pkg-amount">10,000</span></div>
+          <div class="pkg-note">Contact us for event-specific details</div>
+          <ul class="pkg-features">
+            <li>Full event coverage</li>
+            <li>Curated pictures</li>
+            <li>Soft copy delivery</li>
+          </ul>
+          <a href="https://nexgenixcreativesolutions.github.io/nostalgic-trails#sec-contact" class="pkg-cta">Book Event Coverage</a>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /packages-area -->
 
   <!-- FAQ -->
   <div class="faq-section">
     <div class="faq-label">Frequently Asked</div>
-
     <div class="faq-item">
-      <div class="faq-q">How far in advance should I book?</div>
-      <div class="faq-a">We recommend booking at least 3–6 months in advance for weddings, and 4–6 weeks for portrait sessions. Peak season (November–February) fills quickly.</div>
+      <div class="faq-q">Do I need to pose for the photos?</div>
+      <div class="faq-a">Not at all — that's the point. We want you to forget about cameras entirely. Think of your session as a day trip where you can run, dance, laugh, and just be yourself. We document what's real.</div>
     </div>
     <div class="faq-item">
-      <div class="faq-q">Do you travel for destination shoots?</div>
-      <div class="faq-a">Absolutely. We cover all of the Philippines and accept destination bookings internationally. Travel fees apply depending on location — ask us for a custom quote.</div>
+      <div class="faq-q">How far in advance should I book?</div>
+      <div class="faq-a">We recommend at least 3–6 months for weddings and debuts, and 3–4 weeks for portrait sessions. A 30% reservation fee secures your date.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Do you travel for shoots?</div>
+      <div class="faq-a">Yes — we cover the Philippines and accept destination bookings. Travel fees apply depending on location; reach out for a custom quote.</div>
     </div>
     <div class="faq-item">
       <div class="faq-q">When will I receive my photos?</div>
-      <div class="faq-a">Standard delivery is 4–6 weeks. Rush delivery (within 7 days) is available as an add-on. You'll receive your gallery via private online link.</div>
+      <div class="faq-a">Delivery timelines depend on your package. We'll discuss this during our initial consultation. We also offer rush delivery options — just ask.</div>
     </div>
     <div class="faq-item">
-      <div class="faq-q">Is a deposit required to secure the date?</div>
-      <div class="faq-a">Yes — a 30% non-refundable reservation fee is required to hold your date. The remaining balance is due two weeks before your event.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q">Can I customize a package?</div>
-      <div class="faq-a">Of course. Reach out through our booking form and tell us exactly what you need. We're happy to build something tailored to your event and budget.</div>
+      <div class="faq-q">Can packages be customized?</div>
+      <div class="faq-a">Absolutely. Packages are a starting point. We're happy to build something tailored to your day and budget — just send us a message.</div>
     </div>
   </div>
 
-  <!-- CTA -->
   <div class="cta-strip">
     <h2 class="cta-heading">Ready to <em>Reserve</em> Your Date?</h2>
-    <p class="cta-sub">Dates fill up fast. Send us a message and we'll confirm availability within 24 hours.</p>
-    <a href="contact.html" class="btn-primary">Book a Session</a>
+    <p class="cta-sub">Dates book up fast. Send us a message and we'll confirm availability within 24 hours.</p>
+    <a href="https://nexgenixcreativesolutions.github.io/nostalgic-trails#sec-contact" class="btn-primary">Send an Inquiry</a>
   </div>
 
-  <!-- Footer -->
   <footer class="site-footer">
-    <div class="footer-brand">
-      Nostalgic Trails
-      <span>© 2025 Nostalgic Trails Photography. All rights reserved.</span>
+    <div class="footer-brand">Nostalgic Trails<span>© 2025 Nostalgic Trails Photography. All rights reserved.</span></div>
+    <div style="display:flex;gap:24px;">
+      <a href="gallery.html" class="footer-link">Gallery</a>
+      <a href="https://nexgenixcreativesolutions.github.io/nostalgic-trails#sec-contact" class="footer-link">Book Now →</a>
     </div>
-    <a href="contact.html" class="footer-link">Send an Inquiry →</a>
   </footer>
 
   <script>
     // Nav scroll
-    var mainNav = document.getElementById('mainNav');
-    window.addEventListener('scroll', function() {
-      mainNav.classList.toggle('scrolled', window.scrollY > 40);
-    }, { passive: true });
+    var nav = document.getElementById('mainNav');
+    window.addEventListener('scroll', function() { nav.classList.toggle('scrolled', window.scrollY > 40); }, { passive: true });
+
+    // Category tabs
+    var tabs = document.querySelectorAll('.cat-tab');
+    var cats = document.querySelectorAll('.pkg-category');
+    tabs.forEach(function(tab) {
+      tab.addEventListener('click', function() {
+        tabs.forEach(function(t) { t.classList.remove('active'); });
+        cats.forEach(function(c) { c.classList.remove('visible'); });
+        tab.classList.add('active');
+        var target = document.getElementById('cat-' + tab.getAttribute('data-cat'));
+        if (target) target.classList.add('visible');
+      });
+    });
 
     // FAQ accordion
     document.querySelectorAll('.faq-item').forEach(function(item) {
