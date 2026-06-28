@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>What Couples Say — Nostalgic Trails Photography</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Syncopate:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --white: #ffffff; --off-white: #f5f0e8; --sage: #8aaa8e; --sage-dark: #5c7d62;
+      --sage-light: #b0c9b4; --rose: #c4886e; --rose-light: #d9a892;
+      --amber: #c8884a; --amber-dark: #a06030; --ink: #e8e0d4; --text-muted: #786e64;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { width: 100%; overflow-x: hidden; }
+    body { background-color: #0d0b09; color: var(--ink); font-family: 'DM Sans', sans-serif; cursor: none; }
+
+    .cursor { position: fixed; width: 9px; height: 9px; background: var(--rose); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); transition: transform 0.1s ease; }
+    .cursor-ring { position: fixed; width: 36px; height: 36px; border: 1.5px solid var(--sage); border-radius: 50%; pointer-events: none; z-index: 9998; transform: translate(-50%,-50%); transition: all 0.18s ease; opacity: 0.6; }
+    .noise { position: fixed; inset: 0; z-index: 2; pointer-events: none; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E"); opacity: 0.5; }
+
+    /* NAV */
+    #mainNav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; display: flex; align-items: center; padding: 24px 48px; background: rgba(13,11,9,0.95); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid rgba(122,158,135,0.12); }
+    .nav-logo { font-family: 'Syncopate', sans-serif; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--white); text-decoration: none; line-height: 1.55; flex-shrink: 0; white-space: nowrap; }
+    .nav-logo span { display: block; color: var(--sage); font-size: 7.5px; letter-spacing: 0.3em; margin-top: 3px; }
+    .nav-back { margin-left: auto; font-family: 'DM Sans', sans-serif; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(232,224,212,0.6); text-decoration: none; display: flex; align-items: center; gap: 8px; transition: color 0.3s, gap 0.3s; }
+    .nav-back::before { content: '←'; color: var(--amber); }
+    .nav-back:hover { color: var(--off-white); gap: 12px; }
+
+    /* HERO */
+    .reviews-hero {
+      padding: 160px 60px 80px; position: relative; overflow: hidden;
+    }
+    .reviews-hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse 65% 55% at 15% 25%, rgba(196,136,110,0.07) 0%, transparent 70%),
+                  radial-gradient(ellipse 45% 55% at 85% 75%, rgba(138,170,142,0.05) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-tag { font-family: 'DM Sans', sans-serif; font-size: 10px; letter-spacing: 0.5em; text-transform: uppercase; color: var(--rose-light); margin-bottom: 24px; display: flex; align-items: center; gap: 14px; }
+    .hero-tag::before { content: ''; width: 32px; height: 1px; background: var(--rose); }
+    .reviews-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(52px,7vw,110px); font-weight: 300; line-height: 0.9; color: var(--white); }
+    .reviews-title em { font-style: italic; color: var(--off-white); }
+    .reviews-sub { font-size: 14px; line-height: 1.8; color: rgba(255,255,255,0.45); max-width: 480px; margin-top: 28px; }
+
+    /* STATS BAR */
+    .stats-bar {
+      display: flex; gap: 0; border-top: 1px solid rgba(138,170,142,0.15); border-bottom: 1px solid rgba(138,170,142,0.15);
+      margin: 0 60px 80px; padding: 36px 0;
+    }
+    .stat-item { flex: 1; text-align: center; border-right: 1px solid rgba(138,170,142,0.12); padding: 0 40px; }
+    .stat-item:last-child { border-right: none; }
+    .stat-num { font-family: 'Cormorant Garamond', serif; font-size: clamp(40px,4.5vw,72px); font-weight: 300; line-height: 1; color: var(--sage-light); }
+    .stat-label { font-family: 'DM Sans', sans-serif; font-size: 9px; letter-spacing: 0.35em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-top: 8px; }
+
+    /* FLOATING PHOTO STRIP */
+    .reviews-strip { overflow: hidden; margin-bottom: 80px; }
+    .reviews-strip-track { display: flex; gap: 12px; width: max-content; animation: stripScroll 30s linear infinite; }
+    @keyframes stripScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+    .rs-photo { width: 240px; height: 160px; flex-shrink: 0; overflow: hidden; }
+    .rs-photo img { width: 100%; height: 100%; object-fit: cover; filter: saturate(0.75); transition: filter 0.4s; }
+    .rs-photo:hover img { filter: saturate(1.05); }
+
+    /* REVIEW GRID */
+    .reviews-grid {
+      columns: 3; column-gap: 20px; padding: 0 60px 120px;
+    }
+    .r-card {
+      break-inside: avoid; margin-bottom: 20px;
+      background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);
+      padding: 36px 32px; position: relative;
+      opacity: 0; transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease, border-color 0.3s;
+    }
+    .r-card.revealed { opacity: 1; transform: translateY(0); }
+    .r-card:hover { border-color: rgba(200,136,74,0.2); }
+    .r-card::before { content: '"'; font-family: 'Cormorant Garamond', serif; font-size: 80px; line-height: 0.6; color: rgba(122,158,135,0.12); position: absolute; top: 20px; left: 28px; }
+    .r-stars { color: var(--rose-light); font-size: 11px; letter-spacing: 3px; margin-bottom: 16px; }
+    .r-text { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: clamp(15px,1.25vw,21px); line-height: 1.75; color: rgba(255,255,255,0.8); margin-bottom: 28px; margin-top: 12px; }
+    .r-author { display: flex; align-items: center; gap: 14px; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 20px; }
+    .r-avatar { width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg,var(--sage-light),var(--sage-dark)); display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif; font-size: 20px; color: var(--white); flex-shrink: 0; }
+    .r-name { font-size: 13px; font-weight: 500; color: var(--white); margin-bottom: 3px; }
+    .r-occasion { font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--rose-light); }
+
+    /* CTA BAND */
+    .reviews-cta-band {
+      background: rgba(200,136,74,0.06); border-top: 1px solid rgba(200,136,74,0.15); border-bottom: 1px solid rgba(200,136,74,0.15);
+      padding: 72px 60px; display: flex; align-items: center; justify-content: space-between; gap: 40px; flex-wrap: wrap;
+    }
+    .cta-copy h3 { font-family: 'Cormorant Garamond', serif; font-size: clamp(32px,3.5vw,56px); font-weight: 300; color: var(--white); line-height: 1.1; }
+    .cta-copy h3 em { font-style: italic; color: var(--off-white); }
+    .cta-copy p { font-size: 13px; color: rgba(255,255,255,0.45); margin-top: 12px; letter-spacing: 0.05em; }
+    .cta-btn { font-family: 'Syncopate', sans-serif; font-size: 9px; letter-spacing: 0.34em; text-transform: uppercase; color: var(--off-white); background: var(--amber-dark); border: none; padding: 18px 44px; text-decoration: none; display: inline-block; transition: background 0.3s; white-space: nowrap; }
+    .cta-btn:hover { background: var(--amber); }
+
+    /* FOOTER */
+    .site-footer { background: #080605; border-top: 1px solid rgba(122,158,135,0.12); padding: 40px 60px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+    .footer-brand { font-family: 'Syncopate', sans-serif; font-size: 10px; letter-spacing: 0.35em; color: var(--white); }
+    .footer-brand span { display: block; color: var(--text-muted); font-size: 8px; margin-top: 4px; }
+    .footer-social { display: flex; gap: 10px; }
+    .social-link { width: 40px; height: 40px; border: 1px solid rgba(122,158,135,0.25); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--text-muted); text-decoration: none; transition: all 0.3s; }
+    .social-link:hover { border-color: var(--amber); color: var(--off-white); background: rgba(200,136,74,0.1); }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .reviews-grid { columns: 2; }
+      .stats-bar { flex-wrap: wrap; margin: 0 20px 60px; }
+      .stat-item { min-width: 50%; border-right: none; border-bottom: 1px solid rgba(138,170,142,0.12); padding: 24px; }
+      .stat-item:last-child { border-bottom: none; }
+    }
+    @media (max-width: 600px) {
+      body { cursor: auto; }
+      .cursor, .cursor-ring { display: none; }
+      #mainNav { padding: 16px 20px; }
+      .reviews-hero { padding: 120px 20px 48px; }
+      .reviews-grid { columns: 1; padding: 0 20px 80px; }
+      .reviews-cta-band { padding: 48px 20px; flex-direction: column; align-items: flex-start; }
+      .site-footer { flex-direction: column; gap: 24px; text-align: center; padding: 40px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+  <div class="noise"></div>
+
+  <nav id="mainNav">
+    <a href="index.html" class="nav-logo">Nostalgic Trails<span>Raw unfiltered emotions</span></a>
+    <a href="index.html#sec-contact" class="nav-back">Book a Session</a>
+  </nav>
+
+  <!-- HERO -->
+  <header class="reviews-hero">
+    <div class="hero-tag">Kind Words · Verified Clients</div>
+    <h1 class="reviews-title">What <em>Couples</em><br>Say About Us</h1>
+    <p class="reviews-sub">Over a decade of moments kept — here's what the people who trusted us with their most treasured days have to say.</p>
+  </header>
+
+  <!-- STATS -->
+  <div class="stats-bar">
+    <div class="stat-item"><div class="stat-num">500+</div><div class="stat-label">Sessions Completed</div></div>
+    <div class="stat-item"><div class="stat-num">★ 5.0</div><div class="stat-label">Average Rating</div></div>
+    <div class="stat-item"><div class="stat-num">11</div><div class="stat-label">Years of Practice</div></div>
+    <div class="stat-item"><div class="stat-num">98%</div><div class="stat-label">Rebook Rate</div></div>
+  </div>
+
+  <!-- PHOTO STRIP -->
+  <div class="reviews-strip">
+    <div class="reviews-strip-track">
+      <div class="rs-photo"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=480&q=75&fit=crop" alt="" /></div>
+      <div class="rs-photo"><img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=480&q=75&fit=crop" alt="" /></div>
+      <div class="rs-photo"><img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=480&q=75&fit=crop" alt="" /></div>
+      <div class="rs-photo"><img src="https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=480&q=75&fit=crop" alt="" /></div>
+      <div class="rs-photo"><img src="https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=480&q=75&fit=crop" alt="" /></div>
+      <div class="rs-photo"><img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=480&q=75&fit=crop" alt="" /></div>
+      <div class="rs-photo"><img src="https://images.unsplash.com/photo-1524824267900-2b39b93f98f4?w=480&q=75&fit=crop" alt="" /></div>
+      <!-- duplicates -->
+      <div class="rs-photo"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=480&q=75&fit=crop" alt="" /></div>
+      <div class="rs-photo"><img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=480&q=75&fit=crop" alt="" /></div>
+      <div class="rs-photo"><img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=480&q=75&fit=crop" alt="" /></div>
+      <div class="rs-photo"><img src="https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=480&q=75&fit=crop" alt="" /></div>
+      <div class="rs-photo"><img src="https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=480&q=75&fit=crop" alt="" /></div>
+      <div class="rs-photo"><img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=480&q=75&fit=crop" alt="" /></div>
+      <div class="rs-photo"><img src="https://images.unsplash.com/photo-1524824267900-2b39b93f98f4?w=480&q=75&fit=crop" alt="" /></div>
+    </div>
+  </div>
+
+  <!-- REVIEWS GRID -->
+  <div class="reviews-grid" id="reviewsGrid">
+
+    <div class="r-card">
+      <div class="r-stars">★★★★★</div>
+      <p class="r-text">They captured our wedding's soul. Every photo feels like a painting. We cry every time we look at the album — ten years from now these images will still feel alive.</p>
+      <div class="r-author"><div class="r-avatar">A</div><div><div class="r-name">Andrea &amp; Luis Santos</div><div class="r-occasion">Wedding · Tagaytay 2024</div></div></div>
+    </div>
+
+    <div class="r-card">
+      <div class="r-stars">★★★★★</div>
+      <p class="r-text">Our prenup shots are breathtaking. They find the light and make everything look cinematic. Worth every centavo and then some. We are forever grateful.</p>
+      <div class="r-author"><div class="r-avatar">M</div><div><div class="r-name">Marco &amp; Bea Reyes</div><div class="r-occasion">Prenuptial · Batangas 2024</div></div></div>
+    </div>
+
+    <div class="r-card">
+      <div class="r-stars">★★★★★</div>
+      <p class="r-text">We've booked Nostalgic Trails three times — engagement, wedding, daughter's birthday. True artists who always exceed expectations. They feel less like photographers, more like storytellers.</p>
+      <div class="r-author"><div class="r-avatar">C</div><div><div class="r-name">Carla &amp; James Lim</div><div class="r-occasion">Multiple Sessions · 2022–2024</div></div></div>
+    </div>
+
+    <div class="r-card">
+      <div class="r-stars">★★★★★</div>
+      <p class="r-text">I was nervous about how I'd look in photos but they made the entire session feel so natural. Every single shot turned out beautifully. I felt truly seen.</p>
+      <div class="r-author"><div class="r-avatar">S</div><div><div class="r-name">Sofia Reyes</div><div class="r-occasion">Individual Portrait · 2024</div></div></div>
+    </div>
+
+    <div class="r-card">
+      <div class="r-stars">★★★★★</div>
+      <p class="r-text">From the first inquiry to receiving our album, the experience was seamless and warm. The photos transported us right back to that day on the beach.</p>
+      <div class="r-author"><div class="r-avatar">N</div><div><div class="r-name">Nico &amp; Dana Cruz</div><div class="r-occasion">Prenuptial · Boracay 2024</div></div></div>
+    </div>
+
+    <div class="r-card">
+      <div class="r-stars">★★★★★</div>
+      <p class="r-text">The way they captured our daughter's debut was nothing short of magical. Every candid, every dance, every tear — documented with such quiet precision and care.</p>
+      <div class="r-author"><div class="r-avatar">G</div><div><div class="r-name">The Garcia Family</div><div class="r-occasion">Debut · Cebu 2024</div></div></div>
+    </div>
+
+    <div class="r-card">
+      <div class="r-stars">★★★★★</div>
+      <p class="r-text">I didn't think maternity photos were my thing but these images are now some of the most treasured I own. So beautifully lit and deeply personal.</p>
+      <div class="r-author"><div class="r-avatar">P</div><div><div class="r-name">Patricia Cruz</div><div class="r-occasion">Maternity Session · 2023</div></div></div>
+    </div>
+
+    <div class="r-card">
+      <div class="r-stars">★★★★★</div>
+      <p class="r-text">Their patience is unreal. They stayed with us through the entire day without missing a single important moment, and we barely noticed them — in the best way.</p>
+      <div class="r-author"><div class="r-avatar">R</div><div><div class="r-name">Ryan &amp; Lea Santos</div><div class="r-occasion">Wedding · Batangas 2023</div></div></div>
+    </div>
+
+    <div class="r-card">
+      <div class="r-stars">★★★★★</div>
+      <p class="r-text">We live abroad and planned our prenup shoot entirely online. They were communicative, creative, and delivered beyond what we imagined. Highly recommend to any couple.</p>
+      <div class="r-author"><div class="r-avatar">P</div><div><div class="r-name">Paolo &amp; Mia Villanueva</div><div class="r-occasion">Prenuptial · Cebu 2023</div></div></div>
+    </div>
+
+  </div>
+
+  <!-- CTA BAND -->
+  <div class="reviews-cta-band">
+    <div class="cta-copy">
+      <h3>Ready to create your<br>own <em>story</em>?</h3>
+      <p>Slots are limited — reach out and let's talk about your session.</p>
+    </div>
+    <a href="index.html#sec-contact" class="cta-btn">Book a Session →</a>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-brand">Nostalgic Trails<span>© 2025 Nostalgic Trails Photography. All rights reserved.</span></div>
+    <div class="footer-social">
+      <a href="https://www.instagram.com/nostalgictrails" target="_blank" rel="noopener" class="social-link" title="Instagram">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+      </a>
+      <a href="https://www.facebook.com/profile.php?id=100063809053493" target="_blank" rel="noopener" class="social-link" title="Facebook">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+      </a>
+      <a href="mailto:nostalgictrails@gmail.com" class="social-link" title="Email">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+      </a>
+    </div>
+  </footer>
+
+  <script>
+    // Cursor
+    var cursor = document.getElementById('cursor'), cursorRing = document.getElementById('cursorRing');
+    var mx=0,my=0,rx=0,ry=0;
+    document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;cursor.style.left=mx+'px';cursor.style.top=my+'px';});
+    (function loop(){rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;cursorRing.style.left=rx+'px';cursorRing.style.top=ry+'px';requestAnimationFrame(loop);})();
+    document.querySelectorAll('a,button').forEach(function(el){
+      el.addEventListener('mouseenter',function(){cursor.style.transform='translate(-50%,-50%) scale(2.5)';cursorRing.style.opacity='0.35';});
+      el.addEventListener('mouseleave',function(){cursor.style.transform='translate(-50%,-50%) scale(1)';cursorRing.style.opacity='0.6';});
+    });
+
+    // Scroll reveal cards
+    var observer = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){ entry.target.classList.add('revealed'); observer.unobserve(entry.target); }
+      });
+    },{threshold:0.1});
+    document.querySelectorAll('.r-card').forEach(function(c){ observer.observe(c); });
+  </script>
+</body>
+</html>
