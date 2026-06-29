@@ -69,6 +69,7 @@
     .nav-mobile-menu.open ul li:nth-child(3) a { transition-delay: 0.15s; transform: translateY(0); opacity: 1; }
     .nav-mobile-menu.open ul li:nth-child(4) a { transition-delay: 0.20s; transform: translateY(0); opacity: 1; }
     .nav-mobile-menu.open ul li:nth-child(5) a { transition-delay: 0.25s; transform: translateY(0); opacity: 1; }
+    .nav-mobile-menu.open ul li:nth-child(6) a { transition-delay: 0.30s; transform: translateY(0); opacity: 1; }
     .menu-book-btn { font-family: 'Syncopate', sans-serif; font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--white); background: var(--amber-dark); padding: 16px 36px; text-decoration: none; display: inline-block; margin-top: 40px; opacity: 0; transition: opacity 0.45s ease 0.28s, background 0.3s; }
     .nav-mobile-menu.open .menu-book-btn { opacity: 1; }
     .menu-book-btn:hover { background: var(--amber); }
@@ -190,6 +191,10 @@
     .cf-submit-arrow { font-size: 16px; color: rgba(255,255,255,0.6); transition: transform 0.3s; }
     .cf-submit:hover .cf-submit-arrow { transform: translateX(5px); }
     .cf-success { grid-column: 1 / -1; display: none; font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 18px; color: var(--sage-light); margin-top: 16px; letter-spacing: 0.05em; }
+    .cf-select { background: transparent; border: none; border-bottom: 1px solid rgba(138,170,142,0.25); color: var(--ink); font-family: 'Cormorant Garamond', serif; font-size: clamp(16px,1.4vw,22px); font-weight: 300; padding: 12px 0; outline: none; width: 100%; transition: border-color 0.3s; -webkit-appearance: none; appearance: none; border-radius: 0; cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238aaa8e' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 4px center; }
+    .cf-select:focus { border-color: var(--amber); }
+    .cf-select option { background: #1a1208; color: var(--ink); }
+    .cf-select.preselected { color: var(--off-white); border-color: rgba(200,136,74,0.5); }
 
     /* ─── FOOTER ─── */
     .site-footer { background: #080605; border-top: 1px solid rgba(122,158,135,0.12); padding: 40px 60px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; position: relative; z-index: 1; }
@@ -274,7 +279,8 @@
       <li><a href="#sec-gallery"  class="menu-link"><em>Gallery</em></a></li>
       <li><a href="#sec-about"    class="menu-link">About</a></li>
       <li><a href="#sec-contact"  class="menu-link">Contact</a></li>
-      <li><a href="packages.html" class="menu-link">Packages</a></li>
+      <li><a href="https://nexgenixcreativesolutions.github.io/nostalgic-trails/packages" class="menu-link">Packages</a></li>
+      <li><a href="https://nexgenixcreativesolutions.github.io/nostalgic-trails/reviews" class="menu-link">Reviews</a></li>
     </ul>
     <a href="https://nexgenixcreativesolutions.github.io/nostalgic-trails#sec-contact" class="menu-book-btn">Book a Session</a>
     <div class="menu-tagline">Documentary Photography · Est. 2014</div>
@@ -295,7 +301,7 @@
           <p class="section-body">We capture the moments you feel but cannot hold — turning fleeting emotion into timeless, cinematic imagery that lives forever.</p>
           <div class="section-actions">
             <a href="#sec-weddings" class="btn-primary">Explore Works</a>
-            <a href="packages.html" class="btn-ghost">View Packages</a>
+            <a href="https://nexgenixcreativesolutions.github.io/nostalgic-trails/packages" class="btn-ghost">View Packages</a>
           </div>
         </div>
       </div>
@@ -314,7 +320,7 @@
           <p class="section-body">We tell your story with intention and empathy — capturing raw, unfiltered emotions without staging, without posing, and without interrupting life as it unfolds.</p>
           <div class="section-actions">
             <a href="https://nexgenixcreativesolutions.github.io/nostalgic-trails#sec-contact" class="btn-primary">Book a Session</a>
-            <a href="packages.html" class="btn-ghost">See Packages</a>
+            <a href="https://nexgenixcreativesolutions.github.io/nostalgic-trails/packages" class="btn-ghost">See Packages</a>
           </div>
         </div>
         <div class="client-tag" style="position:absolute;bottom:80px;right:60px;z-index:3;text-align:right;">
@@ -371,7 +377,7 @@
         </div>
       </div>
       <div class="gallery-sec-cta">
-        <a href="gallery.html" class="gallery-cta-btn">
+        <a href="https://nexgenixcreativesolutions.github.io/nostalgic-trails/gallery" class="gallery-cta-btn">
           <span>View Full Gallery</span>
           <span class="gallery-cta-arrow">→</span>
         </a>
@@ -414,7 +420,7 @@
         <div class="contact-eyebrow">Let's Begin</div>
         <h2 class="contact-heading">Tell Us<br>Your <em>Story</em></h2>
         <p class="contact-sub">Every great photograph starts with a conversation. Fill in the form and we'll reach out within 24 hours.</p>
-        <a href="gallery.html" class="contact-reviews-link">
+        <a href="https://nexgenixcreativesolutions.github.io/nostalgic-trails/gallery" class="contact-reviews-link">
           <span>Browse our gallery</span>
           <span class="crlink-arrow">→</span>
         </a>
@@ -443,6 +449,34 @@
           <div class="cf-field">
             <label class="cf-label" for="cf-date">Session Date</label>
             <input class="cf-input" id="cf-date" name="session_date" type="date" />
+          </div>
+          <div class="cf-field cf-field--full">
+            <label class="cf-label" for="cf-package">Package Interested In</label>
+            <select class="cf-select" id="cf-package" name="package">
+              <option value="" disabled selected>Select a package…</option>
+              <optgroup label="Individual Portrait">
+                <option value="Individual Portrait — Package A (₱10,000)">Package A — ₱10,000 · 4hrs, 30 outputs, 3 outfits</option>
+                <option value="Individual Portrait — Package B (₱7,500)">Package B — ₱7,500 · 3.5hrs, 24 outputs, 2 outfits</option>
+                <option value="Individual Portrait — Package C (₱5,000)">Package C — ₱5,000 · 2.5hrs, 15 outputs</option>
+              </optgroup>
+              <optgroup label="Pre-Debut &amp; Debut">
+                <option value="Pre-Debut &amp; Debut — Package A (₱35,000)">Package A — ₱35,000 · Full debut + pre-debut session</option>
+                <option value="Pre-Debut &amp; Debut — Package B (₱15,000)">Package B — ₱15,000 · 3.5hrs, 35 outputs</option>
+                <option value="Pre-Debut &amp; Debut — Package C (₱10,000)">Package C — ₱10,000 · Half-day, within Cebu</option>
+              </optgroup>
+              <optgroup label="Engagement Session">
+                <option value="Engagement Session — Package A (₱25,000)">Package A — ₱25,000 · Full-day, 90 photos, slideshow</option>
+                <option value="Engagement Session — Package B (₱15,000)">Package B — ₱15,000 · Half-day, 75 photos</option>
+                <option value="Engagement Session — Package C (₱10,000)">Package C — ₱10,000 · Half-day, within city</option>
+              </optgroup>
+              <optgroup label="Wedding">
+                <option value="Wedding — Package A (₱35,000)">Package A — ₱35,000 · Full coverage, 600+ photos</option>
+              </optgroup>
+              <optgroup label="Birthdays &amp; Events">
+                <option value="Birthdays &amp; Events — Package A (₱10,000)">Package A — ₱10,000 · Full event coverage</option>
+              </optgroup>
+              <option value="Not sure yet">Not sure yet — let's talk</option>
+            </select>
           </div>
           <div class="cf-field cf-field--full">
             <label class="cf-label" for="cf-message">Your Message to Us</label>
@@ -508,7 +542,35 @@
       });
     }
 
-    // ─── UNIFIED SCROLL ENGINE ───────────────────────────────────
+    // ─── PACKAGE PRE-SELECTION FROM URL PARAM ────────────────────
+    // Only fires when arriving from packages.html with ?package=...
+    // If no param exists, dropdown stays at "Select a package…" (no preselection)
+    (function() {
+      var params  = new URLSearchParams(window.location.search);
+      var pkg     = params.get('package');
+      if (!pkg) return; // no param — leave dropdown untouched
+
+      var select  = document.getElementById('cf-package');
+      if (!select) return;
+
+      // Find the matching option (decoded param vs option value)
+      var decoded = decodeURIComponent(pkg);
+      for (var i = 0; i < select.options.length; i++) {
+        if (select.options[i].value === decoded) {
+          select.selectedIndex = i;
+          select.classList.add('preselected');
+          break;
+        }
+      }
+
+      // Scroll smoothly to the contact section so user lands on the form
+      var contactSec = document.getElementById('sec-contact');
+      if (contactSec) {
+        setTimeout(function() {
+          contactSec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 400);
+      }
+    })();
     //
     // We track ALL 5 visible "rows" in DOM order:
     //   0: #sec-hero        → scroll-section  → 01
