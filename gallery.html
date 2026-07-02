@@ -57,8 +57,8 @@
 
     /* HERO */
     .page-hero {
-      position: relative; min-height: 36vh; display: flex; align-items: flex-end;
-      padding: 120px 60px 56px; overflow: hidden;
+      position: relative; min-height: 32vh; display: flex; align-items: flex-end;
+      padding: 120px 60px 40px; overflow: hidden;
     }
     .page-hero-bg {
       position: absolute; inset: 0;
@@ -87,8 +87,8 @@
     /* FILTER TABS */
     .filter-bar {
       position: relative; z-index: 3;
-      padding: 48px 60px 32px;
-      display: flex; gap: 8px; flex-wrap: wrap; align-items: center;
+      padding: 40px 60px 8px;
+      display: flex; gap: 8px; flex-wrap: wrap; align-items: center; justify-content: center;
     }
     .filter-label {
       font-family: 'DM Sans', sans-serif; font-size: 9px; letter-spacing: 0.4em;
@@ -106,119 +106,89 @@
       border-color: var(--amber-dark);
     }
 
-    /* MASONRY GRID */
-    .gallery-section { position: relative; z-index: 3; padding: 0 60px 100px; }
-    .masonry-grid {
-      columns: 3; column-gap: 10px;
-      perspective: 1300px;
+    /* FLIPBOOK */
+    .book-section {
+      position: relative; z-index: 3;
+      padding: 48px 24px 90px;
+      display: flex; flex-direction: column; align-items: center; gap: 28px;
     }
-
-    /* Scrapbook photo card: taped down + gentle flip-in reveal */
-    .masonry-item {
-      break-inside: avoid; margin-bottom: 26px;
-      position: relative; overflow: visible; cursor: pointer;
-      display: block;
-      box-shadow: 0 10px 22px rgba(0,0,0,0.5);
-      opacity: 0; transform-style: preserve-3d; transform-origin: top center;
-      transform: rotateX(-65deg) translateY(18px) rotate(var(--tilt, 0deg));
-      transition: opacity 0.7s ease, transform 0.65s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s ease;
+    .flipbook-stage {
+      position: relative;
+      width: min(480px, 86vw);
+      aspect-ratio: 4 / 5;
+      perspective: 2400px;
     }
-    .masonry-item.visible { opacity: 1; transform: rotateX(0deg) translateY(0) rotate(var(--tilt, 0deg)); }
-    .masonry-item:hover {
-      transform: rotateX(0deg) translateY(-8px) rotate(0deg) scale(1.035);
-      box-shadow: 0 20px 36px rgba(0,0,0,0.6);
-      z-index: 6;
-    }
-
-    /* gentle alternating tilt so photos don't look grid-pasted */
-    .masonry-item:nth-child(5n+1) { --tilt: -2deg; }
-    .masonry-item:nth-child(5n+2) { --tilt: 1.6deg; }
-    .masonry-item:nth-child(5n+3) { --tilt: -1.2deg; }
-    .masonry-item:nth-child(5n+4) { --tilt: 2.2deg; }
-    .masonry-item:nth-child(5n+5) { --tilt: -1.6deg; }
-
-    /* scotch tape strip holding each photo down */
-    .masonry-item::before {
+    /* spine binding the book to the left */
+    .flipbook-stage::before {
       content: '';
-      position: absolute;
-      top: -12px; left: 50%;
-      width: 64px; height: 22px;
-      background: linear-gradient(100deg, rgba(255,255,255,0.5), rgba(255,255,255,0.26) 45%, rgba(255,255,255,0.42));
-      box-shadow: 0 2px 4px rgba(0,0,0,0.3);
-      opacity: 0.8; pointer-events: none; z-index: 4;
+      position: absolute; left: -8px; top: 2%; bottom: 2%; width: 16px;
+      background: linear-gradient(90deg, rgba(0,0,0,0.65), rgba(0,0,0,0.05));
+      border-radius: 5px 0 0 5px;
+      box-shadow: inset -2px 0 5px rgba(0,0,0,0.5);
+      z-index: 3000;
     }
-    .masonry-item:nth-child(4n+1)::before { transform: translateX(-72%) rotate(-6deg); }
-    .masonry-item:nth-child(4n+2)::before { transform: translateX(-28%) rotate(5deg); }
-    .masonry-item:nth-child(4n+3)::before { transform: translateX(-50%) rotate(-3deg); }
-    .masonry-item:nth-child(4n+4)::before { transform: translateX(-60%) rotate(7deg); }
-
-    .masonry-item img {
-      width: 100%; display: block;
-      filter: saturate(0.85) brightness(0.9);
-      transition: filter 0.5s ease;
+    .flipbook {
+      position: relative; width: 100%; height: 100%;
+      transform-style: preserve-3d;
     }
-    .masonry-item:hover img { filter: saturate(1.05) brightness(1); }
-    .masonry-item .item-overlay {
+    .flip-page {
       position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(8,6,4,0.7) 0%, transparent 55%);
-      opacity: 0; transition: opacity 0.4s ease;
+      transform-style: preserve-3d;
+      transform-origin: left center;
+      transition: transform 0.85s cubic-bezier(0.45, 0.05, 0.15, 1);
+      cursor: pointer;
+    }
+    .flip-page.flipped { transform: rotateY(-178deg); }
+    .flip-face {
+      position: absolute; inset: 0;
+      backface-visibility: hidden; -webkit-backface-visibility: hidden;
+      overflow: hidden; border-radius: 3px;
+      box-shadow: 0 8px 26px rgba(0,0,0,0.55);
+      background: #14110d;
+    }
+    .flip-front img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      filter: saturate(0.88) brightness(0.92);
+    }
+    .flip-front .flip-caption {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(8,6,4,0.75) 0%, transparent 45%);
       display: flex; align-items: flex-end; padding: 20px;
     }
-    .masonry-item:hover .item-overlay { opacity: 1; }
-    .item-label {
-      font-family: 'DM Sans', sans-serif; font-size: 9px; letter-spacing: 0.3em;
-      text-transform: uppercase; color: rgba(255,255,255,0.85);
+    .flip-label { font-family: 'DM Sans', sans-serif; font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(255,255,255,0.9); }
+    .flip-cat { font-size: 8px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--rose-light); display: block; margin-top: 4px; }
+    .flip-back {
+      transform: rotateY(180deg);
+      background:
+        repeating-linear-gradient(135deg, #241f18, #241f18 2px, #221d17 2px, #221d17 4px);
+      border: 1px solid rgba(255,255,255,0.05);
+      display: flex; align-items: center; justify-content: center;
     }
-    .item-category {
-      font-size: 8px; letter-spacing: 0.25em; text-transform: uppercase;
-      color: var(--rose-light); display: block; margin-top: 3px;
+    .flip-back::after {
+      content: '';
+      width: 46%; height: 46%;
+      border: 1px solid rgba(196,136,110,0.25);
+      border-radius: 50%;
     }
 
-    /* hidden category filter */
-    .masonry-item[data-cat] { transition: opacity 0.6s ease, transform 0.6s ease, max-height 0.4s ease; }
-    .masonry-item.hidden { opacity: 0; transform: scale(0.95) rotate(0deg); pointer-events: none; max-height: 0; overflow: hidden; margin: 0; }
+    /* tap zones for manual flipping */
+    .flip-zone { position: absolute; top: 0; bottom: 0; width: 50%; z-index: 10; }
+    .flip-zone.prev { left: 0; }
+    .flip-zone.next { right: 0; }
 
-    /* LIGHTBOX */
-    .lightbox {
-      position: fixed; inset: 0; z-index: 9000;
-      background: rgba(8,6,4,0.97); backdrop-filter: blur(20px);
+    /* controls under the book */
+    .book-controls { display: flex; align-items: center; gap: 22px; }
+    .book-nav-btn {
+      width: 46px; height: 46px; border-radius: 50%;
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.14);
+      color: rgba(255,255,255,0.7); font-size: 16px; cursor: pointer;
       display: flex; align-items: center; justify-content: center;
-      opacity: 0; visibility: hidden; pointer-events: none;
-      transition: opacity 0.35s ease, visibility 0.35s;
+      transition: background 0.3s, border-color 0.3s, opacity 0.3s;
     }
-    .lightbox.open { opacity: 1; visibility: visible; pointer-events: all; }
-    .lightbox-img {
-      max-width: 88vw; max-height: 88vh; object-fit: contain;
-      filter: saturate(0.92);
-      transform: scale(0.96); transition: transform 0.35s ease;
-    }
-    .lightbox.open .lightbox-img { transform: scale(1); }
-    .lightbox-close {
-      position: absolute; top: 28px; right: 28px; width: 48px; height: 48px;
-      background: rgba(255,255,255,0.06); border: 1px solid rgba(196,136,110,0.35);
-      border-radius: 50%; display: flex; align-items: center; justify-content: center;
-      cursor: pointer; transition: background 0.3s, transform 0.3s;
-    }
-    .lightbox-close:hover { background: rgba(196,136,110,0.15); transform: rotate(90deg); }
-    .lightbox-close-line { display: block; width: 18px; height: 1.5px; background: var(--rose-light); position: absolute; }
-    .lightbox-close-line:nth-child(1) { transform: rotate(45deg); }
-    .lightbox-close-line:nth-child(2) { transform: rotate(-45deg); }
-    .lightbox-caption {
-      position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%);
-      font-family: 'DM Sans', sans-serif; font-size: 10px; letter-spacing: 0.3em;
-      text-transform: uppercase; color: rgba(255,255,255,0.45); white-space: nowrap;
-    }
-    .lightbox-nav {
-      position: absolute; top: 50%; transform: translateY(-50%);
-      width: 48px; height: 48px; background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.12); border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      cursor: pointer; transition: background 0.3s, border-color 0.3s; color: rgba(255,255,255,0.6);
-      font-size: 18px; user-select: none;
-    }
-    .lightbox-nav:hover { background: rgba(160,96,48,0.2); border-color: var(--amber); color: var(--white); }
-    .lightbox-prev { left: 28px; }
-    .lightbox-next { right: 90px; }
+    .book-nav-btn:hover { background: rgba(160,96,48,0.22); border-color: var(--amber); color: var(--white); }
+    .book-nav-btn:disabled { opacity: 0.3; cursor: default; background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.14); color: rgba(255,255,255,0.7); }
+    .book-progress { font-family: 'DM Sans', sans-serif; font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(255,255,255,0.4); min-width: 90px; text-align: center; }
+    .book-hint { font-size: 11px; color: rgba(255,255,255,0.3); letter-spacing: 0.05em; text-align: center; }
 
     /* CTA STRIP */
     .cta-strip {
@@ -253,23 +223,15 @@
     /* RESPONSIVE */
     @media (max-width: 900px) {
       #mainNav { padding: 18px 24px; } #mainNav.scrolled { padding: 12px 24px; }
-      .page-hero { padding: 100px 24px 48px; }
-      .filter-bar { padding: 36px 24px 24px; }
-      .gallery-section { padding: 0 24px 80px; }
-      .masonry-grid { columns: 2; }
+      .page-hero { padding: 100px 24px 36px; }
+      .filter-bar { padding: 32px 20px 4px; }
+      .book-section { padding: 40px 16px 72px; }
       .cta-strip { padding: 56px 24px; }
       .site-footer { padding: 32px 24px; flex-direction: column; gap: 12px; text-align: center; }
-      .lightbox-prev { left: 12px; } .lightbox-next { right: 12px; }
-    }
-    @media (max-width: 480px) {
-      .masonry-grid { columns: 1; }
     }
 
-    /* respect reduced motion */
     @media (prefers-reduced-motion: reduce) {
-      .masonry-item { transition: opacity 0.4s ease !important; transform: rotate(var(--tilt, 0deg)) !important; }
-      .masonry-item.visible { transform: rotate(var(--tilt, 0deg)) !important; }
-      .masonry-item:hover { transform: rotate(0deg) !important; }
+      .flip-page { transition: transform 0.25s linear; }
     }
   </style>
 </head>
@@ -301,90 +263,17 @@
     <button class="filter-btn" data-filter="family">Family</button>
   </div>
 
-  <section class="gallery-section">
-    <div class="masonry-grid" id="masonryGrid">
-
-      <div class="masonry-item" data-cat="wedding" data-label="Andrea & Luis · Wedding" data-src="https://images.unsplash.com/photo-1519741497674-611481863552?w=1200&q=85&fit=crop">
-        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=700&q=80&fit=crop" alt="Andrea & Luis Wedding" loading="lazy" />
-        <div class="item-overlay"><div><div class="item-label">Andrea &amp; Luis</div><span class="item-category">Wedding · Tagaytay 2024</span></div></div>
-      </div>
-
-      <div class="masonry-item" data-cat="prenuptial" data-label="Marco & Bea · Prenuptial" data-src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=1200&q=85&fit=crop">
-        <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=700&q=80&fit=crop" alt="Prenuptial" loading="lazy" />
-        <div class="item-overlay"><div><div class="item-label">Marco &amp; Bea</div><span class="item-category">Prenuptial · Batangas 2024</span></div></div>
-      </div>
-
-      <div class="masonry-item" data-cat="portrait" data-label="Sofia R. · Portrait" data-src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=1200&q=85&fit=crop">
-        <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=700&q=80&fit=crop" alt="Portrait" loading="lazy" />
-        <div class="item-overlay"><div><div class="item-label">Sofia R.</div><span class="item-category">Portrait Session 2024</span></div></div>
-      </div>
-
-      <div class="masonry-item" data-cat="family" data-label="The Cruz Family · Maternity" data-src="https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=1200&q=85&fit=crop">
-        <img src="https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=700&q=80&fit=crop" alt="Maternity" loading="lazy" />
-        <div class="item-overlay"><div><div class="item-label">The Cruz Family</div><span class="item-category">Maternity · 2024</span></div></div>
-      </div>
-
-      <div class="masonry-item" data-cat="family" data-label="Carla & James · Family" data-src="https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=1200&q=85&fit=crop">
-        <img src="https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=700&q=80&fit=crop" alt="Family" loading="lazy" />
-        <div class="item-overlay"><div><div class="item-label">Carla &amp; James</div><span class="item-category">Family Session 2024</span></div></div>
-      </div>
-
-      <div class="masonry-item" data-cat="event" data-label="The Rivera Debut" data-src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?w=1200&q=85&fit=crop">
-        <img src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?w=700&q=80&fit=crop" alt="Debut" loading="lazy" />
-        <div class="item-overlay"><div><div class="item-label">The Rivera Debut</div><span class="item-category">Event · 2024</span></div></div>
-      </div>
-
-      <div class="masonry-item" data-cat="wedding" data-label="Miguel & Claire · Wedding" data-src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=1200&q=85&fit=crop">
-        <img src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=700&q=80&fit=crop" alt="Wedding" loading="lazy" />
-        <div class="item-overlay"><div><div class="item-label">Miguel &amp; Claire</div><span class="item-category">Wedding · 2024</span></div></div>
-      </div>
-
-      <div class="masonry-item" data-cat="prenuptial" data-label="Nico & Dana · Prenuptial" data-src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=1200&q=85&fit=crop">
-        <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=700&q=80&fit=crop" alt="Prenuptial" loading="lazy" />
-        <div class="item-overlay"><div><div class="item-label">Nico &amp; Dana</div><span class="item-category">Prenuptial · 2024</span></div></div>
-      </div>
-
-      <div class="masonry-item" data-cat="wedding" data-label="Paolo & Mia · Wedding" data-src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=1200&q=85&fit=crop">
-        <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=700&q=80&fit=crop" alt="Wedding" loading="lazy" />
-        <div class="item-overlay"><div><div class="item-label">Paolo &amp; Mia</div><span class="item-category">Wedding · Cebu 2023</span></div></div>
-      </div>
-
-      <div class="masonry-item" data-cat="portrait" data-label="The Tan Family · Portrait" data-src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=1200&q=85&fit=crop">
-        <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=700&q=80&fit=crop" alt="Portrait" loading="lazy" />
-        <div class="item-overlay"><div><div class="item-label">The Tan Family</div><span class="item-category">Portrait · 2023</span></div></div>
-      </div>
-
-      <div class="masonry-item" data-cat="family" data-label="Baby Lorenzo · Newborn" data-src="https://images.unsplash.com/photo-1591604021695-0c69b7c05981?w=1200&q=85&fit=crop">
-        <img src="https://images.unsplash.com/photo-1591604021695-0c69b7c05981?w=700&q=80&fit=crop" alt="Newborn" loading="lazy" />
-        <div class="item-overlay"><div><div class="item-label">Baby Lorenzo</div><span class="item-category">Newborn · 2024</span></div></div>
-      </div>
-
-      <div class="masonry-item" data-cat="event" data-label="Garcia Anniversary" data-src="https://images.unsplash.com/photo-1525267219888-bb077b8792cc?w=1200&q=85&fit=crop">
-        <img src="https://images.unsplash.com/photo-1525267219888-bb077b8792cc?w=700&q=80&fit=crop" alt="Anniversary" loading="lazy" />
-        <div class="item-overlay"><div><div class="item-label">Garcia Anniversary</div><span class="item-category">Event · 2024</span></div></div>
-      </div>
-
-      <div class="masonry-item" data-cat="event" data-label="Isabelle's Debut" data-src="https://images.unsplash.com/photo-1524824267900-2b39b93f98f4?w=1200&q=85&fit=crop">
-        <img src="https://images.unsplash.com/photo-1524824267900-2b39b93f98f4?w=700&q=80&fit=crop" alt="Debut" loading="lazy" />
-        <div class="item-overlay"><div><div class="item-label">Isabelle's Debut</div><span class="item-category">Debut · 2024</span></div></div>
-      </div>
-
-      <div class="masonry-item" data-cat="prenuptial" data-label="Ryan & Lea · Prenuptial" data-src="https://images.unsplash.com/photo-1532712938310-34cb3982ef74?w=1200&q=85&fit=crop">
-        <img src="https://images.unsplash.com/photo-1532712938310-34cb3982ef74?w=700&q=80&fit=crop" alt="Prenuptial" loading="lazy" />
-        <div class="item-overlay"><div><div class="item-label">Ryan &amp; Lea</div><span class="item-category">Prenuptial · 2023</span></div></div>
-      </div>
-
+  <section class="book-section">
+    <div class="flipbook-stage">
+      <div class="flipbook" id="flipbook"></div>
     </div>
+    <div class="book-controls">
+      <button class="book-nav-btn" id="bookPrev" aria-label="Previous page">&#8592;</button>
+      <span class="book-progress" id="bookProgress">Page 1 / 14</span>
+      <button class="book-nav-btn" id="bookNext" aria-label="Next page">&#8594;</button>
+    </div>
+    <p class="book-hint">Click the left or right side of the photo — or use the arrows — to turn the page.</p>
   </section>
-
-  <!-- Lightbox -->
-  <div class="lightbox" id="lightbox">
-    <button class="lightbox-close" id="lbClose"><span class="lightbox-close-line"></span><span class="lightbox-close-line"></span></button>
-    <button class="lightbox-nav lightbox-prev" id="lbPrev">&#8592;</button>
-    <img class="lightbox-img" id="lbImg" src="" alt="" />
-    <button class="lightbox-nav lightbox-next" id="lbNext">&#8594;</button>
-    <div class="lightbox-caption" id="lbCaption"></div>
-  </div>
 
   <div class="cta-strip">
     <h2 class="cta-heading">Your Story<br><em>Belongs Here Too</em></h2>
@@ -405,17 +294,104 @@
     var nav = document.getElementById('mainNav');
     window.addEventListener('scroll', function() { nav.classList.toggle('scrolled', window.scrollY > 40); }, { passive: true });
 
-    // Reveal on scroll
-    var items = document.querySelectorAll('.masonry-item');
-    var observer = new IntersectionObserver(function(entries) {
-      entries.forEach(function(e, i) {
-        if (e.isIntersecting) {
-          setTimeout(function() { e.target.classList.add('visible'); }, (Array.from(items).indexOf(e.target) % 3) * 80);
-          observer.unobserve(e.target);
-        }
+    // Photo data (replaces the old masonry markup)
+    var photos = [
+      { cat: 'wedding',    label: 'Andrea & Luis',      sub: 'Wedding · Tagaytay 2024', src: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=1000&q=85&fit=crop' },
+      { cat: 'prenuptial', label: 'Marco & Bea',        sub: 'Prenuptial · Batangas 2024', src: 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=1000&q=85&fit=crop' },
+      { cat: 'portrait',   label: 'Sofia R.',           sub: 'Portrait Session 2024', src: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=1000&q=85&fit=crop' },
+      { cat: 'family',     label: 'The Cruz Family',    sub: 'Maternity · 2024', src: 'https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=1000&q=85&fit=crop' },
+      { cat: 'family',     label: 'Carla & James',      sub: 'Family Session 2024', src: 'https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=1000&q=85&fit=crop' },
+      { cat: 'event',      label: 'The Rivera Debut',   sub: 'Event · 2024', src: 'https://images.unsplash.com/photo-1520854221256-17451cc331bf?w=1000&q=85&fit=crop' },
+      { cat: 'wedding',    label: 'Miguel & Claire',    sub: 'Wedding · 2024', src: 'https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=1000&q=85&fit=crop' },
+      { cat: 'prenuptial', label: 'Nico & Dana',        sub: 'Prenuptial · 2024', src: 'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=1000&q=85&fit=crop' },
+      { cat: 'wedding',    label: 'Paolo & Mia',        sub: 'Wedding · Cebu 2023', src: 'https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=1000&q=85&fit=crop' },
+      { cat: 'portrait',   label: 'The Tan Family',     sub: 'Portrait · 2023', src: 'https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=1000&q=85&fit=crop' },
+      { cat: 'family',     label: 'Baby Lorenzo',       sub: 'Newborn · 2024', src: 'https://images.unsplash.com/photo-1591604021695-0c69b7c05981?w=1000&q=85&fit=crop' },
+      { cat: 'event',      label: 'Garcia Anniversary', sub: 'Event · 2024', src: 'https://images.unsplash.com/photo-1525267219888-bb077b8792cc?w=1000&q=85&fit=crop' },
+      { cat: 'event',      label: "Isabelle's Debut",   sub: 'Debut · 2024', src: 'https://images.unsplash.com/photo-1524824267900-2b39b93f98f4?w=1000&q=85&fit=crop' },
+      { cat: 'prenuptial', label: 'Ryan & Lea',         sub: 'Prenuptial · 2023', src: 'https://images.unsplash.com/photo-1532712938310-34cb3982ef74?w=1000&q=85&fit=crop' }
+    ];
+
+    var flipbookEl  = document.getElementById('flipbook');
+    var progressEl  = document.getElementById('bookProgress');
+    var prevBtn     = document.getElementById('bookPrev');
+    var nextBtn     = document.getElementById('bookNext');
+
+    var currentSet = photos.slice();
+    var currentIndex = 0;
+
+    function buildBook(set) {
+      currentSet = set;
+      currentIndex = 0;
+      flipbookEl.innerHTML = '';
+      set.forEach(function(photo, i) {
+        var page = document.createElement('div');
+        page.className = 'flip-page';
+        page.style.zIndex = 1000 - i;
+
+        page.innerHTML =
+          '<div class="flip-face flip-front">' +
+            '<img src="' + photo.src + '" alt="' + photo.label + '" loading="lazy" />' +
+            '<div class="flip-caption"><div><div class="flip-label">' + photo.label + '</div>' +
+            '<span class="flip-cat">' + photo.sub + '</span></div></div>' +
+          '</div>' +
+          '<div class="flip-face flip-back"></div>' +
+          '<div class="flip-zone prev"></div>' +
+          '<div class="flip-zone next"></div>';
+
+        flipbookEl.appendChild(page);
       });
-    }, { threshold: 0.1 });
-    items.forEach(function(item) { observer.observe(item); });
+      updateControls();
+    }
+
+    function flipNext() {
+      var pages = flipbookEl.querySelectorAll('.flip-page');
+      if (currentIndex >= pages.length) return;
+      var page = pages[currentIndex];
+      page.classList.add('flipped');
+      page.style.zIndex = currentIndex + 1;
+      currentIndex++;
+      updateControls();
+    }
+
+    function flipPrev() {
+      if (currentIndex <= 0) return;
+      currentIndex--;
+      var pages = flipbookEl.querySelectorAll('.flip-page');
+      var page = pages[currentIndex];
+      page.classList.remove('flipped');
+      page.style.zIndex = 1000 - currentIndex;
+      updateControls();
+    }
+
+    function updateControls() {
+      var total = currentSet.length;
+      progressEl.textContent = 'Page ' + Math.min(currentIndex + 1, total) + ' / ' + total;
+      prevBtn.disabled = currentIndex <= 0;
+      nextBtn.disabled = currentIndex >= total;
+    }
+
+    flipbookEl.addEventListener('click', function(e) {
+      if (e.target.classList.contains('flip-zone')) {
+        if (e.target.classList.contains('next')) flipNext(); else flipPrev();
+      }
+    });
+    prevBtn.addEventListener('click', flipPrev);
+    nextBtn.addEventListener('click', flipNext);
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'ArrowRight') flipNext();
+      if (e.key === 'ArrowLeft') flipPrev();
+    });
+
+    // simple swipe support
+    var touchStartX = null;
+    flipbookEl.addEventListener('touchstart', function(e) { touchStartX = e.touches[0].clientX; }, { passive: true });
+    flipbookEl.addEventListener('touchend', function(e) {
+      if (touchStartX === null) return;
+      var dx = e.changedTouches[0].clientX - touchStartX;
+      if (Math.abs(dx) > 40) { dx < 0 ? flipNext() : flipPrev(); }
+      touchStartX = null;
+    }, { passive: true });
 
     // Filter
     var filterBtns = document.querySelectorAll('.filter-btn');
@@ -424,62 +400,12 @@
         filterBtns.forEach(function(b) { b.classList.remove('active'); });
         btn.classList.add('active');
         var cat = btn.getAttribute('data-filter');
-        items.forEach(function(item) {
-          var match = cat === 'all' || item.getAttribute('data-cat') === cat;
-          item.classList.toggle('hidden', !match);
-          if (match && !item.classList.contains('visible')) item.classList.add('visible');
-        });
+        var set = cat === 'all' ? photos.slice() : photos.filter(function(p) { return p.cat === cat; });
+        buildBook(set);
       });
     });
 
-    // Lightbox
-    var lb       = document.getElementById('lightbox');
-    var lbImg    = document.getElementById('lbImg');
-    var lbCap    = document.getElementById('lbCaption');
-    var lbClose  = document.getElementById('lbClose');
-    var lbPrev   = document.getElementById('lbPrev');
-    var lbNext   = document.getElementById('lbNext');
-    var visibleItems = [];
-    var currentIdx = 0;
-
-    function openLightbox(idx) {
-      visibleItems = Array.from(items).filter(function(i) { return !i.classList.contains('hidden'); });
-      currentIdx = idx;
-      var item = visibleItems[currentIdx];
-      lbImg.src     = item.getAttribute('data-src');
-      lbCap.textContent = item.getAttribute('data-label');
-      lb.classList.add('open');
-      document.body.style.overflow = 'hidden';
-    }
-    function closeLightbox() { lb.classList.remove('open'); document.body.style.overflow = ''; }
-    function navigate(dir) {
-      currentIdx = (currentIdx + dir + visibleItems.length) % visibleItems.length;
-      var item = visibleItems[currentIdx];
-      lbImg.style.opacity = '0';
-      setTimeout(function() {
-        lbImg.src = item.getAttribute('data-src');
-        lbCap.textContent = item.getAttribute('data-label');
-        lbImg.style.opacity = '1';
-      }, 180);
-    }
-    lbImg.style.transition = 'opacity 0.18s ease';
-
-    items.forEach(function(item, i) {
-      item.addEventListener('click', function() {
-        var vis = Array.from(items).filter(function(it) { return !it.classList.contains('hidden'); });
-        openLightbox(vis.indexOf(item));
-      });
-    });
-    lbClose.addEventListener('click', closeLightbox);
-    lbPrev.addEventListener('click', function() { navigate(-1); });
-    lbNext.addEventListener('click', function() { navigate(1); });
-    lb.addEventListener('click', function(e) { if (e.target === lb) closeLightbox(); });
-    document.addEventListener('keydown', function(e) {
-      if (!lb.classList.contains('open')) return;
-      if (e.key === 'Escape')      closeLightbox();
-      if (e.key === 'ArrowLeft')   navigate(-1);
-      if (e.key === 'ArrowRight')  navigate(1);
-    });
+    buildBook(photos.slice());
   </script>
 </body>
 </html>
