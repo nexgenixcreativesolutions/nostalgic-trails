@@ -110,21 +110,54 @@
     .gallery-section { position: relative; z-index: 3; padding: 0 60px 100px; }
     .masonry-grid {
       columns: 3; column-gap: 10px;
+      perspective: 1300px;
     }
+
+    /* Scrapbook photo card: taped down + gentle flip-in reveal */
     .masonry-item {
-      break-inside: avoid; margin-bottom: 10px;
-      position: relative; overflow: hidden; cursor: pointer;
+      break-inside: avoid; margin-bottom: 26px;
+      position: relative; overflow: visible; cursor: pointer;
       display: block;
-      opacity: 0; transform: translateY(20px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
+      box-shadow: 0 10px 22px rgba(0,0,0,0.5);
+      opacity: 0; transform-style: preserve-3d; transform-origin: top center;
+      transform: rotateX(-65deg) translateY(18px) rotate(var(--tilt, 0deg));
+      transition: opacity 0.7s ease, transform 0.65s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s ease;
     }
-    .masonry-item.visible { opacity: 1; transform: translateY(0); }
+    .masonry-item.visible { opacity: 1; transform: rotateX(0deg) translateY(0) rotate(var(--tilt, 0deg)); }
+    .masonry-item:hover {
+      transform: rotateX(0deg) translateY(-8px) rotate(0deg) scale(1.035);
+      box-shadow: 0 20px 36px rgba(0,0,0,0.6);
+      z-index: 6;
+    }
+
+    /* gentle alternating tilt so photos don't look grid-pasted */
+    .masonry-item:nth-child(5n+1) { --tilt: -2deg; }
+    .masonry-item:nth-child(5n+2) { --tilt: 1.6deg; }
+    .masonry-item:nth-child(5n+3) { --tilt: -1.2deg; }
+    .masonry-item:nth-child(5n+4) { --tilt: 2.2deg; }
+    .masonry-item:nth-child(5n+5) { --tilt: -1.6deg; }
+
+    /* scotch tape strip holding each photo down */
+    .masonry-item::before {
+      content: '';
+      position: absolute;
+      top: -12px; left: 50%;
+      width: 64px; height: 22px;
+      background: linear-gradient(100deg, rgba(255,255,255,0.5), rgba(255,255,255,0.26) 45%, rgba(255,255,255,0.42));
+      box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+      opacity: 0.8; pointer-events: none; z-index: 4;
+    }
+    .masonry-item:nth-child(4n+1)::before { transform: translateX(-72%) rotate(-6deg); }
+    .masonry-item:nth-child(4n+2)::before { transform: translateX(-28%) rotate(5deg); }
+    .masonry-item:nth-child(4n+3)::before { transform: translateX(-50%) rotate(-3deg); }
+    .masonry-item:nth-child(4n+4)::before { transform: translateX(-60%) rotate(7deg); }
+
     .masonry-item img {
       width: 100%; display: block;
       filter: saturate(0.85) brightness(0.9);
-      transition: filter 0.5s ease, transform 0.6s ease;
+      transition: filter 0.5s ease;
     }
-    .masonry-item:hover img { filter: saturate(1.05) brightness(1); transform: scale(1.03); }
+    .masonry-item:hover img { filter: saturate(1.05) brightness(1); }
     .masonry-item .item-overlay {
       position: absolute; inset: 0;
       background: linear-gradient(to top, rgba(8,6,4,0.7) 0%, transparent 55%);
@@ -143,7 +176,7 @@
 
     /* hidden category filter */
     .masonry-item[data-cat] { transition: opacity 0.6s ease, transform 0.6s ease, max-height 0.4s ease; }
-    .masonry-item.hidden { opacity: 0; transform: scale(0.95); pointer-events: none; max-height: 0; overflow: hidden; margin: 0; }
+    .masonry-item.hidden { opacity: 0; transform: scale(0.95) rotate(0deg); pointer-events: none; max-height: 0; overflow: hidden; margin: 0; }
 
     /* LIGHTBOX */
     .lightbox {
@@ -230,6 +263,13 @@
     }
     @media (max-width: 480px) {
       .masonry-grid { columns: 1; }
+    }
+
+    /* respect reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      .masonry-item { transition: opacity 0.4s ease !important; transform: rotate(var(--tilt, 0deg)) !important; }
+      .masonry-item.visible { transform: rotate(var(--tilt, 0deg)) !important; }
+      .masonry-item:hover { transform: rotate(0deg) !important; }
     }
   </style>
 </head>
@@ -349,14 +389,14 @@
   <div class="cta-strip">
     <h2 class="cta-heading">Your Story<br><em>Belongs Here Too</em></h2>
     <p class="cta-sub">Let's plan your session and create something you'll treasure forever.</p>
-    <a href="https://nexgenixcreativesolutions.github.io/nostalgic-trails/contact" class="btn-primary">Book a Session</a>
+    <a href="https://nexgenixcreativesolutions.github.io/nostalgic-trails#sec-contact" class="btn-primary">Book a Session</a>
   </div>
 
   <footer class="site-footer">
     <div class="footer-brand">Nostalgic Trails<span>© 2025 Nostalgic Trails Photography. All rights reserved.</span></div>
     <div style="display:flex;gap:24px;">
       <a href="https://nexgenixcreativesolutions.github.io/nostalgic-trails/packages" class="footer-link">Packages</a>
-      <a href="https://nexgenixcreativesolutions.github.io/nostalgic-trails/contact" class="footer-link">Contact →</a>
+      <a href="https://nexgenixcreativesolutions.github.io/nostalgic-trails#sec-contact" class="footer-link">Contact →</a>
     </div>
   </footer>
 
