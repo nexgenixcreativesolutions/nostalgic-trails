@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Nostalgic Trails — Photography</title>
+  <link rel="icon" type="image/png" href="nt-favicon.png" />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Syncopate:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
     :root {
@@ -32,10 +33,19 @@
     .cursor-ring { position: fixed; width: 36px; height: 36px; border: 1.5px solid var(--sage); border-radius: 50%; pointer-events: none; z-index: 9998; transform: translate(-50%,-50%); transition: all 0.18s ease; opacity: 0.6; }
 
     /* ─── NAV ─── */
-    #mainNav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; display: flex; align-items: center; padding: 24px 48px; transition: background 0.4s ease, padding 0.4s ease, border-color 0.4s ease; }
-    #mainNav.scrolled { background: rgba(13,11,9,0.95); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); padding: 14px 48px; border-bottom: 1px solid rgba(122,158,135,0.15); }
+    #mainNav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      display: flex; align-items: center; padding: 24px 48px;
+      transition: background 0.4s ease, padding 0.4s ease;
+    }
+    #mainNav.scrolled {
+      background: rgba(13,11,9,0.95);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      padding: 14px 48px; border-bottom: 1px solid rgba(122,158,135,0.15);
+    }
     .nav-logo { font-family: 'Syncopate', sans-serif; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--white); text-decoration: none; line-height: 1.55; flex-shrink: 0; white-space: nowrap; z-index: 1100; }
     .nav-logo span { display: block; color: var(--sage); font-size: 7.5px; letter-spacing: 0.3em; margin-top: 3px; }
+    .nav-logo-img { height: 32px; width: auto; display: block; object-fit: contain; }
 
     /* ── MOBILE TOGGLE ── */
     .nav-mobile-toggle { display: flex; flex-direction: column; justify-content: center; align-items: center; width: 44px; height: 44px; cursor: pointer !important; z-index: 1100; margin-left: auto; background: none; border: none; padding: 0; position: relative; }
@@ -69,7 +79,6 @@
     .nav-mobile-menu.open ul li:nth-child(3) a { transition-delay: 0.15s; transform: translateY(0); opacity: 1; }
     .nav-mobile-menu.open ul li:nth-child(4) a { transition-delay: 0.20s; transform: translateY(0); opacity: 1; }
     .nav-mobile-menu.open ul li:nth-child(5) a { transition-delay: 0.25s; transform: translateY(0); opacity: 1; }
-    .nav-mobile-menu.open ul li:nth-child(6) a { transition-delay: 0.30s; transform: translateY(0); opacity: 1; }
     .menu-book-btn { font-family: 'Syncopate', sans-serif; font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--white); background: var(--amber-dark); padding: 16px 36px; text-decoration: none; display: inline-block; margin-top: 40px; opacity: 0; transition: opacity 0.45s ease 0.28s, background 0.3s; }
     .nav-mobile-menu.open .menu-book-btn { opacity: 1; }
     .menu-book-btn:hover { background: var(--amber); }
@@ -117,23 +126,52 @@
     .section-counter { position: fixed; left: 40px; bottom: 40px; z-index: 800; font-family: 'Syncopate', sans-serif; font-size: 9px; letter-spacing: 0.4em; color: rgba(255,255,255,0.35); pointer-events: none; }
     .section-counter span { color: rgba(255,255,255,0.7); }
 
-    /* ═══ GALLERY SCROLL SECTION ═══ */
-    .gallery-scroll-section { position: relative; height: 220vh; z-index: 1; }
-    .gallery-scroll-sticky { position: sticky; top: 0; height: 100vh; overflow: hidden; background: linear-gradient(160deg, #080a08 0%, #0d0f0b 50%, #080a06 100%); display: flex; flex-direction: column; justify-content: center; }
-    .gallery-scroll-sticky::before { content: ''; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 55% 40% at 25% 35%, rgba(200,136,74,0.07) 0%, transparent 70%), radial-gradient(ellipse 45% 50% at 75% 65%, rgba(196,136,110,0.05) 0%, transparent 70%); }
+    /* ═══════════════════════════════════════════════════
+       GALLERY SCROLL SECTION (3rd row)
+       Sticky viewport with live marquee strips inside
+    ═══════════════════════════════════════════════════ */
+    .gallery-scroll-section {
+      position: relative; height: 220vh; z-index: 1;
+    }
+    .gallery-scroll-sticky {
+      position: sticky; top: 0; height: 100vh; overflow: hidden;
+      background: linear-gradient(160deg, #080a08 0%, #0d0f0b 50%, #080a06 100%);
+      display: flex; flex-direction: column; justify-content: center;
+    }
 
-    .gallery-sec-header { position: relative; z-index: 3; display: flex; flex-direction: column; align-items: center; text-align: center; padding: 0 40px; opacity: 0; transform: translateY(14px); transition: opacity 0.55s ease, transform 0.55s ease; }
+    /* dark radial glows behind tracks */
+    .gallery-scroll-sticky::before {
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      background:
+        radial-gradient(ellipse 55% 40% at 25% 35%, rgba(200,136,74,0.07) 0%, transparent 70%),
+        radial-gradient(ellipse 45% 50% at 75% 65%, rgba(196,136,110,0.05) 0%, transparent 70%);
+    }
+
+    /* header text inside the gallery section */
+    .gallery-sec-header {
+      position: relative; z-index: 3;
+      display: flex; flex-direction: column; align-items: center;
+      text-align: center; padding: 0 40px;
+      opacity: 0; transform: translateY(14px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
+    }
     .gallery-scroll-section.active .gallery-sec-header { opacity: 1; transform: translateY(0); }
+
     .gallery-sec-eyebrow { font-family: 'DM Sans', sans-serif; font-size: clamp(9px,0.65vw,12px); letter-spacing: 0.5em; text-transform: uppercase; color: var(--rose-light); margin-bottom: 16px; display: flex; align-items: center; gap: 14px; }
     .gallery-sec-eyebrow::before, .gallery-sec-eyebrow::after { content: ''; width: 28px; height: 1px; background: var(--rose); }
     .gallery-sec-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(40px,5vw,88px); font-weight: 300; line-height: 0.93; color: var(--white); }
     .gallery-sec-title em { font-style: italic; color: var(--off-white); }
 
-    .gallery-strips { position: relative; z-index: 2; display: flex; flex-direction: column; gap: 14px; margin: 28px 0 0; overflow: hidden; }
+    /* marquee strip wrapper */
+    .gallery-strips {
+      position: relative; z-index: 2;
+      display: flex; flex-direction: column; gap: 14px;
+      margin: 28px 0 0; overflow: hidden;
+    }
     .gallery-strip-track-wrap { overflow: hidden; }
     .gallery-strip-track { display: flex; gap: 14px; width: max-content; }
-    .gallery-strip-track.fwd { animation: stripFwd 32s linear infinite; }
-    .gallery-strip-track.rev { animation: stripRev 36s linear infinite; }
+    .gallery-strip-track.fwd  { animation: stripFwd  32s linear infinite; }
+    .gallery-strip-track.rev  { animation: stripRev  36s linear infinite; }
     @keyframes stripFwd { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
     @keyframes stripRev { 0% { transform: translateX(-50%); } 100% { transform: translateX(0); } }
 
@@ -143,9 +181,22 @@
     .strip-photo .sp-label { position: absolute; bottom: 0; left: 0; right: 0; padding: 22px 12px 10px; background: linear-gradient(to top, rgba(0,0,0,0.68), transparent); font-family: 'DM Sans', sans-serif; font-size: 8.5px; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(255,255,255,0.8); opacity: 0; transition: opacity 0.3s; }
     .strip-photo:hover .sp-label { opacity: 1; }
 
-    .gallery-sec-cta { position: relative; z-index: 3; display: flex; flex-direction: column; align-items: center; gap: 18px; margin-top: 32px; opacity: 0; transform: translateY(10px); transition: opacity 0.5s ease 0.2s, transform 0.5s ease 0.2s; }
+    /* CTA below the strips */
+    .gallery-sec-cta {
+      position: relative; z-index: 3;
+      display: flex; flex-direction: column; align-items: center; gap: 18px;
+      margin-top: 32px;
+      opacity: 0; transform: translateY(10px);
+      transition: opacity 0.5s ease 0.2s, transform 0.5s ease 0.2s;
+    }
     .gallery-scroll-section.active .gallery-sec-cta { opacity: 1; transform: translateY(0); }
-    .gallery-cta-btn { display: inline-flex; align-items: center; gap: 16px; font-family: 'Syncopate', sans-serif; font-size: 9px; letter-spacing: 0.36em; text-transform: uppercase; color: var(--off-white); border: 1px solid rgba(200,136,74,0.45); padding: 16px 44px; text-decoration: none; position: relative; overflow: hidden; transition: border-color 0.3s, color 0.3s; }
+
+    .gallery-cta-btn {
+      display: inline-flex; align-items: center; gap: 16px;
+      font-family: 'Syncopate', sans-serif; font-size: 9px; letter-spacing: 0.36em; text-transform: uppercase;
+      color: var(--off-white); border: 1px solid rgba(200,136,74,0.45); padding: 16px 44px;
+      text-decoration: none; position: relative; overflow: hidden; transition: border-color 0.3s, color 0.3s;
+    }
     .gallery-cta-btn::before { content: ''; position: absolute; inset: 0; background: rgba(200,136,74,0.09); transform: translateX(-100%); transition: transform 0.4s cubic-bezier(0.23,1,0.32,1); }
     .gallery-cta-btn:hover::before { transform: translateX(0); }
     .gallery-cta-btn:hover { border-color: var(--amber); color: var(--white); }
@@ -154,47 +205,130 @@
     .gallery-cta-note { font-family: 'DM Sans', sans-serif; font-size: 9.5px; letter-spacing: 0.28em; text-transform: uppercase; color: rgba(122,158,135,0.45); }
 
     /* ─── CONTACT SECTION ─── */
-    #sec-contact { position: relative; width: 100%; min-height: 100vh; overflow: hidden; z-index: 2; display: flex; align-items: stretch; }
-    .contact-bg { position: absolute; inset: 0; background-image: url('https://images.unsplash.com/photo-1519741497674-611481863552?w=1600&q=80&fit=crop'); background-size: cover; background-position: center; filter: brightness(0.12) saturate(0.4); z-index: 0; }
-    .contact-overlay { position: absolute; inset: 0; z-index: 1; background: linear-gradient(135deg, rgba(8,6,4,0.88) 0%, rgba(8,6,4,0.78) 100%); }
-    .contact-inner { position: relative; z-index: 2; width: 100%; display: grid; grid-template-columns: 1fr 1.3fr; gap: 0; max-width: 1300px; margin: 0 auto; padding: 120px 60px 100px; }
+    #sec-contact {
+      position: relative; width: 100%; min-height: 100vh;
+      overflow: hidden; z-index: 2;
+      display: flex; align-items: stretch;
+    }
+    .contact-bg {
+      position: absolute; inset: 0;
+      background-image: url('https://images.unsplash.com/photo-1519741497674-611481863552?w=1600&q=80&fit=crop');
+      background-size: cover; background-position: center;
+      filter: brightness(0.12) saturate(0.4); z-index: 0;
+    }
+    .contact-overlay {
+      position: absolute; inset: 0; z-index: 1;
+      background: linear-gradient(135deg, rgba(8,6,4,0.88) 0%, rgba(8,6,4,0.78) 100%);
+    }
+    .contact-inner {
+      position: relative; z-index: 2; width: 100%;
+      display: grid; grid-template-columns: 1fr 1.3fr;
+      gap: 0; max-width: 1300px; margin: 0 auto;
+      padding: 120px 60px 100px;
+    }
 
-    .contact-left { display: flex; flex-direction: column; justify-content: center; padding-right: 80px; border-right: 1px solid rgba(138,170,142,0.14); }
-    .contact-eyebrow { font-family: 'DM Sans', sans-serif; font-size: 10px; letter-spacing: 0.5em; text-transform: uppercase; color: var(--rose-light); margin-bottom: 24px; display: flex; align-items: center; gap: 14px; }
+    /* ── Left side ── */
+    .contact-left {
+      display: flex; flex-direction: column; justify-content: center;
+      padding-right: 80px; border-right: 1px solid rgba(138,170,142,0.14);
+    }
+    .contact-eyebrow {
+      font-family: 'DM Sans', sans-serif; font-size: 10px;
+      letter-spacing: 0.5em; text-transform: uppercase; color: var(--rose-light);
+      margin-bottom: 24px; display: flex; align-items: center; gap: 14px;
+    }
     .contact-eyebrow::before { content: ''; width: 32px; height: 1px; background: var(--rose); }
-    .contact-heading { font-family: 'Cormorant Garamond', serif; font-size: clamp(52px, 6vw, 96px); font-weight: 300; line-height: 0.9; color: var(--white); margin-bottom: 28px; }
+    .contact-heading {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(52px, 6vw, 96px); font-weight: 300; line-height: 0.9;
+      color: var(--white); margin-bottom: 28px;
+    }
     .contact-heading em { font-style: italic; color: var(--off-white); }
-    .contact-sub { font-size: 14px; line-height: 1.8; color: rgba(255,255,255,0.52); max-width: 340px; margin-bottom: 36px; }
-    .contact-reviews-link { font-family: 'DM Sans', sans-serif; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(200,136,74,0.8); text-decoration: none; display: inline-flex; align-items: center; gap: 10px; transition: gap 0.3s, color 0.3s; }
+    .contact-sub {
+      font-size: 14px; line-height: 1.8; color: rgba(255,255,255,0.52);
+      max-width: 340px; margin-bottom: 36px;
+    }
+    .contact-reviews-link {
+      font-family: 'DM Sans', sans-serif; font-size: 11px; letter-spacing: 0.18em;
+      text-transform: uppercase; color: rgba(200,136,74,0.8); text-decoration: none;
+      display: inline-flex; align-items: center; gap: 10px;
+      transition: gap 0.3s, color 0.3s;
+    }
     .contact-reviews-link:hover { gap: 16px; color: var(--amber); }
     .crlink-arrow { color: var(--amber); transition: transform 0.3s; }
     .contact-reviews-link:hover .crlink-arrow { transform: translateX(4px); }
-    .contact-film-strip { display: flex; align-items: center; gap: 6px; margin-top: 48px; border-top: 1px solid rgba(138,170,142,0.1); padding-top: 32px; }
-    .film-hole { width: 12px; height: 12px; border-radius: 2px; border: 1px solid rgba(255,255,255,0.15); flex-shrink: 0; }
-    .film-img { width: 72px; height: 52px; overflow: hidden; flex-shrink: 0; border: 1px solid rgba(255,255,255,0.08); }
+
+    /* decorative film strip */
+    .contact-film-strip {
+      display: flex; align-items: center; gap: 6px;
+      margin-top: 48px; border-top: 1px solid rgba(138,170,142,0.1); padding-top: 32px;
+    }
+    .film-hole {
+      width: 12px; height: 12px; border-radius: 2px;
+      border: 1px solid rgba(255,255,255,0.15); flex-shrink: 0;
+    }
+    .film-img {
+      width: 72px; height: 52px; overflow: hidden; flex-shrink: 0;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
     .film-img img { width: 100%; height: 100%; object-fit: cover; filter: saturate(0.6); }
 
+    /* ── Right side: form ── */
     .contact-right { padding-left: 72px; display: flex; align-items: center; }
     .contact-form { width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 0 24px; }
-    .cf-field { display: flex; flex-direction: column; gap: 8px; margin-bottom: 28px; }
+
+    .cf-field {
+      display: flex; flex-direction: column; gap: 8px; margin-bottom: 28px;
+    }
     .cf-field--full { grid-column: 1 / -1; }
-    .cf-label { font-family: 'DM Sans', sans-serif; font-size: 9px; letter-spacing: 0.4em; text-transform: uppercase; color: rgba(138,170,142,0.7); }
-    .cf-input { background: transparent; border: none; border-bottom: 1px solid rgba(138,170,142,0.25); color: var(--ink); font-family: 'Cormorant Garamond', serif; font-size: clamp(16px,1.4vw,22px); font-weight: 300; padding: 12px 0; outline: none; width: 100%; transition: border-color 0.3s; -webkit-appearance: none; appearance: none; border-radius: 0; }
+    .cf-label {
+      font-family: 'DM Sans', sans-serif; font-size: 9px;
+      letter-spacing: 0.4em; text-transform: uppercase; color: rgba(138,170,142,0.7);
+    }
+    .cf-input {
+      background: transparent; border: none; border-bottom: 1px solid rgba(138,170,142,0.25);
+      color: var(--ink); font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(16px, 1.4vw, 22px); font-weight: 300;
+      padding: 12px 0; outline: none; width: 100%;
+      transition: border-color 0.3s;
+      -webkit-appearance: none; appearance: none;
+      border-radius: 0;
+    }
     .cf-input::placeholder { color: rgba(160,152,136,0.35); font-style: italic; }
     .cf-input:focus { border-color: var(--amber); }
     input[type="date"].cf-input { color-scheme: dark; cursor: none; }
-    .cf-textarea { resize: none; height: 120px; line-height: 1.6; padding-top: 14px; }
-    .cf-submit { grid-column: 1 / -1; display: inline-flex; align-items: center; gap: 18px; font-family: 'Syncopate', sans-serif; font-size: 9px; letter-spacing: 0.38em; text-transform: uppercase; color: var(--off-white); background: var(--amber-dark); border: none; padding: 18px 44px; cursor: none; position: relative; overflow: hidden; transition: background 0.3s; margin-top: 8px; justify-self: start; }
-    .cf-submit::before { content: ''; position: absolute; inset: 0; background: rgba(255,255,255,0.06); transform: translateX(-100%); transition: transform 0.4s cubic-bezier(0.23,1,0.32,1); }
+    .cf-textarea {
+      resize: none; height: 120px; line-height: 1.6;
+      padding-top: 14px;
+    }
+
+    /* submit */
+    .cf-submit {
+      grid-column: 1 / -1;
+      display: inline-flex; align-items: center; gap: 18px;
+      font-family: 'Syncopate', sans-serif; font-size: 9px;
+      letter-spacing: 0.38em; text-transform: uppercase;
+      color: var(--off-white); background: var(--amber-dark);
+      border: none; padding: 18px 44px; cursor: none;
+      position: relative; overflow: hidden; transition: background 0.3s;
+      margin-top: 8px; justify-self: start;
+    }
+    .cf-submit::before {
+      content: ''; position: absolute; inset: 0;
+      background: rgba(255,255,255,0.06);
+      transform: translateX(-100%); transition: transform 0.4s cubic-bezier(0.23,1,0.32,1);
+    }
     .cf-submit:hover::before { transform: translateX(0); }
     .cf-submit:hover { background: var(--amber); }
     .cf-submit-arrow { font-size: 16px; color: rgba(255,255,255,0.6); transition: transform 0.3s; }
     .cf-submit:hover .cf-submit-arrow { transform: translateX(5px); }
-    .cf-success { grid-column: 1 / -1; display: none; font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 18px; color: var(--sage-light); margin-top: 16px; letter-spacing: 0.05em; }
-    .cf-select { background: transparent; border: none; border-bottom: 1px solid rgba(138,170,142,0.25); color: var(--ink); font-family: 'Cormorant Garamond', serif; font-size: clamp(16px,1.4vw,22px); font-weight: 300; padding: 12px 0; outline: none; width: 100%; transition: border-color 0.3s; -webkit-appearance: none; appearance: none; border-radius: 0; cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238aaa8e' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 4px center; }
-    .cf-select:focus { border-color: var(--amber); }
-    .cf-select option { background: #1a1208; color: var(--ink); }
-    .cf-select.preselected { color: var(--off-white); border-color: rgba(200,136,74,0.5); }
+
+    /* success */
+    .cf-success {
+      grid-column: 1 / -1; display: none;
+      font-family: 'Cormorant Garamond', serif; font-style: italic;
+      font-size: 18px; color: var(--sage-light); margin-top: 16px; letter-spacing: 0.05em;
+    }
 
     /* ─── FOOTER ─── */
     .site-footer { background: #080605; border-top: 1px solid rgba(122,158,135,0.12); padding: 40px 60px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; position: relative; z-index: 1; }
@@ -207,7 +341,7 @@
     /* ─── NOISE ─── */
     .noise { position: fixed; inset: 0; z-index: 2; pointer-events: none; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E"); opacity: 0.5; }
 
-    /* ─── RESPONSIVE ─── */
+    /* ─── CONTACT RESPONSIVE ─── */
     @media (max-width: 900px) {
       .contact-inner { grid-template-columns: 1fr; padding: 100px 32px 80px; }
       .contact-left { border-right: none; padding-right: 0; border-bottom: 1px solid rgba(138,170,142,0.14); padding-bottom: 48px; margin-bottom: 48px; }
@@ -220,6 +354,8 @@
       .cf-submit { grid-column: 1; }
       .cf-success { grid-column: 1; }
     }
+
+    /* ─── RESPONSIVE ─── */
     @media (max-width: 768px) {
       body { cursor: auto; }
       .cursor, .cursor-ring { display: none; }
@@ -235,9 +371,16 @@
       .client-tag { display: none !important; }
       .gallery-scroll-section { height: 180vh; }
       .strip-photo { width: 180px; height: 120px; }
+      #sec-testimonials { padding: 80px 20px 60px; }
+      .testimonials-inner { grid-template-columns: 1fr !important; max-width: 100% !important; gap: 16px; }
+      .t-card { padding: 24px 20px; } .t-text { font-size: 14px; }
       .section-progress { right: 14px; }
       .section-counter { left: 20px; bottom: 20px; }
       .site-footer { flex-direction: column; gap: 24px; text-align: center; padding: 40px 20px; }
+      .t-float-img { display: none; }
+    }
+    @media (min-width: 769px) and (max-width: 1024px) {
+      .testimonials-inner { grid-template-columns: 1fr !important; }
     }
   </style>
 </head>
@@ -247,6 +390,7 @@
   <div class="cursor-ring" id="cursorRing"></div>
   <div class="noise"></div>
 
+  <!-- Camera HUD -->
   <div class="cam-hud" id="camHud">
     <svg viewBox="0 0 160 160" fill="none">
       <circle cx="80" cy="80" r="68" stroke="rgba(196,136,110,0.3)" stroke-width="0.8"/>
@@ -255,42 +399,43 @@
       <line x1="138" y1="80" x2="158" y2="80" stroke="rgba(196,136,110,0.55)" stroke-width="0.8"/>
       <line x1="80"  y1="2"  x2="80"  y2="22" stroke="rgba(196,136,110,0.55)" stroke-width="0.8"/>
       <line x1="80" y1="138" x2="80" y2="158" stroke="rgba(196,136,110,0.55)" stroke-width="0.8"/>
-      <path d="M18 10 L10 10 L10 18"       stroke="rgba(255,255,255,0.18)" stroke-width="1" fill="none"/>
-      <path d="M142 10 L150 10 L150 18"    stroke="rgba(255,255,255,0.18)" stroke-width="1" fill="none"/>
-      <path d="M18 150 L10 150 L10 142"    stroke="rgba(255,255,255,0.18)" stroke-width="1" fill="none"/>
+      <path d="M18 10 L10 10 L10 18"      stroke="rgba(255,255,255,0.18)" stroke-width="1" fill="none"/>
+      <path d="M142 10 L150 10 L150 18"   stroke="rgba(255,255,255,0.18)" stroke-width="1" fill="none"/>
+      <path d="M18 150 L10 150 L10 142"   stroke="rgba(255,255,255,0.18)" stroke-width="1" fill="none"/>
       <path d="M142 150 L150 150 L150 142" stroke="rgba(255,255,255,0.18)" stroke-width="1" fill="none"/>
     </svg>
   </div>
 
+  <!-- NAV -->
   <nav id="mainNav">
-    <a href="#sec-hero" class="nav-logo">Nostalgic Trails<span>Raw unfiltered emotions</span></a>
+    <a href="#sec-hero" class="nav-logo"><img src="nt-logo.png" alt="Nostalgic Trails" class="nav-logo-img" /><span>Raw unfiltered emotions</span></a>
     <button class="nav-mobile-toggle" id="navHamburger" aria-label="Open menu">
       <span class="ham-line"></span><span class="ham-line"></span><span class="ham-line"></span>
     </button>
   </nav>
 
+  <!-- MOBILE MENU -->
   <div class="nav-mobile-menu" id="navMobileMenu">
     <div class="menu-corner-br"></div>
     <button class="menu-close-btn" id="menuCloseBtn" aria-label="Close menu">
       <span class="menu-close-line"></span><span class="menu-close-line"></span>
     </button>
     <ul>
-      <li><a href="#sec-weddings" class="menu-link">Works</a></li>
-      <li><a href="#sec-gallery"  class="menu-link"><em>Gallery</em></a></li>
-      <li><a href="#sec-about"    class="menu-link">About</a></li>
-      <li><a href="#sec-contact"  class="menu-link">Contact</a></li>
-      <li><a href="https://nexgenixcreativesolutions.github.io/nostalgic-trails/packages" class="menu-link">Packages</a></li>
-      <li><a href="https://nexgenixcreativesolutions.github.io/nostalgic-trails/reviews" class="menu-link">Reviews</a></li>
+      <li><a href="#sec-weddings"     class="menu-link">Works</a></li>
+      <li><a href="#sec-gallery"      class="menu-link"><em>Gallery</em></a></li>
+      <li><a href="reviews.html"      class="menu-link">Reviews</a></li>
+      <li><a href="#sec-about"        class="menu-link">About</a></li>
+      <li><a href="#sec-contact"      class="menu-link">Contact</a></li>
     </ul>
-    <a href="https://nexgenixcreativesolutions.github.io/nostalgic-trails#sec-contact" class="menu-book-btn">Book a Session</a>
+    <a href="contact.html" class="menu-book-btn">Book a Session</a>
     <div class="menu-tagline">Documentary Photography · Est. 2014</div>
   </div>
 
   <div class="section-progress" id="sectionProgress"></div>
-  <div class="section-counter" id="sectionCounter"><span>01</span> / 05</div>
+  <div class="section-counter"  id="sectionCounter"><span>01</span> / 05</div>
 
-  <!-- ══ 01 — HERO ══ -->
-  <div class="scroll-section" id="sec-hero">
+  <!-- ══ SECTION 1 — HERO ══ -->
+  <div class="scroll-section" data-index="0" id="sec-hero">
     <div class="scroll-sticky">
       <div class="scroll-zoom" id="zoom-0">
         <div class="section-bg" style="background-image:url('https://images.unsplash.com/photo-1519741497674-611481863552?w=1600&q=80&fit=crop')"></div>
@@ -301,15 +446,15 @@
           <p class="section-body">We capture the moments you feel but cannot hold — turning fleeting emotion into timeless, cinematic imagery that lives forever.</p>
           <div class="section-actions">
             <a href="#sec-weddings" class="btn-primary">Explore Works</a>
-            <a href="https://nexgenixcreativesolutions.github.io/nostalgic-trails/packages" class="btn-ghost">View Packages</a>
+            <a href="packages.html" class="btn-ghost">View Packages</a>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- ══ 02 — WORKS / WHAT WE DO ══ -->
-  <div class="scroll-section" id="sec-weddings">
+  <!-- ══ SECTION 2 — WEDDINGS / ABOUT ══ -->
+  <div class="scroll-section" data-index="1" id="sec-weddings">
     <div class="scroll-sticky">
       <div class="scroll-zoom" id="zoom-1">
         <div class="section-bg" style="background-image:url('https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=1600&q=80&fit=crop')"></div>
@@ -319,8 +464,8 @@
           <h2 class="section-title-big">Weddings,<br>Portraits &amp;<br><em>Real Moments</em></h2>
           <p class="section-body">We tell your story with intention and empathy — capturing raw, unfiltered emotions without staging, without posing, and without interrupting life as it unfolds.</p>
           <div class="section-actions">
-            <a href="https://nexgenixcreativesolutions.github.io/nostalgic-trails#sec-contact" class="btn-primary">Book a Session</a>
-            <a href="https://nexgenixcreativesolutions.github.io/nostalgic-trails/packages" class="btn-ghost">See Packages</a>
+            <a href="contact.html" class="btn-primary">Book a Session</a>
+            <a href="packages.html" class="btn-ghost">See Packages</a>
           </div>
         </div>
         <div class="client-tag" style="position:absolute;bottom:80px;right:60px;z-index:3;text-align:right;">
@@ -331,32 +476,42 @@
     </div>
   </div>
 
-  <!-- ══ 03 — GALLERY ══ -->
-  <div class="gallery-scroll-section" id="sec-gallery">
+  <!-- ══════════════════════════════════════════
+       SECTION 3 — GALLERY (scroll-sticky with live marquee strips)
+  ══════════════════════════════════════════ -->
+  <div class="gallery-scroll-section" data-index="2" id="sec-gallery">
     <div class="gallery-scroll-sticky">
+
+      <!-- Header text -->
       <div class="gallery-sec-header">
         <div class="gallery-sec-eyebrow">Our Work · Full Portfolio</div>
         <h2 class="gallery-sec-title">A Life in <em>Frames</em></h2>
       </div>
+
+      <!-- Animated strips -->
       <div class="gallery-strips">
+        <!-- Strip 1 — forward -->
         <div class="gallery-strip-track-wrap">
           <div class="gallery-strip-track fwd">
             <div class="strip-photo"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=560&q=75&fit=crop" alt="Wedding" loading="lazy"><div class="sp-label">Andrea &amp; Luis · Wedding</div></div>
             <div class="strip-photo"><img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=560&q=75&fit=crop" alt="Prenuptial" loading="lazy"><div class="sp-label">Marco &amp; Bea · Prenuptial</div></div>
             <div class="strip-photo"><img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=560&q=75&fit=crop" alt="Portrait" loading="lazy"><div class="sp-label">Sofia R. · Portrait</div></div>
-            <div class="strip-photo"><img src="https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=560&q=75&fit=crop" alt="Maternity" loading="lazy"><div class="sp-label">Cruz Family · Maternity</div></div>
+            <div class="strip-photo"><img src="https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=560&q=75&fit=crop" alt="Session" loading="lazy"><div class="sp-label">Cruz Family · Maternity</div></div>
             <div class="strip-photo"><img src="https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=560&q=75&fit=crop" alt="Family" loading="lazy"><div class="sp-label">Carla &amp; James · Family</div></div>
             <div class="strip-photo"><img src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?w=560&q=75&fit=crop" alt="Event" loading="lazy"><div class="sp-label">Rivera Debut · Event</div></div>
             <div class="strip-photo"><img src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=560&q=75&fit=crop" alt="Wedding 2" loading="lazy"><div class="sp-label">Miguel &amp; Claire · Wedding</div></div>
+            <!-- duplicate for seamless loop -->
             <div class="strip-photo"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=560&q=75&fit=crop" alt="Wedding" loading="lazy"><div class="sp-label">Andrea &amp; Luis · Wedding</div></div>
             <div class="strip-photo"><img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=560&q=75&fit=crop" alt="Prenuptial" loading="lazy"><div class="sp-label">Marco &amp; Bea · Prenuptial</div></div>
             <div class="strip-photo"><img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=560&q=75&fit=crop" alt="Portrait" loading="lazy"><div class="sp-label">Sofia R. · Portrait</div></div>
-            <div class="strip-photo"><img src="https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=560&q=75&fit=crop" alt="Maternity" loading="lazy"><div class="sp-label">Cruz Family · Maternity</div></div>
+            <div class="strip-photo"><img src="https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=560&q=75&fit=crop" alt="Session" loading="lazy"><div class="sp-label">Cruz Family · Maternity</div></div>
             <div class="strip-photo"><img src="https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=560&q=75&fit=crop" alt="Family" loading="lazy"><div class="sp-label">Carla &amp; James · Family</div></div>
             <div class="strip-photo"><img src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?w=560&q=75&fit=crop" alt="Event" loading="lazy"><div class="sp-label">Rivera Debut · Event</div></div>
             <div class="strip-photo"><img src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=560&q=75&fit=crop" alt="Wedding 2" loading="lazy"><div class="sp-label">Miguel &amp; Claire · Wedding</div></div>
           </div>
         </div>
+
+        <!-- Strip 2 — reverse -->
         <div class="gallery-strip-track-wrap">
           <div class="gallery-strip-track rev">
             <div class="strip-photo"><img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=560&q=75&fit=crop" alt="Prenup 2" loading="lazy"><div class="sp-label">Nico &amp; Dana · Prenuptial</div></div>
@@ -366,6 +521,7 @@
             <div class="strip-photo"><img src="https://images.unsplash.com/photo-1525267219888-bb077b8792cc?w=560&q=75&fit=crop" alt="Event 2" loading="lazy"><div class="sp-label">Garcia Anniversary</div></div>
             <div class="strip-photo"><img src="https://images.unsplash.com/photo-1524824267900-2b39b93f98f4?w=560&q=75&fit=crop" alt="Debut" loading="lazy"><div class="sp-label">Isabelle's Debut · 2024</div></div>
             <div class="strip-photo"><img src="https://images.unsplash.com/photo-1532712938310-34cb3982ef74?w=560&q=75&fit=crop" alt="Couple" loading="lazy"><div class="sp-label">Ryan &amp; Lea · Prenuptial</div></div>
+            <!-- duplicate -->
             <div class="strip-photo"><img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=560&q=75&fit=crop" alt="Prenup 2" loading="lazy"><div class="sp-label">Nico &amp; Dana · Prenuptial</div></div>
             <div class="strip-photo"><img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=560&q=75&fit=crop" alt="Wedding 3" loading="lazy"><div class="sp-label">Paolo &amp; Mia · Wedding</div></div>
             <div class="strip-photo"><img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=560&q=75&fit=crop" alt="Portrait 2" loading="lazy"><div class="sp-label">The Tan Family · Portrait</div></div>
@@ -376,18 +532,22 @@
           </div>
         </div>
       </div>
+
+      <!-- View Gallery CTA -->
       <div class="gallery-sec-cta">
-        <a href="https://nexgenixcreativesolutions.github.io/nostalgic-trails/gallery" class="gallery-cta-btn">
+        <a href="gallery.html" class="gallery-cta-btn">
           <span>View Full Gallery</span>
           <span class="gallery-cta-arrow">→</span>
         </a>
         <div class="gallery-cta-note">16+ sessions · Weddings · Prenuptials · Portraits · Events</div>
       </div>
+
     </div>
   </div>
+  <!-- ══ END SECTION 3 ══ -->
 
-  <!-- ══ 04 — ABOUT ══ -->
-  <div class="scroll-section" id="sec-about">
+  <!-- ══ SECTION 4 — ABOUT ══ -->
+  <div class="scroll-section" data-index="3" id="sec-about">
     <div class="scroll-sticky">
       <div class="scroll-zoom" id="zoom-3">
         <div class="section-bg" style="background-image:url('https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=1600&q=80&fit=crop');filter:brightness(0.5) saturate(0.7)"></div>
@@ -411,19 +571,24 @@
     </div>
   </div>
 
-  <!-- ══ 05 — CONTACT ══ -->
+  <!-- ══ SECTION 5 — CONTACT FORM ══ -->
   <section id="sec-contact">
+    <!-- Background: blurred photo -->
     <div class="contact-bg"></div>
     <div class="contact-overlay"></div>
+
     <div class="contact-inner">
+
+      <!-- Left: editorial copy -->
       <div class="contact-left">
         <div class="contact-eyebrow">Let's Begin</div>
         <h2 class="contact-heading">Tell Us<br>Your <em>Story</em></h2>
         <p class="contact-sub">Every great photograph starts with a conversation. Fill in the form and we'll reach out within 24 hours.</p>
-        <a href="https://nexgenixcreativesolutions.github.io/nostalgic-trails/gallery" class="contact-reviews-link">
-          <span>Browse our gallery</span>
+        <a href="reviews.html" class="contact-reviews-link">
+          <span>Read what couples say</span>
           <span class="crlink-arrow">→</span>
         </a>
+        <!-- decorative film strip -->
         <div class="contact-film-strip">
           <div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div>
           <div class="film-img"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=300&q=70&fit=crop" alt="" /></div>
@@ -432,73 +597,67 @@
           <div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div>
         </div>
       </div>
+
+      <!-- Right: form -->
       <div class="contact-right">
         <form class="contact-form" action="https://formspree.io/f/mnjkjbly" method="POST">
+
           <div class="cf-field">
             <label class="cf-label" for="cf-name">Full Name</label>
             <input class="cf-input" id="cf-name" name="full_name" type="text" placeholder="Andrea Santos" required />
           </div>
+
           <div class="cf-field">
             <label class="cf-label" for="cf-email">Email</label>
             <input class="cf-input" id="cf-email" name="email" type="email" placeholder="andrea@email.com" required />
           </div>
+
           <div class="cf-field">
             <label class="cf-label" for="cf-location">Location / Venue</label>
             <input class="cf-input" id="cf-location" name="location_venue" type="text" placeholder="Tagaytay, Batangas…" />
           </div>
+
           <div class="cf-field">
             <label class="cf-label" for="cf-date">Session Date</label>
             <input class="cf-input" id="cf-date" name="session_date" type="date" />
           </div>
-          <div class="cf-field cf-field--full">
-            <label class="cf-label" for="cf-package">Package Interested In</label>
-            <select class="cf-select" id="cf-package" name="package">
-              <option value="" disabled selected>Select a package…</option>
-              <optgroup label="Individual Portrait">
-                <option value="Individual Portrait — Package A (₱10,000)">Package A — ₱10,000 · 4hrs, 30 outputs, 3 outfits</option>
-                <option value="Individual Portrait — Package B (₱7,500)">Package B — ₱7,500 · 3.5hrs, 24 outputs, 2 outfits</option>
-                <option value="Individual Portrait — Package C (₱5,000)">Package C — ₱5,000 · 2.5hrs, 15 outputs</option>
-              </optgroup>
-              <optgroup label="Pre-Debut &amp; Debut">
-                <option value="Pre-Debut &amp; Debut — Package A (₱35,000)">Package A — ₱35,000 · Full debut + pre-debut session</option>
-                <option value="Pre-Debut &amp; Debut — Package B (₱15,000)">Package B — ₱15,000 · 3.5hrs, 35 outputs</option>
-                <option value="Pre-Debut &amp; Debut — Package C (₱10,000)">Package C — ₱10,000 · Half-day, within Cebu</option>
-              </optgroup>
-              <optgroup label="Engagement Session">
-                <option value="Engagement Session — Package A (₱25,000)">Package A — ₱25,000 · Full-day, 90 photos, slideshow</option>
-                <option value="Engagement Session — Package B (₱15,000)">Package B — ₱15,000 · Half-day, 75 photos</option>
-                <option value="Engagement Session — Package C (₱10,000)">Package C — ₱10,000 · Half-day, within city</option>
-              </optgroup>
-              <optgroup label="Wedding">
-                <option value="Wedding — Package A (₱35,000)">Package A — ₱35,000 · Full coverage, 600+ photos</option>
-              </optgroup>
-              <optgroup label="Birthdays &amp; Events">
-                <option value="Birthdays &amp; Events — Package A (₱10,000)">Package A — ₱10,000 · Full event coverage</option>
-              </optgroup>
-              <option value="Not sure yet">Not sure yet — let's talk</option>
-            </select>
-          </div>
+
           <div class="cf-field cf-field--full">
             <label class="cf-label" for="cf-message">Your Message to Us</label>
-            <textarea class="cf-input cf-textarea" id="cf-message" name="message" placeholder="Tell us about your special day…" required></textarea>
+            <textarea class="cf-input cf-textarea" id="cf-message" name="message" placeholder="Tell us about your special day, what you're looking for, any questions…" required></textarea>
           </div>
+
           <button class="cf-submit" type="submit">
             <span class="cf-submit-label">Send Message</span>
             <span class="cf-submit-arrow">→</span>
           </button>
-          <div class="cf-success" id="cfSuccess">Thank you — we'll be in touch within 24 hours. ✦</div>
+
+          <div class="cf-success" id="cfSuccess">
+            Thank you — we'll be in touch within 24 hours. ✦
+          </div>
+
         </form>
       </div>
+
     </div>
   </section>
 
+  <!-- FOOTER -->
   <footer class="site-footer">
     <div class="footer-brand">Nostalgic Trails<span>© 2025 Nostalgic Trails Photography. All rights reserved.</span></div>
     <div class="footer-social">
-      <a href="https://www.instagram.com/nostalgictrails" target="_blank" rel="noopener" class="social-link" title="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
-      <a href="https://www.facebook.com/profile.php?id=100063809053493" target="_blank" rel="noopener" class="social-link" title="Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
-      <a href="mailto:nostalgictrails@gmail.com" class="social-link" title="Email us"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></a>
-      <a href="tel:+639287030126" class="social-link" title="Call us"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg></a>
+      <a href="https://www.instagram.com/nostalgictrails" target="_blank" rel="noopener" class="social-link" title="Instagram">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+      </a>
+      <a href="https://www.facebook.com/profile.php?id=100063809053493" target="_blank" rel="noopener" class="social-link" title="Facebook">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+      </a>
+      <a href="mailto:nostalgictrails@gmail.com" class="social-link" title="Email us">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+      </a>
+      <a href="tel:+639287030126" class="social-link" title="Call us">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+      </a>
     </div>
   </footer>
 
@@ -516,11 +675,18 @@
     document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeMenu(); });
 
     // ─── CUSTOM CURSOR ───────────────────────────────────────────
-    var cursor = document.getElementById('cursor');
+    var cursor     = document.getElementById('cursor');
     var cursorRing = document.getElementById('cursorRing');
     var mx = 0, my = 0, rx = 0, ry = 0;
-    document.addEventListener('mousemove', function(e) { mx = e.clientX; my = e.clientY; cursor.style.left = mx + 'px'; cursor.style.top = my + 'px'; });
-    (function loop() { rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12; cursorRing.style.left = rx + 'px'; cursorRing.style.top = ry + 'px'; requestAnimationFrame(loop); })();
+    document.addEventListener('mousemove', function(e) {
+      mx = e.clientX; my = e.clientY;
+      cursor.style.left = mx + 'px'; cursor.style.top = my + 'px';
+    });
+    (function loop() {
+      rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
+      cursorRing.style.left = rx + 'px'; cursorRing.style.top = ry + 'px';
+      requestAnimationFrame(loop);
+    })();
     document.querySelectorAll('a, button').forEach(function(el) {
       el.addEventListener('mouseenter', function() { cursor.style.transform = 'translate(-50%,-50%) scale(2.5)'; cursorRing.style.transform = 'translate(-50%,-50%) scale(1.5)'; cursorRing.style.opacity = '0.35'; });
       el.addEventListener('mouseleave', function() { cursor.style.transform = 'translate(-50%,-50%) scale(1)'; cursorRing.style.transform = 'translate(-50%,-50%) scale(1)'; cursorRing.style.opacity = '0.6'; });
@@ -536,157 +702,116 @@
     if (contactForm) {
       contactForm.addEventListener('submit', function(e) {
         e.preventDefault();
-        fetch(contactForm.action, { method: 'POST', body: new FormData(contactForm), headers: { 'Accept': 'application/json' } })
-          .then(function(r) { if (r.ok) { contactForm.reset(); if (cfSuccess) cfSuccess.style.display = 'block'; } })
-          .catch(function() {});
+        var data = new FormData(contactForm);
+        fetch(contactForm.action, { method: 'POST', body: data, headers: { 'Accept': 'application/json' } })
+          .then(function(r) {
+            if (r.ok) {
+              contactForm.reset();
+              if (cfSuccess) { cfSuccess.style.display = 'block'; }
+            }
+          }).catch(function() {});
       });
     }
 
-    // ─── PACKAGE PRE-SELECTION FROM URL PARAM ────────────────────
-    // Only fires when arriving from packages.html with ?package=...
-    // If no param exists, dropdown stays at "Select a package…" (no preselection)
-    (function() {
-      var params  = new URLSearchParams(window.location.search);
-      var pkg     = params.get('package');
-      if (!pkg) return; // no param — leave dropdown untouched
+    // ─── SCROLL ENGINE ───────────────────────────────────────────
+    // Standard scroll-zoom sections
+    var STD_SECTIONS    = document.querySelectorAll('.scroll-section');
+    var N_STD           = STD_SECTIONS.length;
+    var HUD             = document.getElementById('camHud');
+    var COUNTER         = document.getElementById('sectionCounter');
+    var PROGRESS_WRAP   = document.getElementById('sectionProgress');
+    // Gallery section
+    var GAL_SECTION     = document.getElementById('sec-gallery');
 
-      var select  = document.getElementById('cf-package');
-      if (!select) return;
+    // Total dot count = std sections + gallery
+    var TOTAL = N_STD + 1;
 
-      // Find the matching option (decoded param vs option value)
-      var decoded = decodeURIComponent(pkg);
-      for (var i = 0; i < select.options.length; i++) {
-        if (select.options[i].value === decoded) {
-          select.selectedIndex = i;
-          select.classList.add('preselected');
-          break;
-        }
-      }
-
-      // Scroll smoothly to the contact section so user lands on the form
-      var contactSec = document.getElementById('sec-contact');
-      if (contactSec) {
-        setTimeout(function() {
-          contactSec.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }, 400);
-      }
-    })();
-    //
-    // We track ALL 5 visible "rows" in DOM order:
-    //   0: #sec-hero        → scroll-section  → 01
-    //   1: #sec-weddings    → scroll-section  → 02
-    //   2: #sec-gallery     → gallery-scroll-section → 03
-    //   3: #sec-about       → scroll-section  → 04
-    //   4: #sec-contact     → static section  → 05
-    //
-    // We build one ordered descriptor array that tells us:
-    //   { el, type:'zoom'|'gallery'|'static', zoomEl? }
-    //
-    var ROWS = [
-      { el: document.getElementById('sec-hero'),     type: 'zoom',    zoomEl: document.getElementById('zoom-0') },
-      { el: document.getElementById('sec-weddings'), type: 'zoom',    zoomEl: document.getElementById('zoom-1') },
-      { el: document.getElementById('sec-gallery'),  type: 'gallery'                                            },
-      { el: document.getElementById('sec-about'),    type: 'zoom',    zoomEl: document.getElementById('zoom-3') },
-      { el: document.getElementById('sec-contact'),  type: 'static'                                            }
-    ];
-    var TOTAL = ROWS.length; // 5
-
-    // Build progress dots in the same order
-    var PROGRESS_WRAP = document.getElementById('sectionProgress');
-    var COUNTER       = document.getElementById('sectionCounter');
-    var HUD           = document.getElementById('camHud');
-    COUNTER.innerHTML = '<span>01</span> / ' + String(TOTAL).padStart(2,'0');
-
-    ROWS.forEach(function(row, i) {
+    // Build progress dots
+    STD_SECTIONS.forEach(function(sec, i) {
       var dot = document.createElement('div');
       dot.className = 'progress-dot';
-      dot.addEventListener('click', function() { row.el.scrollIntoView({ behavior: 'smooth' }); });
+      dot.addEventListener('click', function() { sec.scrollIntoView({ behavior: 'smooth' }); });
       PROGRESS_WRAP.appendChild(dot);
     });
+    // Gallery dot (inserted at position 2, index 2)
+    // Actually just append; visual order matches DOM order
+    var galDot = document.createElement('div');
+    galDot.className = 'progress-dot';
+    galDot.addEventListener('click', function() { GAL_SECTION.scrollIntoView({ behavior: 'smooth' }); });
+    // Insert after 2nd dot (index 1)
+    var allDots = PROGRESS_WRAP.querySelectorAll('.progress-dot');
+    // We'll rebuild the dot list in DOM order after appending
+    PROGRESS_WRAP.appendChild(galDot);
+
     var dots = PROGRESS_WRAP.querySelectorAll('.progress-dot');
 
-    // Easing helpers
-    var ZOOM_START = 1.85, ZOOM_EXIT = 1.45, BLUR_IN = 5, BLUR_EXIT = 3;
-    function easeOut3(t) { return 1 - Math.pow(1 - t, 3); }
-    function easeIn3(t)  { return t * t * t; }
+    var ZOOM_START = 1.85; var ZOOM_EXIT = 1.45; var BLUR_IN = 5; var BLUR_EXIT = 3;
+    function easeOut3(t) { return 1 - Math.pow(1-t,3); }
+    function easeIn3(t)  { return t*t*t; }
 
-    // Compute scroll progress [0,1] for any element that uses scroll-based tracking
-    function getProgress(el) {
-      var rect    = el.getBoundingClientRect();
+    function getGalleryProgress() {
+      var rect   = GAL_SECTION.getBoundingClientRect();
+      var laneH  = GAL_SECTION.offsetHeight;
+      var raw    = (window.scrollY + rect.top - window.scrollY) ;
+      // p = how far we've scrolled through the gallery lane
       var laneTop = window.scrollY + rect.top;
-      var laneH   = el.offsetHeight;
-      var denom   = laneH - window.innerHeight;
-      if (denom <= 0) return 0;
-      return Math.max(0, Math.min(1, (window.scrollY - laneTop) / denom));
+      var p = (window.scrollY - laneTop) / (laneH - window.innerHeight);
+      return Math.max(0, Math.min(1, p));
     }
-
-    // For static sections (contact), just check if it's in viewport
-    function isInViewport(el) {
-      var rect = el.getBoundingClientRect();
-      return rect.top < window.innerHeight * 0.85 && rect.bottom > 0;
-    }
-
-    var currentNum = 1;
 
     function onScroll() {
       var scrollY = window.scrollY;
       var vH      = window.innerHeight;
-      var nowNum  = 1;
-      var anyZooming = false;
 
-      ROWS.forEach(function(row, i) {
-        var dotEl = dots[i];
+      // Standard scroll-zoom sections
+      STD_SECTIONS.forEach(function(section, i) {
+        var zoomEl  = section.querySelector('.scroll-zoom');
+        var rect    = section.getBoundingClientRect();
+        var laneTop = scrollY + rect.top;
+        var laneH   = section.offsetHeight;
+        var p       = Math.max(0, Math.min(1, (scrollY - laneTop) / (laneH - vH)));
+        var scale, blur;
 
-        if (row.type === 'zoom') {
-          var p = getProgress(row.el);
-
-          // Apply zoom + blur
-          var scale, blur;
-          if (p <= 0.12) {
-            var et = easeOut3(p / 0.12);
-            scale = ZOOM_START - (ZOOM_START - 1.0) * et;
-            blur  = BLUR_IN * (1 - et);
-            anyZooming = true;
-          } else if (p <= 0.85) {
-            scale = 1.0; blur = 0;
-          } else {
-            var et2 = easeIn3((p - 0.85) / 0.15);
-            scale = 1.0 + (ZOOM_EXIT - 1.0) * et2;
-            blur  = BLUR_EXIT * et2;
-          }
-          row.zoomEl.style.transform = 'scale(' + scale.toFixed(4) + ')';
-          row.zoomEl.style.filter    = blur > 0.08 ? 'blur(' + blur.toFixed(2) + 'px)' : '';
-
-          // Active text reveal
-          var isActive = p > 0.13 && p < 0.84;
-          row.el.classList.toggle('active', isActive);
-          if (dotEl) dotEl.classList.toggle('active', p > 0.05 && p < 0.95);
-
-          // This row is "showing" when p is in the reading zone
-          if (p > 0.05 && p < 0.95) nowNum = i + 1;
-
-        } else if (row.type === 'gallery') {
-          var gp = getProgress(row.el);
-          var isGalActive = gp > 0.05 && gp < 0.95;
-          row.el.classList.toggle('active', isGalActive);
-          if (dotEl) dotEl.classList.toggle('active', isGalActive);
-          if (isGalActive) nowNum = i + 1;
-
-        } else if (row.type === 'static') {
-          var inView = isInViewport(row.el);
-          if (dotEl) dotEl.classList.toggle('active', inView);
-          if (inView) nowNum = i + 1;
+        if (p <= 0.12) {
+          var et = easeOut3(p / 0.12);
+          scale = ZOOM_START - (ZOOM_START - 1.0) * et; blur = BLUR_IN * (1 - et);
+        } else if (p <= 0.85) {
+          scale = 1.0; blur = 0;
+        } else {
+          var et2 = easeIn3((p - 0.85) / 0.15);
+          scale = 1.0 + (ZOOM_EXIT - 1.0) * et2; blur = BLUR_EXIT * et2;
         }
+
+        zoomEl.style.transform = 'scale(' + scale.toFixed(4) + ')';
+        zoomEl.style.filter    = blur > 0.08 ? 'blur(' + blur.toFixed(2) + 'px)' : '';
+        section.classList.toggle('active', p > 0.13 && p < 0.84);
+        if (dots[i]) dots[i].classList.toggle('active', p > 0.05 && p < 0.95);
       });
 
-      // Camera HUD
-      HUD.classList.toggle('visible', anyZooming);
+      // Gallery section active state
+      var gp = getGalleryProgress();
+      GAL_SECTION.classList.toggle('active', gp > 0.05 && gp < 0.95);
+      if (dots[N_STD]) dots[N_STD].classList.toggle('active', gp > 0.05 && gp < 0.95);
 
-      // Counter — only update when changed to avoid reflow
-      if (nowNum !== currentNum) {
-        currentNum = nowNum;
-        COUNTER.innerHTML = '<span>' + String(currentNum).padStart(2,'0') + '</span> / ' + String(TOTAL).padStart(2,'0');
-      }
+      // Camera HUD on zoom-in
+      var zooming = Array.from(STD_SECTIONS).some(function(s) {
+        var lt = scrollY + s.getBoundingClientRect().top;
+        var p  = Math.max(0, Math.min(1, (scrollY - lt) / (s.offsetHeight - vH)));
+        return p > 0.01 && p < 0.13;
+      });
+      HUD.classList.toggle('visible', zooming);
+
+      // Counter: find which section is active
+      var activeSection = null;
+      var activeNum = 1;
+      STD_SECTIONS.forEach(function(s, i) {
+        var lt = scrollY + s.getBoundingClientRect().top;
+        var p  = Math.max(0, Math.min(1, (scrollY - lt) / (s.offsetHeight - vH)));
+        if (p > 0.13 && p < 0.84) { activeSection = s; activeNum = i + 1; }
+      });
+      if (gp > 0.05 && gp < 0.95) activeNum = 3; // gallery is 3rd
+      COUNTER.innerHTML = '<span>' + String(activeNum).padStart(2,'0') + '</span> / ' + String(TOTAL).padStart(2,'0');
+
     }
 
     window.addEventListener('scroll', onScroll, { passive: true });
