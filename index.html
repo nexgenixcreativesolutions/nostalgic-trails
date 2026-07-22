@@ -371,8 +371,18 @@
     @media (max-width: 768px) {
       body { cursor: auto; }
       .cursor, .cursor-ring { display: none; }
-      #mainNav { padding: 18px 20px; }
+      #mainNav { padding: 18px 20px; position: relative; justify-content: center; }
       #mainNav.scrolled { padding: 12px 20px; }
+      .nav-logo { align-items: center; text-align: center; gap: 8px; }
+      .nav-logo-mark { height: 88px; }
+      #mainNav.scrolled .nav-logo-mark { height: 60px; }
+      .nav-logo-mark img { max-width: 260px; }
+      .nav-logo span { font-size: 10px; letter-spacing: 0.22em; }
+      .nav-mobile-toggle { position: absolute; right: 20px; top: 50%; transform: translateY(-50%); width: 52px; height: 52px; margin-left: 0; }
+      .ham-line { width: 28px; height: 2px; }
+      .ham-line:nth-child(1) { transform: translateY(-9px); }
+      .ham-line:nth-child(2) { width: 19px; }
+      .ham-line:nth-child(3) { transform: translateY(9px); }
       .scroll-section { height: 160vh; }
       .section-content { padding: 80px 20px 36px; justify-content: flex-end !important; align-items: flex-start !important; text-align: left !important; }
       .section-content.bottom-left, .section-content.bottom-right { padding: 0 20px 44px; align-items: flex-start !important; text-align: left !important; }
