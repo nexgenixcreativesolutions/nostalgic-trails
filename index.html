@@ -36,13 +36,19 @@
     #mainNav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
       display: flex; align-items: center; padding: 24px 48px;
-      background: transparent;
-      transition: background 0.5s ease, padding 0.4s ease;
+      background-image: url('https://images.unsplash.com/photo-1519741497674-611481863552?w=1600&q=80&fit=crop');
+      background-size: cover; background-position: center top;
+      transition: padding 0.4s ease;
+    }
+    #mainNav::before {
+      content: ''; position: absolute; inset: 0; z-index: -1;
+      background: linear-gradient(to bottom, rgba(8,6,4,0.6) 0%, rgba(8,6,4,0.32) 60%, transparent 100%);
+      opacity: 0; transition: opacity 0.5s ease;
     }
     #mainNav.scrolled {
-      background: linear-gradient(to bottom, rgba(8,6,4,0.55) 0%, rgba(8,6,4,0.28) 55%, transparent 100%);
       padding: 14px 48px;
     }
+    #mainNav.scrolled::before { opacity: 1; }
     .nav-logo { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; font-family: 'Syncopate', sans-serif; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--white); text-decoration: none; line-height: 1.4; flex-shrink: 0; white-space: nowrap; z-index: 1100; }
     .nav-logo span { display: block; color: var(--sage); font-size: 7.5px; letter-spacing: 0.3em; }
     .nav-logo-mark {
